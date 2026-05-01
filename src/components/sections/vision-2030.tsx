@@ -1,0 +1,58 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+
+const PILLARS = [
+  {
+    title: "Digital Transformation",
+    body: "Sportech positions Gulf sports clubs as global leaders in fan technology — driving the digital transformation of the sports sector.",
+    delay: 0,
+  },
+  {
+    title: "Local Innovation",
+    body: "Built in Saudi Arabia. The patented player camera and the full platform stack were engineered locally — creating IP and jobs at home.",
+    delay: 0.15,
+  },
+  {
+    title: "Sustainable Revenue Infrastructure",
+    body: "Sportech delivers the financial model that sustains clubs beyond matchday — in direct alignment with Vision 2030's sports economy goals.",
+    delay: 0.3,
+  },
+];
+
+export function Vision2030() {
+  return (
+    <section className="bg-canvas py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        <ScrollReveal>
+          <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
+            Supporting Saudi Vision 2030
+          </span>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <h2 className="text-on-dark font-bold mt-4" style={{ fontSize: 40, lineHeight: 1.15 }}>
+            The digital sports economy. Built here.
+          </h2>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {PILLARS.map(({ title, body, delay }) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-surface-card border border-hairline rounded-xl p-8"
+            >
+              <h3 className="text-on-dark font-semibold text-lg mb-3">{title}</h3>
+              <p className="text-body-text text-sm leading-relaxed">{body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
