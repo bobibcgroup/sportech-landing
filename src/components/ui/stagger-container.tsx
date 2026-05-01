@@ -47,7 +47,8 @@ export function StaggerContainer({
         },
       }}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
       className={className}
     >
       {children}

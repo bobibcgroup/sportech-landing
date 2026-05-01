@@ -56,7 +56,7 @@ export function RevenueStreams() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: 40, lineHeight: 1.15 }}>
+          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
             8 revenue streams. One platform. All running at once.
           </h2>
         </ScrollReveal>

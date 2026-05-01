@@ -62,9 +62,9 @@ export function Nav() {
           {/* Desktop right actions */}
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-1 text-xs font-medium text-muted">
-              <button className="hover:text-on-dark transition-colors">EN</button>
-              <span className="text-muted-soft">|</span>
-              <button className="hover:text-on-dark transition-colors">عر</button>
+              <span className="text-on-dark text-sm font-medium">EN</span>
+              <span className="text-muted-soft text-sm" aria-hidden="true">|</span>
+              <span className="text-muted text-sm font-medium">عر</span>
             </div>
             <a
               href="#contact"
@@ -79,6 +79,7 @@ export function Nav() {
             className="md:hidden text-on-dark p-1"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -89,6 +90,7 @@ export function Nav() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-nav-menu"
             className="fixed inset-x-0 top-16 z-40 border-b border-hairline"
             style={{ background: "rgba(10,10,10,0.97)", backdropFilter: "blur(20px)" }}
             initial={{ opacity: 0, y: -16 }}

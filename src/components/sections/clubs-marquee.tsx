@@ -1,73 +1,71 @@
 "use client";
 
+import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { CLUBS_ROW1, CLUBS_ROW2, type Club } from "@/data/clubs";
 
-const ROW_ONE = [
-  "Al-Nassr", "Real Madrid", "FC Barcelona", "Manchester City", "PSG",
-  "Bayern Munich", "Liverpool", "Al-Hilal", "Juventus", "Chelsea", "Arsenal", "Al-Ahli",
-];
-
-const ROW_TWO = [
-  "Formula 1", "LA Lakers", "Golden State Warriors", "UFC", "Al-Ittihad",
-  "Borussia Dortmund", "AC Milan", "Inter Milan", "Ajax", "Manchester United",
-  "Miami Heat", "Red Bull Racing",
-];
-
-interface MarqueeRowProps {
-  clubs: string[];
-  reverse?: boolean;
-}
-
-function MarqueeRow({ clubs, reverse = false }: MarqueeRowProps) {
-  const doubled = [...clubs, ...clubs];
+function ClubLogo({ club }: { club: Club }) {
   return (
-    <div className="overflow-hidden py-2">
-      <div
-        className="flex gap-0 w-max"
-        style={{
-          animation: "marquee 30s linear infinite",
-          animationDirection: reverse ? "reverse" : "normal",
-        }}
-      >
-        {doubled.map((club, i) => (
-          <span
-            key={`${club}-${i}`}
-            className="bg-surface-card border border-hairline text-muted text-sm font-medium rounded-lg px-4 py-2 shrink-0 mx-2 hover:text-on-dark hover:border-hairline-strong transition-colors duration-200 cursor-default"
-          >
-            {club}
-          </span>
-        ))}
-      </div>
+    <div className="flex items-center justify-center mx-6 w-16 h-16 shrink-0 group">
+      <Image
+        src={club.logo}
+        alt={club.name}
+        width={48}
+        height={48}
+        className="object-contain opacity-40 grayscale brightness-0 invert group-hover:opacity-90 group-hover:brightness-200 transition-all duration-300"
+        unoptimized
+      />
     </div>
   );
 }
 
 export function ClubsMarquee() {
   return (
-    <section className="bg-canvas py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-canvas py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-10">
         <ScrollReveal>
           <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Built for Sport
+            Built for Clubs Like Yours
           </span>
         </ScrollReveal>
-
         <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: 40, lineHeight: 1.15 }}>
-            The platform any of these clubs could deploy tomorrow.
+          <h2
+            className="text-on-dark font-bold mt-4 max-w-2xl"
+            style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}
+          >
+            Join a global movement of clubs unlocking fan revenue.
           </h2>
         </ScrollReveal>
       </div>
 
-      <div className="mt-12 space-y-3">
-        <MarqueeRow clubs={ROW_ONE} />
-        <MarqueeRow clubs={ROW_TWO} reverse />
+      <div className="space-y-4">
+        <div className="relative">
+          <InfiniteSlider speed={35}>
+            {CLUBS_ROW1.map((club) => (
+              <ClubLogo key={club.name} club={club} />
+            ))}
+          </InfiniteSlider>
+          <ProgressiveBlur direction="left" />
+          <ProgressiveBlur direction="right" className="right-0 left-auto" />
+        </div>
+
+        <div className="relative">
+          <InfiniteSlider speed={28} reverse>
+            {CLUBS_ROW2.map((club) => (
+              <ClubLogo key={club.name} club={club} />
+            ))}
+          </InfiniteSlider>
+          <ProgressiveBlur direction="left" />
+          <ProgressiveBlur direction="right" className="right-0 left-auto" />
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal delay={0.1}>
-          <p className="text-muted text-sm text-center mt-12">
-            One platform. Every sport. Built to deploy at global scale.
+      <div className="max-w-7xl mx-auto px-6 mt-10">
+        <ScrollReveal delay={0.15}>
+          <p className="text-body-text text-sm text-center">
+            From Saudi Pro League to European giants — one platform, every market.
           </p>
         </ScrollReveal>
       </div>

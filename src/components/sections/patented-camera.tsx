@@ -29,7 +29,7 @@ export function PatentedCamera() {
               viewport={{ once: true, margin: "-80px" }}
               variants={blurSlide}
               className="text-on-dark font-bold mt-4"
-              style={{ fontSize: 56, lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(32px, 5vw, 56px)", lineHeight: 1.1 }}
             >
               Watch the game the way only players do.
             </motion.h2>

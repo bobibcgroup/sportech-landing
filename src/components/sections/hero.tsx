@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import { AnimatedGrid } from "@/components/ui/animated-grid";
 import { fadeUp, blurSlide } from "@/lib/variants";
 
@@ -23,14 +22,11 @@ const HEADLINE_LINES = [
 ];
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const { scrollY } = useScroll();
   const phoneY = useTransform(scrollY, [0, 500], [0, -60]);
 
   return (
     <section
-      ref={containerRef}
       className="relative min-h-screen flex items-center overflow-hidden bg-canvas"
     >
       {/* Layer 1: Animated grid */}
@@ -76,12 +72,10 @@ export function Hero() {
 
               {/* Headline */}
               <div className="mb-6">
-                {HEADLINE_LINES.map(({ text, yellow }, i) => (
+                {HEADLINE_LINES.map(({ text, yellow }) => (
                   <motion.div
                     key={text}
                     variants={blurSlide}
-                    custom={i}
-                    style={{ transitionDelay: `${i * 0.1}s` }}
                   >
                     <h1
                       className="block leading-[1.05] tracking-[-2.5px] font-bold"
@@ -99,7 +93,7 @@ export function Hero() {
               <motion.p
                 variants={fadeUp}
                 className="text-body-text text-base font-normal leading-relaxed max-w-lg mb-6"
-                style={{ transitionDelay: "0.4s" }}
+                transition={{ delay: 0.4 }}
               >
                 One white-label platform that turns every match into an interactive
                 revenue engine — live cameras, predictions, voting, AR, and more.

@@ -17,9 +17,9 @@ function CounterAnimation({ target, prefix = "", suffix = "" }: CounterAnimation
   const display = useTransform(mv, (v) => `${prefix}${Math.round(v).toLocaleString()}${suffix}`);
 
   useEffect(() => {
-    if (inView) {
-      animate(mv, target, { duration: 2, ease: "easeOut" });
-    }
+    if (!inView) return;
+    const controls = animate(mv, target, { duration: 2, ease: "easeOut" });
+    return () => controls.stop();
   }, [inView, mv, target]);
 
   return (
@@ -64,7 +64,7 @@ export function Opportunity() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: 40, lineHeight: 1.15 }}>
+          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
             The world&apos;s biggest sports clubs proved it. Now it&apos;s your turn.
           </h2>
         </ScrollReveal>
@@ -81,7 +81,7 @@ export function Opportunity() {
             >
               <div
                 className="text-primary font-bold leading-none"
-                style={{ fontSize: 56, letterSpacing: "-1.5px" }}
+                style={{ fontSize: "clamp(32px, 5vw, 56px)", letterSpacing: "-1.5px" }}
               >
                 <CounterAnimation target={target} prefix={prefix} suffix={suffix} />
               </div>

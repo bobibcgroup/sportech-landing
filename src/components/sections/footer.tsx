@@ -1,5 +1,3 @@
-"use client";
-
 const NAV_LINKS = ["Platform", "Revenue", "Sports", "Partners", "Contact"];
 
 const SOCIAL_LINKS = [
@@ -99,7 +97,7 @@ export function Footer() {
             <a href="#" className="hover:text-on-dark transition-colors duration-200">
               Privacy Policy
             </a>
-            <span className="text-hairline-strong">·</span>
+            <span className="text-muted-soft" aria-hidden="true">·</span>
             <a href="#" className="hover:text-on-dark transition-colors duration-200">
               Terms of Use
             </a>
