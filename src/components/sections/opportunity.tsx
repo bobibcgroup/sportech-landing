@@ -34,21 +34,21 @@ const STATS = [
     target: 200,
     prefix: "€",
     suffix: "M+",
-    label: "Annual digital revenue FC Barcelona generates from its fan platform alone.",
+    label: "What FC Barcelona makes every year from digital fans alone.",
     delay: 0,
   },
   {
     target: 35,
     prefix: "",
     suffix: "%",
-    label: "Increase in fan loyalty Manchester United saw from digital membership in year one.",
+    label: "More loyal fans. Manchester United, one year after launching digital memberships.",
     delay: 0.15,
   },
   {
     target: 100,
     prefix: "",
     suffix: "",
-    label: "Countries PSG's fan token reached in its first year — generating $20M+ in digital currency sales.",
+    label: "Countries where PSG fans bought digital tokens in year one. They made $20M+.",
     delay: 0.3,
   },
 ];
@@ -65,7 +65,7 @@ export function Opportunity() {
 
         <ScrollReveal delay={0.1}>
           <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            The world&apos;s biggest sports clubs proved it. Now it&apos;s your turn.
+            Your fans are already spending. Just not on you.
           </h2>
         </ScrollReveal>
 
@@ -92,8 +92,7 @@ export function Opportunity() {
 
         <ScrollReveal delay={0.2}>
           <p className="text-body-text text-center mt-12 max-w-3xl mx-auto leading-relaxed">
-            These clubs built platforms from scratch, at enormous cost. Sportech gives you
-            everything they built — and more — for free.
+            They spent years and millions building this from scratch. You don&apos;t have to.
           </p>
         </ScrollReveal>
       </div>

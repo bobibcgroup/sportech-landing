@@ -13,35 +13,35 @@ const FEATURES: Feature[] = [
   {
     badge: "★ PATENTED",
     title: "Player Camera",
-    body: "Jersey-mounted cameras stream live first-person footage directly to fans during matches. A world-first. No other fan platform has this.",
+    body: "A small camera on the jersey. Fans pick a player and watch the match through their eyes, live. Nobody else on earth offers this.",
   },
   {
     title: "Interactive Voting",
-    body: "Members vote on tactical decisions, substitutions, and formations in real time. Vote weight scales with subscription tier.",
+    body: "Fans vote on tactics, subs, and formations live during the match. Premium subscribers get a bigger say.",
   },
   {
     title: "Sports Predictions",
-    body: "Fans predict match outcomes and player performance using platform digital currency. Sharia-compliant — no cash betting.",
+    body: "Match predictions using platform tokens, not real money. Fully Sharia-compliant, fully engaging.",
   },
   {
     title: "Live Rooms",
-    body: "Private and public audio spaces where fans debate matches live, backed by real-time stats and AI insights.",
+    body: "Audio rooms where fans argue about the match in real time, with live stats in the background.",
   },
   {
     title: "Augmented Reality",
-    body: "Live stats, player profiles, and match data overlaid on the viewing experience. Compatible with AR glasses.",
+    body: "Point your phone at the pitch and see live player stats and match data overlaid on the action.",
   },
   {
     title: "Live Commentator Feed",
-    body: "Fans worldwide listen to the official in-stadium commentator feed — live, as if sitting in the stands.",
+    body: "Your global fans hear the same stadium commentator as the home crowd. Live, no delay.",
   },
   {
     title: "Tickets & Merchandise",
-    body: "Integrated ticket purchase, peer-to-peer resale, official club gear, and same-day delivery — all inside your app.",
+    body: "Tickets, resale, official gear, same-day delivery. All in one place, all earning.",
   },
   {
     title: "Digital Store & NFTs",
-    body: "Club-branded gift cards accepted at 150,000+ stores. Digital trading cards, rare player NFTs, and limited seasonal drops.",
+    body: "Digital collectibles, player cards, limited seasonal drops. High margin. Zero inventory.",
   },
 ];
 
@@ -57,14 +57,13 @@ export function PlatformFeatures() {
 
         <ScrollReveal delay={0.1}>
           <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            Every tool a fan needs. Every touchpoint a club earns from.
+            Eight features. One app. Fully yours.
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
           <p className="text-body-text mt-4 max-w-2xl leading-relaxed">
-            Not just an app. A complete fan engagement operating system — modular, white-labeled,
-            and built to turn every fan interaction into revenue.
+            A complete fan platform your club owns. Every feature earns. None of it comes off your balance sheet.
           </p>
         </ScrollReveal>
 

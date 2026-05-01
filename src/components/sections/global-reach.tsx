@@ -5,17 +5,17 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 const REGIONS = [
   {
     title: "Saudi Arabia & UAE",
-    body: "Home market. Sportech launches with the region's premier clubs, reaching fans across both countries.",
+    body: "Home turf. Saudi and UAE's biggest clubs first.",
     delay: 0,
   },
   {
     title: "China & Asia",
-    body: "The largest international opportunity — driven by hundreds of millions of fans following Gulf clubs and their world-class rosters across Asian markets.",
+    body: "The biggest untapped market. Hundreds of millions of fans across Asia follow Gulf football, and almost none of them have a way to engage.",
     delay: 0.15,
   },
   {
     title: "Europe, Americas & Beyond",
-    body: "Multi-language platform. Any fan, anywhere, can subscribe to their club's app and participate fully in the digital experience.",
+    body: "The platform runs in any language. A fan in London, Jakarta, or Buenos Aires can subscribe to your club app and feel like they're in the stands.",
     delay: 0.3,
   },
 ];
@@ -38,8 +38,7 @@ export function GlobalReach() {
 
         <ScrollReveal delay={0.15}>
           <p className="text-body-text mt-4 max-w-2xl leading-relaxed">
-            The Saudi Pro League and UAE Pro League have some of the most globally followed clubs
-            on the planet. Sportech turns that global fanbase into a global revenue base.
+            Al-Nassr has fans in Tokyo and São Paulo. Your digital revenue should too.
           </p>
         </ScrollReveal>
 
@@ -56,7 +55,7 @@ export function GlobalReach() {
 
         <ScrollReveal delay={0.2}>
           <p className="text-on-dark font-bold text-center mt-16" style={{ fontSize: 24 }}>
-            One platform. Every language. Global fans. Local club.
+            Your fans are everywhere. Your revenue should be too.
           </p>
         </ScrollReveal>
       </div>

@@ -57,14 +57,13 @@ export function RevenueStreams() {
 
         <ScrollReveal delay={0.1}>
           <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            8 revenue streams. One platform. All running at once.
+            Eight ways to earn. All running at the same time.
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
           <p className="text-body-text mt-4 max-w-2xl leading-relaxed">
-            Most fan platforms generate revenue from one or two sources. Sportech generates it
-            from every fan interaction — simultaneously, automatically, and at scale.
+            Most apps make money one way. This one makes it eight ways at once, without you lifting a finger.
           </p>
         </ScrollReveal>
 
@@ -87,12 +86,12 @@ export function RevenueStreams() {
         <div className="mt-16 text-center">
           <ScrollReveal>
             <p className="text-body-text text-center">
-              Every transaction. Every interaction. Every engagement moment.
+              Every click, every purchase, every prediction.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-primary font-bold mt-2 text-center" style={{ fontSize: 32 }}>
-              50% stays with your club. Forever.
+            Half of it goes to you. Every time.
             </p>
           </ScrollReveal>
         </div>

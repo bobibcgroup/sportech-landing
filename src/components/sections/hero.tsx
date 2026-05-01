@@ -95,9 +95,7 @@ export function Hero() {
                 className="text-body-text text-base font-normal leading-relaxed max-w-lg mb-6"
                 transition={{ delay: 0.4 }}
               >
-                One white-label platform that turns every match into an interactive
-                revenue engine — live cameras, predictions, voting, AR, and more.
-                Built for clubs, leagues, and broadcasters.
+                Your fans are already spending money on their passion. They&apos;re just not spending it with you.
               </motion.p>
 
               {/* Feature pills */}

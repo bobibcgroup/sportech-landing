@@ -13,6 +13,9 @@ const HowItWorks = dynamic(() =>
 const PlatformFeatures = dynamic(() =>
   import("@/components/sections/platform-features").then((m) => ({ default: m.PlatformFeatures }))
 );
+const AppGallery = dynamic(() =>
+  import("@/components/sections/app-gallery").then((m) => ({ default: m.AppGallery }))
+);
 const PatentedCamera = dynamic(() =>
   import("@/components/sections/patented-camera").then((m) => ({ default: m.PatentedCamera }))
 );
@@ -46,6 +49,7 @@ export default function Home() {
       <Opportunity />
       <HowItWorks />
       <PlatformFeatures />
+      <AppGallery />
       <PatentedCamera />
       <RevenueStreams />
       <ClubsMarquee />

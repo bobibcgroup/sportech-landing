@@ -1,23 +1,23 @@
 "use client";
 
-import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-import { ProgressiveBlur } from "@/components/ui/progressive-blur";
-import { CLUBS_ROW1, CLUBS_ROW2, type Club } from "@/data/clubs";
 
-function ClubLogo({ club }: { club: Club }) {
+const ROW1 = [
+  "Al-Nassr", "Real Madrid", "FC Barcelona", "Manchester City", "PSG",
+  "Bayern Munich", "Liverpool", "Al-Hilal", "Juventus",
+];
+
+const ROW2 = [
+  "Chelsea", "Arsenal", "Al-Ahli", "Al-Ittihad", "Borussia Dortmund",
+  "AC Milan", "Inter Milan", "Ajax", "Manchester United",
+];
+
+function Pill({ name }: { name: string }) {
   return (
-    <div className="flex items-center justify-center mx-6 w-16 h-16 shrink-0 group">
-      <Image
-        src={club.logo}
-        alt={club.name}
-        width={48}
-        height={48}
-        className="object-contain opacity-40 grayscale brightness-0 invert group-hover:opacity-90 group-hover:brightness-200 transition-all duration-300"
-        unoptimized
-      />
-    </div>
+    <span className="bg-surface-card border border-hairline text-muted text-sm font-medium rounded-lg px-4 py-2 shrink-0 mx-2 hover:text-on-dark hover:border-hairline-strong transition-colors duration-200 cursor-default whitespace-nowrap">
+      {name}
+    </span>
   );
 }
 
@@ -27,7 +27,7 @@ export function ClubsMarquee() {
       <div className="max-w-7xl mx-auto px-6 mb-10">
         <ScrollReveal>
           <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Built for Clubs Like Yours
+            The clubs we're coming for next
           </span>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
@@ -35,37 +35,28 @@ export function ClubsMarquee() {
             className="text-on-dark font-bold mt-4 max-w-2xl"
             style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}
           >
-            Join a global movement of clubs unlocking fan revenue.
+            World-class clubs are already doing this. Now it's your league's turn.
           </h2>
         </ScrollReveal>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div className="relative">
           <InfiniteSlider speed={35}>
-            {CLUBS_ROW1.map((club) => (
-              <ClubLogo key={club.name} club={club} />
-            ))}
+            {ROW1.map((name) => <Pill key={name} name={name} />)}
           </InfiniteSlider>
-          <ProgressiveBlur direction="left" />
-          <ProgressiveBlur direction="right" className="right-0 left-auto" />
         </div>
-
         <div className="relative">
           <InfiniteSlider speed={28} reverse>
-            {CLUBS_ROW2.map((club) => (
-              <ClubLogo key={club.name} club={club} />
-            ))}
+            {ROW2.map((name) => <Pill key={name} name={name} />)}
           </InfiniteSlider>
-          <ProgressiveBlur direction="left" />
-          <ProgressiveBlur direction="right" className="right-0 left-auto" />
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-10">
         <ScrollReveal delay={0.15}>
           <p className="text-body-text text-sm text-center">
-            From Saudi Pro League to European giants — one platform, every market.
+            From the Saudi Pro League to Europe's top five. One platform runs them all.
           </p>
         </ScrollReveal>
       </div>

@@ -19,7 +19,7 @@ export function PatentedCamera() {
           <div className="lg:col-span-7">
             <ScrollReveal>
               <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-                World-First Patented Technology
+                A first for football
               </span>
             </ScrollReveal>
 
@@ -36,23 +36,19 @@ export function PatentedCamera() {
 
             <ScrollReveal delay={0.15}>
               <p className="text-body-text leading-relaxed mt-6">
-                Sportech&apos;s patented jersey-mounted player camera places fans inside the
-                action — live, during the match. No broadcast angle. Fans choose a player and
-                experience the match through their eyes, in real time.
+                A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch — live, during the game, with no delay.
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
               <p className="text-body-text leading-relaxed mt-4">
-                This is not a feature any other fan platform offers. Not PSG. Not Barcelona.
-                Not Manchester United. The technology is exclusive to Sportech and protected
-                by patent.
+                PSG doesn&apos;t have this. Barcelona doesn&apos;t. Manchester United doesn&apos;t. It&apos;s ours, and it&apos;s patented.
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.25}>
               <p className="text-primary font-semibold mt-4 text-sm">
-                For clubs: this is the single feature that makes your app irreplaceable.
+                This is the one feature no other app can copy.
               </p>
             </ScrollReveal>
 

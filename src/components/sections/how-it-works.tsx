@@ -8,21 +8,21 @@ const STEPS = [
     number: "1",
     title: "We Build It",
     description:
-      "Sportech designs, develops, and operates your complete fan engagement platform. Fully branded with your club's identity. Ready in weeks, not years.",
+      "We design, build, and run everything. Your logo, your colors, your name. Ready in weeks.",
     delay: 0,
   },
   {
     number: "2",
     title: "Fans Engage",
     description:
-      "Your fans join through your branded app — they subscribe, predict, vote, attend digital events, buy merchandise, and collect digital items.",
+      "Fans download your app, subscribe, predict match results, vote on tactics, buy merch, collect digital cards. Normal fan stuff, now on your terms.",
     delay: 0.2,
   },
   {
     number: "3",
     title: "Revenue Splits 50/50",
     description:
-      "Every transaction generates revenue. Sportech covers all operating costs and takes 50%. Your club keeps the other 50%.",
+      "Every purchase, every subscription, every token spent. We cover the costs and take 50%. The rest lands in your account.",
     delay: 0.4,
   },
 ];
@@ -39,7 +39,7 @@ export function HowItWorks() {
 
         <ScrollReveal delay={0.1}>
           <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            Zero cost to your club. Eight revenue streams. Fifty percent yours.
+            We build it. Your fans use it. You collect half.
           </h2>
         </ScrollReveal>
 

@@ -44,7 +44,7 @@ export function FinalCTA() {
             className="text-on-primary font-bold mt-4"
             style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}
           >
-            Your club. Your app. Built and running before your competitors even start.
+            First clubs in get the early advantage. Your app live before anyone else even starts.
           </motion.h2>
 
           <motion.p
@@ -52,8 +52,7 @@ export function FinalCTA() {
             className="text-base mt-6 leading-relaxed max-w-lg mx-auto"
             style={{ color: "rgba(10,10,10,0.8)" }}
           >
-            Sportech is onboarding a limited number of partner clubs in this first phase.
-            Zero cost. Zero risk. Full platform. 50% of every dollar your fans spend.
+            We&apos;re bringing a small number of clubs on first. Free platform, no risk, full feature set. You earn 50% from day one.
           </motion.p>
 
           <motion.div variants={itemVariants} className="mt-8">
@@ -80,7 +79,7 @@ export function FinalCTA() {
             className="text-[12px] mt-4 tracking-wider uppercase"
             style={{ color: "rgba(10,10,10,0.5)" }}
           >
-            No platform cost. No tech overhead. No risk. Just revenue.
+            No cost. No catch.
           </motion.p>
         </div>
       </div>

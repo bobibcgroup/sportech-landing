@@ -6,17 +6,17 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 const PILLARS = [
   {
     title: "Digital Transformation",
-    body: "Sportech positions Gulf sports clubs as global leaders in fan technology — driving the digital transformation of the sports sector.",
+    body: "Saudi sports clubs at the forefront of fan technology. Not catching up to the West. Leading it.",
     delay: 0,
   },
   {
     title: "Local Innovation",
-    body: "Built in Saudi Arabia. The patented player camera and the full platform stack were engineered locally — creating IP and jobs at home.",
+    body: "The patent is Saudi. The team is Saudi. The IP stays here.",
     delay: 0.15,
   },
   {
     title: "Sustainable Revenue Infrastructure",
-    body: "Sportech delivers the financial model that sustains clubs beyond matchday — in direct alignment with Vision 2030's sports economy goals.",
+    body: "Matchday revenue will never be enough on its own. This builds the revenue model that lasts.",
     delay: 0.3,
   },
 ];
