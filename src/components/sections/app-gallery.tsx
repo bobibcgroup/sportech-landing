@@ -1,95 +1,102 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useLanguage } from "@/lib/language-context";
+import { t } from "@/lib/translations";
 
-interface PhoneScreenProps {
+const SCREENSHOT_SRCS = [
+  "/appimages/IMG_6873.PNG",
+  "/appimages/IMG_6875.PNG",
+  "/appimages/IMG_6877.PNG",
+  "/appimages/IMG_6878.PNG",
+];
+
+interface IPhoneFrameProps {
+  src: string;
   label: string;
-  badge?: string;
-  badgeColor?: string;
-  rows: { label: string; value: string; color?: string }[];
-  accentLine?: string;
-  delay?: number;
+  badge: string;
+  delay: number;
 }
 
-function PhoneScreen({ label, badge, badgeColor = "#faff69", rows, accentLine, delay = 0 }: PhoneScreenProps) {
+function IPhoneFrame({ src, label, badge, delay }: IPhoneFrameProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 44 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full max-w-[220px] mx-auto"
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center gap-4"
     >
-      {/* Phone frame */}
-      <div className="rounded-[28px] bg-[#111] border border-[#2a2a2a] p-3 shadow-2xl">
-        {/* Notch */}
-        <div className="flex justify-center mb-3">
-          <div className="w-16 h-[5px] rounded-full bg-[#2a2a2a]" />
-        </div>
+      {/* iPhone 15 frame */}
+      <div className="relative" style={{ width: 195, height: 400 }}>
+        {/* Phone shell */}
+        <div
+          className="absolute inset-0 rounded-[38px]"
+          style={{
+            background: "linear-gradient(160deg, #2e2e2e 0%, #181818 100%)",
+            border: "1px solid rgba(255,255,255,0.07)",
+            boxShadow:
+              "0 32px 72px rgba(0,0,0,0.72), 0 0 0 0.5px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.04)",
+          }}
+        />
+
+        {/* Side buttons — left */}
+        <div className="absolute" style={{ left: -3, top: 78, width: 3, height: 26, borderRadius: "2px 0 0 2px", background: "#252525" }} />
+        <div className="absolute" style={{ left: -3, top: 114, width: 3, height: 44, borderRadius: "2px 0 0 2px", background: "#252525" }} />
+        <div className="absolute" style={{ left: -3, top: 166, width: 3, height: 44, borderRadius: "2px 0 0 2px", background: "#252525" }} />
+        {/* Power button — right */}
+        <div className="absolute" style={{ right: -3, top: 118, width: 3, height: 64, borderRadius: "0 2px 2px 0", background: "#252525" }} />
 
         {/* Screen */}
-        <div className="rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1e1e1e]">
-          {/* Status bar */}
-          <div className="flex items-center justify-between px-3 pt-2 pb-1">
-            <span className="text-[10px] text-white/40 font-medium">9:41</span>
-            {badge && (
-              <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: badgeColor }}>
-                {badge}
-              </span>
-            )}
-          </div>
-
-          {/* Screen label */}
-          <div className="px-3 pb-2 pt-1">
-            <p className="text-white/80 text-[11px] font-semibold">{label}</p>
-          </div>
-
-          {/* Content rows */}
-          <div className="px-3 pb-3 space-y-1.5">
-            {rows.map(({ label: rowLabel, value, color }) => (
-              <div
-                key={rowLabel}
-                className="flex items-center justify-between px-2.5 py-2 rounded-lg"
-                style={{ background: "#1a1a1a", border: "1px solid #222" }}
-              >
-                <span className="text-[11px] text-white/40">{rowLabel}</span>
-                <span className="text-[11px] font-semibold" style={{ color: color || "#faff69" }}>
-                  {value}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Accent bottom line */}
-          {accentLine && (
-            <div className="px-3 pb-3">
-              <div
-                className="w-full text-center py-2 rounded-lg text-[11px] font-semibold"
-                style={{ background: "rgba(250,255,105,0.08)", color: "#faff69", border: "1px solid rgba(250,255,105,0.15)" }}
-              >
-                {accentLine}
-              </div>
-            </div>
-          )}
+        <div
+          className="absolute overflow-hidden bg-black"
+          style={{ inset: 7, borderRadius: 32 }}
+        >
+          <Image
+            src={src}
+            alt={label}
+            fill
+            style={{ objectFit: "cover", objectPosition: "top" }}
+            unoptimized
+          />
         </div>
 
-        {/* Home indicator */}
-        <div className="flex justify-center mt-2">
-          <div className="w-20 h-[4px] rounded-full bg-[#2a2a2a]" />
-        </div>
+        {/* Dynamic Island */}
+        <div
+          className="absolute z-20"
+          style={{
+            top: 17,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 86,
+            height: 25,
+            borderRadius: 14,
+            background: "#0a0a0a",
+          }}
+        />
+      </div>
+
+      {/* Caption */}
+      <div className="text-center">
+        <span className="text-primary text-[10px] font-bold tracking-widest uppercase">{badge}</span>
+        <p className="text-white/60 text-[13px] font-medium mt-0.5">{label}</p>
       </div>
     </motion.div>
   );
 }
 
 export function AppGallery() {
+  const { lang } = useLanguage();
+  const tx = t[lang].gallery;
+
   return (
     <section className="bg-canvas py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <ScrollReveal>
           <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Inside the app
+            {tx.badge}
           </span>
         </ScrollReveal>
 
@@ -98,60 +105,20 @@ export function AppGallery() {
             className="text-on-dark font-bold mt-4 max-w-2xl"
             style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}
           >
-            Fans open it every match day. Not because they have to. Because there's always something happening.
+            {tx.heading}
           </h2>
         </ScrollReveal>
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
-          <PhoneScreen
-            label="Player POV — Live"
-            badge="LIVE"
-            badgeColor="#22c55e"
-            rows={[
-              { label: "Active streams", value: "12 players", color: "#faff69" },
-              { label: "Watching now", value: "84K fans", color: "#faff69" },
-              { label: "Your player", value: "#10 Active", color: "#22c55e" },
-            ]}
-            accentLine="Watching from inside the pitch"
-            delay={0}
-          />
-
-          <PhoneScreen
-            label="Match Predictions"
-            badge="OPEN"
-            rows={[
-              { label: "Al-Nassr win", value: "2.1×", color: "#faff69" },
-              { label: "First scorer", value: "Ronaldo", color: "#faff69" },
-              { label: "Your tokens", value: "1,240 PT", color: "#22c55e" },
-            ]}
-            accentLine="Place your prediction"
-            delay={0.1}
-          />
-
-          <PhoneScreen
-            label="Fan Vote — Live"
-            badge="VOTING"
-            badgeColor="#faff69"
-            rows={[
-              { label: "Sub Naif → Salim", value: "62% Yes", color: "#faff69" },
-              { label: "4-3-3 formation", value: "77% Agree", color: "#22c55e" },
-              { label: "Your vote tier", value: "Premium ×3", color: "#faff69" },
-            ]}
-            accentLine="Your club, your say"
-            delay={0.2}
-          />
-
-          <PhoneScreen
-            label="Revenue Dashboard"
-            badge="THIS WEEK"
-            rows={[
-              { label: "Subscriptions", value: "+SAR 18K", color: "#22c55e" },
-              { label: "Predictions", value: "+SAR 7.4K", color: "#22c55e" },
-              { label: "Merch sales", value: "+SAR 4.1K", color: "#22c55e" },
-            ]}
-            accentLine="50% is yours, automatically"
-            delay={0.3}
-          />
+        <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 items-start justify-items-center">
+          {tx.screens.map((screen, i) => (
+            <IPhoneFrame
+              key={i}
+              src={SCREENSHOT_SRCS[i]}
+              label={screen.label}
+              badge={screen.badge}
+              delay={i * 0.1}
+            />
+          ))}
         </div>
       </div>
     </section>
