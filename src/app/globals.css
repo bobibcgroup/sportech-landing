@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+@theme inline {
+  /* Canvas / surfaces */
+  --color-canvas: #0a0a0a;
+  --color-surface-soft: #121212;
+  --color-surface-card: #1a1a1a;
+  --color-surface-elevated: #242424;
+
+  /* Brand */
+  --color-primary: #faff69;
+  --color-primary-active: #e6eb52;
+  --color-primary-disabled: #3a3a1f;
+  --color-on-primary: #0a0a0a;
+  --color-on-dark: #ffffff;
+
+  /* Text */
+  --color-body-text: #cccccc;
+  --color-body-strong: #e6e6e6;
+  --color-muted: #888888;
+  --color-muted-soft: #5a5a5a;
+
+  /* Lines */
+  --color-hairline: #2a2a2a;
+  --color-hairline-strong: #3a3a3a;
+
+  /* Accents */
+  --color-accent-emerald: #22c55e;
+  --color-accent-rose: #ef4444;
+  --color-accent-blue: #3b82f6;
+
+  /* Fonts */
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0a0a0a;
+}
+
+.section-padding {
+  padding: 96px 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
