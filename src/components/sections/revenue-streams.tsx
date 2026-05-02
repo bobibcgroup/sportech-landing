@@ -1,100 +1,130 @@
 "use client";
 
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
-const STREAMS = [
-  {
-    title: "Subscriptions",
-    description:
-      "Recurring monthly and annual membership tiers — from free fans to high-value partners.",
-  },
-  {
-    title: "Digital Currency",
-    description:
-      "Fans purchase PredictPro tokens to participate in predictions and win rewards.",
-  },
-  {
-    title: "Sports Predictions",
-    description:
-      "Match outcomes, player performance, season results — every prediction is a revenue event.",
-  },
-  {
-    title: "Interactive Voting",
-    description:
-      "Higher tiers pay for greater vote influence over club decisions.",
-  },
-  {
-    title: "Tickets",
-    description:
-      "In-app purchase and peer-to-peer resale with platform commission on every transaction.",
-  },
-  {
-    title: "Merchandise",
-    description:
-      "Official club gear — jerseys, accessories, limited editions — sold through the app.",
-  },
-  {
-    title: "Digital Gift Cards",
-    description:
-      "Club-branded cards accepted at 150,000+ stores globally.",
-  },
-  {
-    title: "NFT & Collectibles",
-    description:
-      "Digital trading cards, rare player tokens, seasonal drops — high-margin digital assets.",
-  },
+const STREAMS_LEFT = [
+  { title: "Subscriptions", desc: "Recurring monthly and annual tiers — free to premium." },
+  { title: "Digital Currency", desc: "Fans purchase tokens for predictions and rewards." },
+  { title: "Sports Predictions", desc: "Every match outcome prediction is a revenue event." },
+  { title: "Interactive Voting", desc: "Higher tiers pay for greater vote influence over club decisions." },
 ];
 
-export function RevenueStreams() {
+const STREAMS_RIGHT = [
+  { title: "Tickets", desc: "In-app purchase and peer-to-peer resale with platform commission." },
+  { title: "Merchandise", desc: "Official club gear sold through the app — jerseys, editions, accessories." },
+  { title: "Digital Gift Cards", desc: "Club-branded cards accepted at 150,000+ stores globally." },
+  { title: "NFT & Collectibles", desc: "Digital trading cards, rare tokens, seasonal drops." },
+];
+
+function StreamRow({ title, desc, delay, direction }: { title: string; desc: string; delay: number; direction: "left" | "right" }) {
   return (
-    <section className="bg-surface-card py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal>
-          <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Revenue Model
-          </span>
-        </ScrollReveal>
+    <motion.div
+      initial={{ opacity: 0, x: direction === "left" ? -32 : 32 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: REVEAL_MARGIN }}
+      transition={{ duration: dur.normal, delay, ease: ease.out }}
+      className="flex items-start gap-3 py-3 border-b group cursor-default"
+      style={{ borderColor: "rgba(250,255,105,0.08)" }}
+    >
+      <div
+        className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 transition-colors duration-300 group-hover:bg-primary"
+        style={{ background: "rgba(250,255,105,0.3)", animation: "dot-pulse 2s ease-in-out infinite" }}
+      />
+      <div>
+        <p className="text-on-dark text-sm font-semibold group-hover:text-primary transition-colors duration-200">{title}</p>
+        <p className="text-muted text-xs leading-relaxed mt-0.5">{desc}</p>
+      </div>
+    </motion.div>
+  );
+}
 
-        <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            Eight ways to earn. All running at the same time.
-          </h2>
-        </ScrollReveal>
+export function RevenueStreams() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const glowScale = useTransform(scrollYProgress, [0.3, 0.65], [0.2, 1]);
+  const glowOpacity = useTransform(scrollYProgress, [0.3, 0.55, 0.8], [0, 1, 0.5]);
 
-        <ScrollReveal delay={0.15}>
-          <p className="text-body-text mt-4 max-w-2xl leading-relaxed">
-            Most apps make money one way. This one makes it eight ways at once, without you lifting a finger.
+  return (
+    <section ref={sectionRef} className="bg-canvas py-28 relative overflow-hidden" id="revenue">
+      {/* Gold glow behind the 50% figure */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 600,
+          height: 400,
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(212,160,23,0.18) 0%, transparent 70%)",
+          scale: glowScale,
+          opacity: glowOpacity,
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <motion.span
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.fast, ease: ease.out }}
+          className="text-[12px] font-semibold tracking-widest uppercase block mb-3"
+          style={{ color: "rgba(250,255,105,0.6)" }}
+        >
+          8 Revenue Streams. One Split.
+        </motion.span>
+
+        {/* Two-column revenue list */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 mb-16">
+          <div>
+            {STREAMS_LEFT.map((s, i) => (
+              <StreamRow key={s.title} {...s} delay={i * 0.08} direction="left" />
+            ))}
+          </div>
+          <div>
+            {STREAMS_RIGHT.map((s, i) => (
+              <StreamRow key={s.title} {...s} delay={0.32 + i * 0.08} direction="right" />
+            ))}
+          </div>
+        </div>
+
+        {/* The typographic moment */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: 0.5, delay: 0.7, ease: ease.out }}
+          className="text-center"
+        >
+          <div
+            className="font-bold leading-none"
+            style={{
+              fontSize: "clamp(80px, 12vw, 144px)",
+              letterSpacing: "-6px",
+              color: "#d4a017",
+              textShadow: "0 0 120px rgba(212,160,23,0.25)",
+            }}
+          >
+            50%
+          </div>
+          <div
+            className="font-bold leading-none -mt-2"
+            style={{ fontSize: "clamp(44px, 6vw, 72px)", letterSpacing: "-4px", color: "#d4a017" }}
+          >
+            YOURS
+          </div>
+
+          <p className="text-body-text text-base mt-6 max-w-lg mx-auto leading-relaxed">
+            The other 50% funds everything we build for you.
           </p>
-        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12">
-          {STREAMS.map(({ title, description }, index) => (
-            <ScrollReveal key={title} delay={index * 0.08}>
-              <div className="bg-surface-elevated rounded-xl p-6 border border-hairline flex items-start gap-4">
-                <div className="w-10 h-10 shrink-0 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm">
-                  {index + 1}
-                </div>
-                <div>
-                  <h3 className="text-on-dark font-semibold mb-1">{title}</h3>
-                  <p className="text-body-text text-sm leading-relaxed">{description}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <ScrollReveal>
-            <p className="text-body-text text-center">
-              Every click, every purchase, every prediction.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="text-primary font-bold mt-2 text-center" style={{ fontSize: 32 }}>
-            Half of it goes to you. Every time.
-            </p>
-          </ScrollReveal>
-        </div>
+          <p className="mt-3 max-w-xl mx-auto" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>
+            Equivalent to the revenue FC Barcelona&apos;s digital platform generates for the club — over{" "}
+            <span style={{ color: "#d4a017" }}>SAR 800M</span> annually.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

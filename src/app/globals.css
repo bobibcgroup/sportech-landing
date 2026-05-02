@@ -71,3 +71,35 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
 }
+
+@keyframes flare-pulse {
+  0%, 100% { transform: scaleX(0.7); opacity: 0.5; }
+  50% { transform: scaleX(1.3); opacity: 1; }
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes marquee-r {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,54 +1,97 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const PILLARS = [
   {
     title: "Digital Transformation",
-    body: "Saudi sports clubs at the forefront of fan technology. Not catching up to the West. Leading it.",
-    delay: 0,
+    body: "Saudi sports clubs at the forefront of fan technology. Not catching up to the West — leading it.",
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
+  },
+  {
+    title: "Sports Economy",
+    body: "SAR 1.8 Trillion — the Vision 2030 target for Saudi sports sector contribution to GDP.",
+    stat: "SAR 1.8T",
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
   },
   {
     title: "Local Innovation",
-    body: "The patent is Saudi. The team is Saudi. The IP stays here.",
-    delay: 0.15,
-  },
-  {
-    title: "Sustainable Revenue Infrastructure",
-    body: "Matchday revenue will never be enough on its own. This builds the revenue model that lasts.",
-    delay: 0.3,
+    body: "The patent is Saudi. The team is Saudi. The IP stays here — part of what we build for the Kingdom.",
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
   },
 ];
 
-export function Vision2030() {
+function GeometricPattern({ rotation }: { rotation: ReturnType<typeof useTransform<number, number>> }) {
   return (
-    <section className="bg-canvas py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal>
-          <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Supporting Saudi Vision 2030
-          </span>
-        </ScrollReveal>
+    <motion.div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ rotate: rotation, opacity: 0.04 }}>
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="geo" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <polygon points="40,4 76,20 76,60 40,76 4,60 4,20" fill="none" stroke="#faff69" strokeWidth="0.8" />
+            <polygon points="40,14 66,26 66,54 40,66 14,54 14,26" fill="none" stroke="#faff69" strokeWidth="0.5" />
+            <line x1="40" y1="4" x2="40" y2="76" stroke="#faff69" strokeWidth="0.3" />
+            <line x1="4" y1="40" x2="76" y2="40" stroke="#faff69" strokeWidth="0.3" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#geo)" />
+      </svg>
+    </motion.div>
+  );
+}
 
-        <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            The digital sports economy. Built here.
-          </h2>
-        </ScrollReveal>
+export function Vision2030() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const rotation = useTransform(scrollYProgress, [0, 1], [0, 12]);
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          {PILLARS.map(({ title, body, delay }) => (
+  return (
+    <section ref={sectionRef} className="bg-canvas py-24 relative overflow-hidden">
+      <GeometricPattern rotation={rotation} />
+
+      {/* Saudi colors subtle atmospheric glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 80% 50% at 80% 50%, rgba(26,0,8,0.3) 0%, transparent 70%)"
+      }} />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <motion.span
+          initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
+          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
+          style={{ color: "rgba(250,255,105,0.6)" }}
+        >
+          Supporting Saudi Vision 2030
+        </motion.span>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
+          className="text-on-dark font-bold mb-16 max-w-2xl"
+          style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
+        >
+          BUILT FOR SAUDI ARABIA&apos;S{" "}
+          <span style={{ color: "#faff69" }}>NEXT CHAPTER.</span>
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PILLARS.map(({ title, body, stat, icon }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-surface-card border border-hairline rounded-xl p-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: REVEAL_MARGIN }}
+              transition={{ duration: dur.normal, delay: 0.2 + i * 0.1, ease: ease.out }}
+              className="rounded-xl p-6 border"
+              style={{ background: "rgba(12,12,12,0.5)", borderColor: "rgba(250,255,105,0.08)" }}
             >
-              <h3 className="text-on-dark font-semibold text-lg mb-3">{title}</h3>
+              <div className="mb-4">{icon}</div>
+              <h3 className="text-on-dark font-bold text-base mb-2 tracking-tight">{title}</h3>
               <p className="text-body-text text-sm leading-relaxed">{body}</p>
+              {stat && (
+                <p className="font-bold mt-4" style={{ fontSize: 28, color: "#faff69", letterSpacing: "-1px" }}>{stat}</p>
+              )}
             </motion.div>
           ))}
         </div>

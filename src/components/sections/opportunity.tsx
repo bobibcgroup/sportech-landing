@@ -1,90 +1,135 @@
 "use client";
 
-import { motion, useMotionValue, useInView, useTransform, animate } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { motion, useMotionValue, useInView, useTransform, useScroll, animate } from "framer-motion";
+import { ease, dur, COUNTER_DURATION, REVEAL_MARGIN } from "@/lib/animation";
 import { useLanguage } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
-interface CounterAnimationProps {
+interface CounterProps {
   target: number;
   prefix?: string;
   suffix?: string;
 }
 
-function CounterAnimation({ target, prefix = "", suffix = "" }: CounterAnimationProps) {
+function Counter({ target, prefix = "", suffix = "" }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: REVEAL_MARGIN });
   const mv = useMotionValue(0);
   const display = useTransform(mv, (v) => `${prefix}${Math.round(v).toLocaleString()}${suffix}`);
 
   useEffect(() => {
     if (!inView) return;
-    const controls = animate(mv, target, { duration: 2, ease: "easeOut" });
+    const controls = animate(mv, target, {
+      duration: COUNTER_DURATION / 1000,
+      ease: "easeOut",
+    });
     return () => controls.stop();
   }, [inView, mv, target]);
 
-  return (
-    <span ref={ref}>
-      <motion.span>{display}</motion.span>
-    </span>
-  );
+  return <span ref={ref}><motion.span>{display}</motion.span></span>;
 }
 
-const STAT_NUMBERS = [
-  { target: 200, prefix: "€", suffix: "M+", delay: 0 },
-  { target: 35, prefix: "", suffix: "%", delay: 0.15 },
-  { target: 100, prefix: "", suffix: "", delay: 0.3 },
+const STATS = [
+  { target: 200, prefix: "€", suffix: "M+", attribution: "FC Barcelona annual digital revenue", delay: 0 },
+  { target: 35, prefix: "", suffix: "%", attribution: "Manchester United fan loyalty increase, Year 1", delay: 0.2 },
+  { target: 100, prefix: "", suffix: "+", attribution: "Countries with PSG fan token holders", delay: 0.4 },
 ];
 
 export function Opportunity() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const glowOpacity = useTransform(scrollYProgress, [0.1, 0.4, 0.7, 1], [0, 0.6, 0.6, 0]);
+
   const { lang } = useLanguage();
   const tx = t[lang].opportunity;
 
   return (
-    <section className="bg-canvas py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal>
-          <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            {tx.badge}
-          </span>
-        </ScrollReveal>
+    <section ref={sectionRef} className="bg-canvas py-28 relative overflow-hidden">
+      {/* Stadium blue atmospheric bleed */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: glowOpacity,
+          background: "radial-gradient(ellipse 60% 80% at 0% 50%, rgba(13,27,62,0.7) 0%, transparent 70%)",
+        }}
+      />
 
-        <ScrollReveal delay={0.1}>
-          <h2
-            className="text-on-dark font-bold mt-4 max-w-2xl"
-            style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}
-          >
-            {tx.heading}
-          </h2>
-        </ScrollReveal>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <motion.span
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.fast, ease: ease.out }}
+          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
+          style={{ color: "rgba(250,255,105,0.6)" }}
+        >
+          {tx.badge}
+        </motion.span>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          {STAT_NUMBERS.map(({ target, prefix, suffix, delay }, i) => (
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
+          className="text-on-dark font-bold mb-16 max-w-2xl"
+          style={{ fontSize: "clamp(28px, 4vw, 48px)", lineHeight: 1.1, letterSpacing: "-2px" }}
+        >
+          {tx.heading}
+        </motion.h2>
+
+        {/* Counter cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {STATS.map(({ target, prefix, suffix, attribution, delay }, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 48 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-surface-card border border-hairline rounded-xl p-8"
+              initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: REVEAL_MARGIN }}
+              transition={{ duration: 0.8, delay, ease: ease.out }}
+              className="rounded-2xl p-8 border"
+              style={{
+                background: "rgba(10,10,10,0.6)",
+                borderColor: "rgba(250,255,105,0.12)",
+                backdropFilter: "blur(8px)",
+              }}
             >
               <div
-                className="text-primary font-bold leading-none"
-                style={{ fontSize: "clamp(32px, 5vw, 56px)", letterSpacing: "-1.5px" }}
+                className="font-bold leading-none mb-2"
+                style={{ fontSize: "clamp(56px, 6vw, 96px)", letterSpacing: "-4px", color: "#faff69" }}
               >
-                <CounterAnimation target={target} prefix={prefix} suffix={suffix} />
+                <Counter target={target} prefix={prefix} suffix={suffix} />
               </div>
-              <p className="text-body-text text-sm leading-relaxed mt-4">{tx.stats[i]}</p>
+              <p className="text-[13px] leading-relaxed mt-4" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {attribution}
+              </p>
+              <p className="text-body-text text-sm leading-relaxed mt-2">
+                {tx.stats[i]}
+              </p>
             </motion.div>
           ))}
         </div>
 
-        <ScrollReveal delay={0.2}>
-          <p className="text-body-text text-center mt-12 max-w-3xl mx-auto leading-relaxed">
-            {tx.footer}
-          </p>
-        </ScrollReveal>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.normal, delay: 0.6, ease: ease.out }}
+          className="text-center mt-14 font-semibold"
+          style={{ fontSize: "clamp(18px, 2vw, 22px)", color: "rgba(255,255,255,0.85)" }}
+        >
+          Your club does not have this yet.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.normal, delay: 0.8 }}
+          className="text-body-text text-sm text-center mt-3 max-w-2xl mx-auto leading-relaxed"
+        >
+          {tx.footer}
+        </motion.p>
       </div>
     </section>
   );

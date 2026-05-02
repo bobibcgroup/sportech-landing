@@ -1,154 +1,81 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { blurSlide } from "@/lib/variants";
-
-const COMPETITORS = [
-  "PSG Fan Platform",
-  "FC Barcelona Digital",
-  "Manchester United Membership",
-];
+import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 export function PatentedCamera() {
   return (
-    <section className="bg-canvas py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left column */}
-          <div className="lg:col-span-7">
-            <ScrollReveal>
-              <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-                A first for football
-              </span>
-            </ScrollReveal>
+    <section className="bg-canvas py-24 relative overflow-hidden" id="camera">
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(240,244,248,0.025) 100%)"
+      }} />
 
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={blurSlide}
-              className="text-on-dark font-bold mt-4"
-              style={{ fontSize: "clamp(32px, 5vw, 56px)", lineHeight: 1.1 }}
-            >
-              Watch the game the way only players do.
-            </motion.h2>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.fast }}
+          className="flex justify-center mb-8"
+        >
+          <span className="text-[11px] font-bold tracking-[0.25em] uppercase px-4 py-1.5 rounded-full border"
+            style={{ color: "#faff69", borderColor: "rgba(250,255,105,0.3)", background: "rgba(250,255,105,0.08)" }}>
+            PATENTED
+          </span>
+        </motion.div>
 
-            <ScrollReveal delay={0.15}>
-              <p className="text-body-text leading-relaxed mt-6">
-                A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch — live, during the game, with no delay.
-              </p>
-            </ScrollReveal>
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.6, ease: ease.overshoot }}
+          className="text-on-dark font-bold text-center mb-16"
+          style={{ fontSize: "clamp(32px, 5.5vw, 64px)", lineHeight: 1.0, letterSpacing: "-3px" }}
+        >
+          SEE THE GAME<br /><span style={{ color: "#faff69" }}>FROM INSIDE IT.</span>
+        </motion.h2>
 
-            <ScrollReveal delay={0.2}>
-              <p className="text-body-text leading-relaxed mt-4">
-                PSG doesn&apos;t have this. Barcelona doesn&apos;t. Manchester United doesn&apos;t. It&apos;s ours, and it&apos;s patented.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.25}>
-              <p className="text-primary font-semibold mt-4 text-sm">
-                This is the one feature no other app can copy.
-              </p>
-            </ScrollReveal>
-
-            {/* Comparison list */}
-            <div className="mt-10 space-y-2">
-              {COMPETITORS.map((name, i) => (
-                <ScrollReveal key={name} delay={0.1 + i * 0.08}>
-                  <div className="flex items-center justify-between bg-surface-card border border-hairline rounded-lg px-5 py-3">
-                    <span className="text-muted text-sm">{name}</span>
-                    <span className="text-muted text-sm">no player cameras ✗</span>
-                  </div>
-                </ScrollReveal>
-              ))}
-              <ScrollReveal delay={0.37}>
-                <div className="flex items-center justify-between bg-surface-elevated border border-primary/30 rounded-lg px-5 py-3">
-                  <span className="text-on-dark font-semibold text-sm">Sportech</span>
-                  <span className="text-primary font-semibold text-sm">✓ Patented</span>
-                </div>
-              </ScrollReveal>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, ease: ease.out }}
+            className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3", background: "#0d0d0d" }}
+          >
+            <Image src="/cinematic/player-camera-hardware.jpg" alt="Jersey-mounted player camera" fill className="object-cover" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%)" }} />
+            <div className="absolute bottom-4 left-4">
+              <p className="text-primary text-[11px] font-bold tracking-widest uppercase">Player Camera Hardware</p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right column — visual card */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-surface-card rounded-2xl border border-hairline p-6 flex flex-col items-center justify-center min-h-[400px]"
-            >
-              {/* Camera icon with glow */}
-              <div className="relative flex items-center justify-center mb-2">
-                <div
-                  className="absolute rounded-full"
-                  style={{
-                    width: 100,
-                    height: 100,
-                    background: "rgba(250,255,105,0.15)",
-                    filter: "blur(28px)",
-                  }}
-                />
-                <div
-                  className="relative flex items-center justify-center w-20 h-20 rounded-full border border-hairline-strong"
-                  style={{ background: "#242424" }}
-                >
-                  <svg
-                    width="36"
-                    height="36"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#faff69"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
-                    <circle cx="12" cy="13" r="3" />
-                  </svg>
-                </div>
-              </div>
-
-              <span className="text-primary tracking-widest text-sm uppercase font-semibold mt-4">
-                Player POV
-              </span>
-
-              {/* LIVE badge */}
-              <div className="flex items-center gap-2 mt-3">
-                <span
-                  className="w-2 h-2 rounded-full bg-accent-emerald"
-                  style={{ animation: "float 1.5s ease-in-out infinite" }}
-                />
-                <span className="text-accent-emerald text-xs font-semibold uppercase tracking-wider">
-                  Live
-                </span>
-              </div>
-
-              <p className="text-muted text-sm text-center mt-4 leading-relaxed max-w-xs">
-                Choose your player. Watch from inside the field.
-              </p>
-
-              {/* Simulated viewer stats */}
-              <div className="w-full mt-6 space-y-2">
-                {[
-                  { label: "Active Streams", value: "12 Players" },
-                  { label: "Watching Now", value: "84K Fans" },
-                ].map(({ label, value }) => (
-                  <div
-                    key={label}
-                    className="flex items-center justify-between px-4 py-2 rounded-lg"
-                    style={{ background: "#242424", border: "1px solid #2a2a2a" }}
-                  >
-                    <span className="text-[12px] text-muted">{label}</span>
-                    <span className="text-[12px] font-semibold text-primary">{value}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.2, ease: ease.out }}
+            className="relative rounded-2xl overflow-hidden group"
+            style={{ aspectRatio: "4/3", background: "#0d0d0d", border: "1px solid rgba(250,255,105,0.12)" }}
+          >
+            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+              <source src="/cinematic/player-pov.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 3px)" }} />
+            <div className="absolute bottom-4 left-4 flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-accent-emerald" style={{ animation: "dot-pulse 1.5s ease-in-out infinite" }} />
+              <span className="text-accent-emerald text-[11px] font-bold uppercase tracking-wider">Live Feed</span>
+            </div>
+          </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.5, ease: ease.out }}
+          className="text-center mt-12 max-w-2xl mx-auto"
+        >
+          <p className="text-body-text leading-relaxed">
+            A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch — live, no delay. PSG doesn&apos;t have this. Barcelona doesn&apos;t. It&apos;s ours. It&apos;s patented.
+          </p>
+          <p className="text-body-text leading-relaxed mt-3">
+            Fans pay to access it. Clubs earn{" "}
+            <span className="font-bold" style={{ color: "#faff69" }}>50%</span> of everything they pay.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

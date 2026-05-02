@@ -1,214 +1,163 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { AnimatedGrid } from "@/components/ui/animated-grid";
-import { fadeUp, blurSlide } from "@/lib/variants";
+import Image from "next/image";
+import { ease, dur } from "@/lib/animation";
 import { useLanguage } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
 export function Hero() {
-  const { scrollY } = useScroll();
-  const phoneY = useTransform(scrollY, [0, 500], [0, -60]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.75], [0, -60]);
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
   const { lang } = useLanguage();
   const tx = t[lang].hero;
 
-  const headlineLines = tx.headline.map((text, i) => ({
-    text,
-    yellow: i === tx.headline.length - 1,
-  }));
+  const headlineEN = "YOUR CLUB'S REVENUE. FINALLY UNLOCKED.";
+  const headlineText = lang === "en" ? headlineEN : tx.headline.join(" ");
+  const words = headlineText.split(" ");
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-canvas">
-      {/* Layer 1: Animated grid */}
-      <AnimatedGrid />
-
-      {/* Layer 2: Ambient orbs */}
-      <div
-        className="absolute top-20 right-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{
-          background: "rgba(250,255,105,0.08)",
-          filter: "blur(120px)",
-          animation: "float 8s ease-in-out infinite",
-        }}
-      />
-      <div
-        className="absolute bottom-20 left-0 w-80 h-80 rounded-full pointer-events-none"
-        style={{
-          background: "rgba(59,130,246,0.08)",
-          filter: "blur(100px)",
-          animation: "float 6s ease-in-out infinite reverse",
-        }}
-      />
-
-      {/* Layer 3: Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left column */}
-          <div className="lg:col-span-7 flex flex-col">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
-              }}
-            >
-              {/* Badge */}
-              <motion.div variants={fadeUp} className="mb-6">
-                <span className="inline-flex items-center bg-surface-card text-primary text-[12px] font-semibold tracking-widest uppercase rounded-full px-4 py-2 border border-hairline">
-                  {tx.badge}
-                </span>
-              </motion.div>
-
-              {/* Headline */}
-              <div className="mb-6">
-                {headlineLines.map(({ text, yellow }) => (
-                  <motion.div key={text} variants={blurSlide}>
-                    <h1
-                      className="block leading-[1.05] tracking-[-2.5px] font-bold"
-                      style={{ fontSize: "clamp(48px, 6vw, 72px)" }}
-                    >
-                      <span className={yellow ? "text-primary" : "text-on-dark"}>
-                        {text}
-                      </span>
-                    </h1>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Sub */}
-              <motion.p
-                variants={fadeUp}
-                className="text-body-text text-base font-normal leading-relaxed max-w-lg mb-6"
-                transition={{ delay: 0.4 }}
-              >
-                {tx.sub}
-              </motion.p>
-
-              {/* Feature pills */}
-              <motion.div
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.6 } },
-                }}
-                className="flex flex-wrap gap-2 mb-8"
-              >
-                {tx.pills.map((pill) => (
-                  <motion.span
-                    key={pill}
-                    variants={fadeUp}
-                    className="bg-surface-card border border-hairline text-body-text text-[13px] rounded-full px-3 py-1"
-                  >
-                    {pill}
-                  </motion.span>
-                ))}
-              </motion.div>
-
-              {/* CTA buttons */}
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-1 bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-11 hover:bg-primary-active transition-colors duration-200"
-                >
-                  {tx.cta1}
-                </a>
-                <a
-                  href="#platform"
-                  className="inline-flex items-center gap-1 bg-surface-card border border-hairline text-on-dark text-sm font-semibold rounded-lg px-5 h-11 hover:bg-surface-elevated transition-colors duration-200"
-                >
-                  {tx.cta2}
-                </a>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Right column — phone mockup */}
-          <div className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end">
-            <motion.div
-              initial={{ x: 80, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              style={{ y: phoneY }}
-              className="w-full max-w-[340px]"
-            >
-              <PhoneMockup />
-            </motion.div>
-          </div>
-        </div>
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-canvas">
+      {/* Fallback image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/cinematic/hero-bg-fallback.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          style={{ opacity: 0.55 }}
+        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            opacity: 0.55,
+            animation: "kenburns 16s ease-in-out infinite alternate",
+          }}
+        >
+          <source src="/cinematic/hero-bg.mp4" type="video/mp4" />
+        </video>
       </div>
 
+      {/* Vignette */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.85) 100%)",
+        }}
+      />
+
+      {/* Lens flare */}
+      <div
+        className="absolute z-[2] w-full pointer-events-none"
+        style={{
+          top: "38%",
+          height: 2,
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(250,255,105,0.10) 35%, rgba(250,255,105,0.18) 50%, rgba(250,255,105,0.10) 65%, transparent 100%)",
+          animation: "flare-pulse 6s ease-in-out infinite",
+          transformOrigin: "center",
+        }}
+      />
+
+      {/* Content */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center"
+        style={{ opacity: contentOpacity, y: contentY }}
+      >
+        <motion.span
+          initial={{ opacity: 0, x: -24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.8, duration: dur.fast, ease: ease.out }}
+          className="text-[12px] font-semibold tracking-widest uppercase mb-8 block"
+          style={{ color: "rgba(250,255,105,0.6)" }}
+        >
+          {tx.badge}
+        </motion.span>
+
+        <h1
+          className="font-bold leading-[0.92] mb-8"
+          style={{
+            fontSize: "clamp(44px, 6.5vw, 80px)",
+            letterSpacing: "-3px",
+          }}
+        >
+          {words.map((word, i) => {
+            const isYellow = lang === "en" ? i >= words.length - 2 : i === words.length - 1;
+            return (
+              <motion.span
+                key={i}
+                className="inline-block mr-[0.22em]"
+                style={{ color: isYellow ? "#faff69" : "#ffffff" }}
+                initial={{ opacity: 0, y: -28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 2.2 + i * 0.1,
+                  duration: 0.55,
+                  ease: ease.out,
+                }}
+              >
+                {word}
+              </motion.span>
+            );
+          })}
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.9, duration: dur.slow }}
+          className="text-body-text text-base max-w-[480px] leading-relaxed mb-10"
+        >
+          {tx.sub}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3.3, duration: dur.normal, ease: ease.out }}
+          className="flex flex-wrap items-center justify-center gap-3"
+        >
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-1 bg-primary text-on-primary text-sm font-semibold rounded-lg px-6 h-12 hover:bg-primary-active transition-colors duration-200"
+          >
+            {tx.cta1}
+          </a>
+          <a
+            href="#platform"
+            className="inline-flex items-center gap-1 border border-hairline text-on-dark text-sm font-semibold rounded-lg px-6 h-12 hover:border-hairline-strong transition-colors duration-200"
+          >
+            {tx.cta2}
+          </a>
+        </motion.div>
+      </motion.div>
+
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        style={{ opacity: indicatorOpacity }}
+      >
         <div
           className="text-muted text-xl"
           style={{ animation: "bounce-y 2s ease-in-out infinite" }}
         >
           ↓
         </div>
-      </div>
+      </motion.div>
     </section>
-  );
-}
-
-function PhoneMockup() {
-  return (
-    <div className="rounded-2xl bg-surface-card border border-hairline p-4 shadow-2xl">
-      <div className="flex items-center justify-between mb-3 px-1">
-        <span className="text-[11px] text-muted font-medium">9:41</span>
-        <div className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full" style={{ background: "#22c55e" }} />
-          <span className="text-[11px] font-semibold text-accent-emerald uppercase tracking-wider">Live</span>
-        </div>
-      </div>
-
-      <div
-        className="rounded-xl overflow-hidden flex flex-col items-center justify-center"
-        style={{
-          background: "linear-gradient(160deg, #121212 0%, #0a0a0a 100%)",
-          minHeight: 320,
-          border: "1px solid #2a2a2a",
-        }}
-      >
-        <div className="relative flex items-center justify-center mb-4">
-          <div
-            className="absolute rounded-full"
-            style={{ width: 80, height: 80, background: "rgba(250,255,105,0.15)", filter: "blur(20px)" }}
-          />
-          <div
-            className="relative flex items-center justify-center w-14 h-14 rounded-full border border-hairline-strong"
-            style={{ background: "#1a1a1a" }}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-              stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
-              <circle cx="12" cy="13" r="3" />
-            </svg>
-          </div>
-        </div>
-
-        <p className="text-[11px] font-semibold tracking-widest uppercase text-primary mb-6">
-          Player POV — Live
-        </p>
-
-        <div className="w-full px-4 space-y-2">
-          {[
-            { label: "Fan Engagement", value: "98.2%", up: true },
-            { label: "Live Viewers", value: "124K", up: true },
-            { label: "Predictions Active", value: "3,412", up: false },
-          ].map(({ label, value, up }) => (
-            <div
-              key={label}
-              className="flex items-center justify-between px-3 py-2 rounded-lg"
-              style={{ background: "#242424", border: "1px solid #2a2a2a" }}
-            >
-              <span className="text-[12px] text-muted">{label}</span>
-              <span className="text-[12px] font-semibold" style={{ color: up ? "#22c55e" : "#faff69" }}>
-                {value}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }

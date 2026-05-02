@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { Nav } from "@/components/sections/nav";
 import { Hero } from "@/components/sections/hero";
 import { SportsScope } from "@/components/sections/sports-scope";
-import { ScrollParallaxBg } from "@/components/ui/scroll-parallax-bg";
+import { FilmGrain } from "@/components/ui/film-grain";
 
 const Opportunity = dynamic(() =>
   import("@/components/sections/opportunity").then((m) => ({ default: m.Opportunity }))
@@ -41,7 +41,7 @@ const Footer = dynamic(() =>
 export default function Home() {
   return (
     <main className="bg-canvas min-h-screen relative">
-      <ScrollParallaxBg />
+      <FilmGrain />
       <div className="relative" style={{ zIndex: 1 }}>
       <Nav />
       <Hero />

@@ -1,63 +1,139 @@
 "use client";
 
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
-const REGIONS = [
-  {
-    title: "Saudi Arabia & UAE",
-    body: "Home turf. Saudi and UAE's biggest clubs first.",
-    delay: 0,
-  },
-  {
-    title: "China & Asia",
-    body: "The biggest untapped market. Hundreds of millions of fans across Asia follow Gulf football, and almost none of them have a way to engage.",
-    delay: 0.15,
-  },
-  {
-    title: "Europe, Americas & Beyond",
-    body: "The platform runs in any language. A fan in London, Jakarta, or Buenos Aires can subscribe to your club app and feel like they're in the stands.",
-    delay: 0.3,
-  },
+// Simplified world map: city dots relative to a 600×340 SVG
+const CITIES = [
+  { id: "riyadh", x: 330, y: 195, label: "Riyadh", isOrigin: true },
+  { id: "london", x: 230, y: 118, label: "London", fact: "50M+ Premier League global fans" },
+  { id: "barcelona", x: 222, y: 138, label: "Barcelona" },
+  { id: "paris", x: 238, y: 122, label: "Paris" },
+  { id: "tokyo", x: 500, y: 148, label: "Tokyo", fact: "120M sports streaming users" },
+  { id: "beijing", x: 468, y: 145, label: "Beijing" },
+  { id: "saopaulo", x: 218, y: 268, label: "São Paulo", fact: "200M+ football fans in Brazil" },
+  { id: "newyork", x: 148, y: 155, label: "New York", fact: "MLS growing 30% year-on-year" },
 ];
 
+function arc(x1: number, y1: number, x2: number, y2: number): string {
+  const mx = (x1 + x2) / 2;
+  const my = Math.min(y1, y2) - Math.abs(x2 - x1) * 0.35;
+  return `M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}`;
+}
+
 export function GlobalReach() {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const triggered = useInView(svgRef, { once: true, margin: REVEAL_MARGIN });
+  const origin = CITIES[0];
+
   return (
-    <section className="bg-surface-card py-24">
+    <section className="bg-canvas py-24" id="reach">
       <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal>
-          <span className="text-primary text-[12px] font-semibold tracking-widest uppercase">
-            Global Reach
-          </span>
-        </ScrollReveal>
+        <motion.span
+          initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
+          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
+          style={{ color: "rgba(250,255,105,0.6)" }}
+        >
+          Global Reach
+        </motion.span>
 
-        <ScrollReveal delay={0.1}>
-          <h2 className="text-on-dark font-bold mt-4 max-w-2xl" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", lineHeight: 1.15 }}>
-            Built for the Gulf. Designed for the world.
-          </h2>
-        </ScrollReveal>
+        <div className="flex flex-col lg:flex-row lg:items-start gap-12">
+          <div className="lg:w-80 shrink-0">
+            <motion.h2
+              initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
+              className="text-on-dark font-bold mb-6"
+              style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
+            >
+              IN CONVERSATIONS ACROSS
+              <span style={{ color: "#faff69" }}> 3 LEAGUES.</span>
+            </motion.h2>
 
-        <ScrollReveal delay={0.15}>
-          <p className="text-body-text mt-4 max-w-2xl leading-relaxed">
-            Al-Nassr has fans in Tokyo and São Paulo. Your digital revenue should too.
-          </p>
-        </ScrollReveal>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.3 }}
+              className="space-y-4"
+            >
+              {[
+                { stat: "100+", label: "Countries with our target audience" },
+                { stat: "10+", label: "Clubs in active conversations" },
+                { stat: "3", label: "Leagues across the GCC" },
+              ].map(({ stat, label }) => (
+                <div key={stat} className="border-l-2 pl-4" style={{ borderColor: "rgba(250,255,105,0.4)" }}>
+                  <p className="font-bold text-2xl" style={{ color: "#faff69", letterSpacing: "-1px" }}>{stat}</p>
+                  <p className="text-body-text text-xs mt-0.5">{label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          {REGIONS.map(({ title, body, delay }) => (
-            <ScrollReveal key={title} delay={delay}>
-              <div className="bg-surface-elevated border border-hairline rounded-xl p-8 h-full">
-                <h3 className="text-on-dark font-semibold text-lg mb-3">{title}</h3>
-                <p className="text-body-text text-sm leading-relaxed">{body}</p>
-              </div>
-            </ScrollReveal>
-          ))}
+          {/* SVG Map */}
+          <div className="flex-1 relative">
+            <svg
+              ref={svgRef}
+              viewBox="0 0 600 340"
+              className="w-full"
+              style={{ maxHeight: 360 }}
+            >
+              {/* Radar rings */}
+              {[60, 120, 190, 270].map((r, i) => (
+                <circle key={r} cx={origin.x} cy={origin.y} r={r}
+                  fill="none" stroke="rgba(250,255,105,0.05)" strokeWidth="1"
+                  strokeDasharray={i % 2 === 0 ? "4 6" : "none"} />
+              ))}
+              {/* Compass lines */}
+              {[0, 45, 90, 135].map((deg) => {
+                const rad = (deg * Math.PI) / 180;
+                return (
+                  <line key={deg}
+                    x1={origin.x - 280 * Math.cos(rad)} y1={origin.y - 280 * Math.sin(rad)}
+                    x2={origin.x + 280 * Math.cos(rad)} y2={origin.y + 280 * Math.sin(rad)}
+                    stroke="rgba(250,255,105,0.04)" strokeWidth="1" />
+                );
+              })}
+
+              {/* Arcs from Riyadh */}
+              {CITIES.slice(1).map((city, i) => (
+                <motion.path
+                  key={city.id}
+                  d={arc(origin.x, origin.y, city.x, city.y)}
+                  fill="none"
+                  stroke="rgba(250,255,105,0.35)"
+                  strokeWidth="1"
+                  pathLength="1"
+                  initial={{ pathLength: 0 }}
+                  animate={triggered ? { pathLength: 1 } : {}}
+                  transition={{ duration: 0.8, delay: 0.6 + i * 0.15, ease: ease.out }}
+                />
+              ))}
+
+              {/* City dots */}
+              {CITIES.map((city, i) => (
+                <motion.g key={city.id}
+                  initial={{ opacity: 0, scale: 0 }} animate={triggered ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.3, delay: city.isOrigin ? 0.4 : 1.1 + i * 0.1 }}
+                >
+                  {city.isOrigin && (
+                    <>
+                      <circle cx={city.x} cy={city.y} r={18} fill="rgba(250,255,105,0.06)" style={{ animation: "pulse-ring 2s ease-out infinite" }} />
+                      <circle cx={city.x} cy={city.y} r={12} fill="rgba(250,255,105,0.1)" />
+                    </>
+                  )}
+                  <circle cx={city.x} cy={city.y} r={city.isOrigin ? 4 : 3}
+                    fill={city.isOrigin ? "#faff69" : "rgba(250,255,105,0.7)"}
+                    style={!city.isOrigin ? { animation: "dot-pulse 2s ease-in-out infinite" } : {}} />
+                  <text x={city.x + (city.x > origin.x ? 8 : -8)} y={city.y + 4}
+                    fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="Inter, sans-serif"
+                    textAnchor={city.x > origin.x ? "start" : "end"}>
+                    {city.label}
+                  </text>
+                </motion.g>
+              ))}
+            </svg>
+          </div>
         </div>
-
-        <ScrollReveal delay={0.2}>
-          <p className="text-on-dark font-bold text-center mt-16" style={{ fontSize: 24 }}>
-            Your fans are everywhere. Your revenue should be too.
-          </p>
-        </ScrollReveal>
       </div>
     </section>
   );
