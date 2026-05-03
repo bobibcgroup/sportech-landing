@@ -34,14 +34,10 @@ function SportTile({ sport, index, name }: { sport: typeof SPORTS[0]; index: num
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         sizes="(max-width: 768px) 50vw, 25vw"
       />
-      {/* Dark overlay — lifts on hover */}
+      {/* Single overlay — heavy at rest, lifts on hover */}
       <div
-        className="absolute inset-0 transition-opacity duration-300"
-        style={{ background: "rgba(10,10,10,0.55)", opacity: 1 }}
-      />
-      <div
-        className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-        style={{ background: "rgba(10,10,10,0.25)" }}
+        className="absolute inset-0 transition-opacity duration-400 group-hover:opacity-50"
+        style={{ background: "rgba(10,10,10,0.55)" }}
       />
 
       {/* Sport name */}
