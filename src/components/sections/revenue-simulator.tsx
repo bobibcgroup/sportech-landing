@@ -15,18 +15,19 @@ const TIERS = [
 ];
 
 const ACTIVE_RATIO = 0.25;
-const GROSS_PER_USER = [4, 500, 500, 100, 1000, 1000, 500, 50].reduce((a, b) => a + b, 0);
 
 const STREAMS = [
-  { key: "subscriptions", label: "Subscriptions",       gross: 4,    color: "#faff69" },
-  { key: "gifting",       label: "Live Stream Gifting", gross: 500,  color: "#ff78c8" },
-  { key: "predictions",   label: "Sports Predictions",  gross: 500,  color: "#a8ff78" },
-  { key: "voting",        label: "Interactive Voting",  gross: 100,  color: "#78e8ff" },
-  { key: "tickets",       label: "Tickets",             gross: 1000, color: "#78c1ff" },
-  { key: "merchandise",   label: "Merchandise",         gross: 1000, color: "#ffb878" },
-  { key: "giftcards",     label: "Digital Gift Cards",  gross: 500,  color: "#c8a8ff" },
-  { key: "nft",           label: "NFT & Collectibles",  gross: 50,   color: "#ff9878" },
+  { key: "subscriptions", label: "Subscriptions",       gross: 4,   color: "#faff69" },
+  { key: "gifting",       label: "Live Stream Gifting", gross: 196, color: "#ff78c8" },
+  { key: "predictions",   label: "Sports Predictions",  gross: 213, color: "#a8ff78" },
+  { key: "voting",        label: "Interactive Voting",  gross: 43,  color: "#78e8ff" },
+  { key: "tickets",       label: "Tickets",             gross: 386, color: "#78c1ff" },
+  { key: "merchandise",   label: "Merchandise",         gross: 399, color: "#ffb878" },
+  { key: "giftcards",     label: "Digital Gift Cards",  gross: 178, color: "#c8a8ff" },
+  { key: "nft",           label: "NFT & Collectibles",  gross: 27,  color: "#ff9878" },
 ];
+
+const GROSS_PER_USER = STREAMS.reduce((sum, s) => sum + s.gross, 0);
 
 function AnimatedNumber({ value }: { value: number }) {
   const mv = useMotionValue(0);
