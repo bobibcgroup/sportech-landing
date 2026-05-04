@@ -5,21 +5,17 @@ import { motion, animate, useMotionValue, useTransform } from "framer-motion";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const TIERS = [
-  { label: "10K", fans: 10_000 },
-  { label: "50K", fans: 50_000 },
+  { label: "10K",  fans: 10_000 },
+  { label: "50K",  fans: 50_000 },
   { label: "100K", fans: 100_000 },
   { label: "250K", fans: 250_000 },
   { label: "500K", fans: 500_000 },
-  { label: "1M", fans: 1_000_000 },
-  { label: "2M+", fans: 2_000_000 },
+  { label: "1M",   fans: 1_000_000 },
+  { label: "2M+",  fans: 2_000_000 },
 ];
 
-// 25% of the selected fanbase is counted as active users
 const ACTIVE_RATIO = 0.25;
 
-// Gross platform revenue per active user per year.
-// Club receives 50% of each figure.
-// Subscriptions: 50% free ($0) + 50% paying ($8/yr avg) = $4 gross per user.
 const STREAMS = [
   { key: "subscriptions", label: "Subscriptions",       gross: 4,    color: "#faff69" },
   { key: "gifting",       label: "Live Stream Gifting", gross: 500,  color: "#ff78c8" },
@@ -31,28 +27,55 @@ const STREAMS = [
   { key: "nft",           label: "NFT & Collectibles",  gross: 50,   color: "#ff9878" },
 ];
 
-function AnimatedCounter({ value, prefix = "$" }: { value: number; prefix?: string }) {
+function AnimatedNumber({ value }: { value: number }) {
   const mv = useMotionValue(0);
-  const display = useTransform(mv, (v) => `${prefix}${Math.round(v).toLocaleString()}`);
+  const display = useTransform(mv, (v) => `$${Math.round(v).toLocaleString()}`);
   const prevRef = useRef(0);
 
   useEffect(() => {
     const from = prevRef.current;
     prevRef.current = value;
-    const controls = animate(mv, value, { duration: 0.75, ease: "easeOut", from });
+    const controls = animate(mv, value, { duration: 0.6, ease: "easeOut", from });
     return () => controls.stop();
   }, [value, mv]);
 
   return <motion.span>{display}</motion.span>;
 }
 
+function StreamCard({ label, revenue, color, index }: {
+  label: string; revenue: number; color: string; index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: REVEAL_MARGIN }}
+      transition={{ duration: dur.normal, delay: 0.05 * index, ease: ease.out }}
+      className="flex items-center gap-4 rounded-xl px-4 py-3.5 border"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        borderColor: "rgba(255,255,255,0.06)",
+        borderLeft: `3px solid ${color}`,
+      }}
+    >
+      <div className="flex-1 min-w-0">
+        <p className="text-xs font-medium truncate" style={{ color: "rgba(255,255,255,0.5)" }}>
+          {label}
+        </p>
+      </div>
+      <p className="font-bold tabular-nums shrink-0" style={{ color, fontSize: 15, letterSpacing: "-0.5px" }}>
+        <AnimatedNumber value={revenue} />
+      </p>
+    </motion.div>
+  );
+}
+
 export function RevenueSimulator() {
   const [selectedTier, setSelectedTier] = useState(2);
 
-  const totalFans  = TIERS[selectedTier].fans;
+  const totalFans   = TIERS[selectedTier].fans;
   const activeUsers = Math.round(totalFans * ACTIVE_RATIO);
 
-  // Club earns 50% of gross per active user per year
   const streams = STREAMS.map(s => ({
     ...s,
     revenue: Math.round(activeUsers * s.gross * 0.5),
@@ -114,20 +137,16 @@ export function RevenueSimulator() {
           ))}
         </motion.div>
 
-        {/* Revenue card */}
+        {/* Main card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.4, ease: ease.out }}
-          className="rounded-2xl p-8 border"
-          style={{
-            background: "rgba(10,10,10,0.65)",
-            borderColor: "rgba(250,255,105,0.12)",
-            backdropFilter: "blur(16px)",
-          }}
+          className="rounded-2xl border overflow-hidden"
+          style={{ background: "rgba(10,10,10,0.65)", borderColor: "rgba(250,255,105,0.12)", backdropFilter: "blur(16px)" }}
         >
-          {/* Active user callout + total */}
-          <div className="mb-8 pb-8 border-b" style={{ borderColor: "rgba(250,255,105,0.08)" }}>
-            <div className="flex flex-wrap items-center gap-3 mb-3">
+          {/* Total header */}
+          <div className="px-8 py-7 border-b" style={{ borderColor: "rgba(250,255,105,0.08)" }}>
+            <div className="flex flex-wrap items-center gap-3 mb-2">
               <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: "rgba(250,255,105,0.45)" }}>
                 Estimated annual share — your 50%
               </span>
@@ -135,46 +154,23 @@ export function RevenueSimulator() {
                 className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
                 style={{ background: "rgba(250,255,105,0.08)", color: "rgba(250,255,105,0.55)", border: "1px solid rgba(250,255,105,0.15)" }}
               >
-                Based on{" "}
-                <AnimatedCounter value={activeUsers} prefix="" />{" "}
-                active users (25% of {TIERS[selectedTier].label})
+                {activeUsers.toLocaleString()} active users · 25% of {TIERS[selectedTier].label}
               </span>
             </div>
-
             <div
               className="font-bold"
               style={{ fontSize: "clamp(48px, 7vw, 80px)", letterSpacing: "-4px", color: "#faff69", lineHeight: 1 }}
             >
-              <AnimatedCounter value={total} />
+              <AnimatedNumber value={total} />
             </div>
             <p className="text-muted text-xs mt-1.5">per year</p>
           </div>
 
-          {/* 8-stream breakdown */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-            {streams.map((stream) => {
-              const pct = total > 0 ? (stream.revenue / total) * 100 : 0;
-              return (
-                <div key={stream.key}>
-                  <div className="flex justify-between items-baseline mb-1.5">
-                    <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>
-                      {stream.label}
-                    </span>
-                    <span className="text-xs font-bold tabular-nums" style={{ color: stream.color }}>
-                      $<AnimatedCounter value={stream.revenue} prefix="" />
-                    </span>
-                  </div>
-                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-                    <motion.div
-                      className="h-full rounded-full"
-                      animate={{ width: `${pct}%` }}
-                      transition={{ duration: 0.65, ease: ease.out }}
-                      style={{ background: stream.color }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+          {/* Stream cards grid */}
+          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {streams.map((s, i) => (
+              <StreamCard key={s.key} label={s.label} revenue={s.revenue} color={s.color} index={i} />
+            ))}
           </div>
         </motion.div>
 
