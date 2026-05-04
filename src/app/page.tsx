@@ -25,9 +25,6 @@ const RevenueStreams = dynamic(() =>
 const RevenueSimulator = dynamic(() =>
   import("@/components/sections/revenue-simulator").then((m) => ({ default: m.RevenueSimulator }))
 );
-const ClubsMarquee = dynamic(() =>
-  import("@/components/sections/clubs-marquee").then((m) => ({ default: m.ClubsMarquee }))
-);
 const GlobalReach = dynamic(() =>
   import("@/components/sections/global-reach").then((m) => ({ default: m.GlobalReach }))
 );
@@ -56,7 +53,6 @@ export default function Home() {
       <PatentedCamera />
       <RevenueStreams />
       <RevenueSimulator />
-      <ClubsMarquee />
       <GlobalReach />
       <Vision2030 />
       <FinalCTA />
