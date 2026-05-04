@@ -63,22 +63,15 @@ export function Nav() {
 
           {/* Desktop center nav */}
           <div className="hidden md:flex items-center gap-8">
-            {tx.links.map((link) => {
-              const isDecorative = link.key === "sports" || link.key === "partners";
-              return isDecorative ? (
-                <span key={link.key} className="text-body-text text-sm font-medium cursor-default">
-                  {link.label}
-                </span>
-              ) : (
-                <a
-                  key={link.key}
-                  href={`#${link.key}`}
-                  className="text-body-text hover:text-on-dark text-sm font-medium transition-colors duration-200"
-                >
-                  {link.label}
-                </a>
-              );
-            })}
+            {tx.links.map((link) => (
+              <a
+                key={link.key}
+                href={`#${link.key}`}
+                className="text-body-text hover:text-on-dark text-sm font-medium transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Desktop right */}
@@ -123,23 +116,16 @@ export function Nav() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
-              {tx.links.map((link) => {
-                const isDecorative = link.key === "sports" || link.key === "partners";
-                return isDecorative ? (
-                  <span key={link.key} className="text-body-text text-base font-medium py-1 cursor-default">
-                    {link.label}
-                  </span>
-                ) : (
-                  <a
-                    key={link.key}
-                    href={`#${link.key}`}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-body-text hover:text-on-dark text-base font-medium transition-colors py-1"
-                  >
-                    {link.label}
-                  </a>
-                );
-              })}
+              {tx.links.map((link) => (
+                <a
+                  key={link.key}
+                  href={`#${link.key}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-body-text hover:text-on-dark text-base font-medium transition-colors py-1"
+                >
+                  {link.label}
+                </a>
+              ))}
               <button
                 onClick={toggleLang}
                 className="flex items-center gap-2 text-body-text text-base font-medium py-1"

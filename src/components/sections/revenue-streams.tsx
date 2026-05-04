@@ -6,7 +6,7 @@ import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const STREAMS = [
   { num: "01", title: "Subscriptions", desc: "Recurring tiers … free to premium." },
-  { num: "02", title: "Digital Currency", desc: "Fans purchase tokens for predictions and rewards." },
+  { num: "02", title: "Live Stream Gifting", desc: "Fans send virtual gifts during live match streams … every gift is instant revenue." },
   { num: "03", title: "Sports Predictions", desc: "Every match outcome prediction is a revenue event." },
   { num: "04", title: "Interactive Voting", desc: "Higher tiers pay for greater vote influence over club decisions." },
   { num: "05", title: "Tickets", desc: "In-app purchase and peer-to-peer resale with platform commission." },
@@ -125,7 +125,7 @@ export function RevenueStreams() {
             </p>
             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>
               Equivalent to what FC Barcelona&apos;s digital platform generates —{" "}
-              <span style={{ color: "#d4a017" }}>over SAR 800M</span> annually.
+              <span style={{ color: "#d4a017" }}>over $220M</span> annually.
             </p>
           </motion.div>
         </div>

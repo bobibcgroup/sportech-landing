@@ -31,7 +31,7 @@ function Counter({ target, prefix = "", suffix = "" }: CounterProps) {
 }
 
 const STATS = [
-  { target: 200, prefix: "€", suffix: "M+", attribution: "FC Barcelona annual digital revenue", delay: 0 },
+  { target: 200, prefix: "$", suffix: "M+", attribution: "FC Barcelona annual digital revenue", delay: 0 },
   { target: 35, prefix: "", suffix: "%", attribution: "Manchester United fan loyalty increase, Year 1", delay: 0.2 },
   { target: 100, prefix: "", suffix: "+", attribution: "Countries with PSG fan token holders", delay: 0.4 },
 ];

@@ -15,10 +15,14 @@ const TIERS = [
 ];
 
 const STREAMS_CONFIG = [
-  { key: "subscriptions", label: "Subscriptions", arpu: 1.80, color: "#faff69" },
-  { key: "predictions", label: "Predictions", arpu: 0.24, color: "#a8ff78" },
-  { key: "merchandise", label: "Merchandise", arpu: 0.50, color: "#78c1ff" },
-  { key: "tokens", label: "Digital Currency", arpu: 0.45, color: "#ffb878" },
+  { key: "subscriptions", label: "Subscriptions", arpu: 1.50, color: "#faff69" },
+  { key: "gifting", label: "Live Stream Gifting", arpu: 0.50, color: "#ff78c8" },
+  { key: "predictions", label: "Sports Predictions", arpu: 0.24, color: "#a8ff78" },
+  { key: "voting", label: "Interactive Voting", arpu: 0.10, color: "#78e8ff" },
+  { key: "tickets", label: "Tickets", arpu: 0.24, color: "#78c1ff" },
+  { key: "merchandise", label: "Merchandise", arpu: 0.42, color: "#ffb878" },
+  { key: "giftcards", label: "Digital Gift Cards", arpu: 0.15, color: "#c8a8ff" },
+  { key: "nft", label: "NFT & Collectibles", arpu: 0.15, color: "#ff9878" },
 ];
 
 const TOTAL_ARPU = STREAMS_CONFIG.reduce((sum, s) => sum + s.arpu, 0);
@@ -75,7 +79,7 @@ export function RevenueSimulator() {
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.2 }}
           className="text-body-text text-sm mb-10"
         >
-          Select your active fanbase size to estimate your annual revenue share.
+          Select your active fanbase size to estimate your annual revenue share across all 8 streams.
         </motion.p>
 
         {/* Tier selector */}
@@ -122,16 +126,16 @@ export function RevenueSimulator() {
             >
               <AnimatedCounter value={total} />
             </div>
-            <p className="text-muted text-xs mt-1.5">per year · based on {TIERS[selectedTier].label} active fans</p>
+            <p className="text-muted text-xs mt-1.5">per year · based on {TIERS[selectedTier].fans.toLocaleString()} active fans</p>
           </div>
 
-          {/* Stream breakdown */}
-          <div className="space-y-5">
+          {/* 8-stream breakdown */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             {streams.map((stream) => {
               const pct = total > 0 ? (stream.revenue / total) * 100 : 0;
               return (
                 <div key={stream.key}>
-                  <div className="flex justify-between items-baseline mb-2">
+                  <div className="flex justify-between items-baseline mb-1.5">
                     <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>
                       {stream.label}
                     </span>

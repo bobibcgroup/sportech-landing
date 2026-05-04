@@ -10,6 +10,7 @@ import { t } from "@/lib/translations";
 const SCREENSHOT_SRCS = [
   "/appimages/IMG_6873.PNG",
   "/appimages/IMG_6875.PNG",
+  "/appimages/IMG_6876.PNG",
   "/appimages/IMG_6877.PNG",
   "/appimages/IMG_6878.PNG",
 ];
@@ -118,7 +119,7 @@ export function AppGallery() {
           style={{ rotateY, rotateX, perspective: 1200 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-start justify-items-center cursor-grab active:cursor-grabbing"
+          className="grid grid-cols-2 lg:grid-cols-5 gap-3 items-start justify-items-center cursor-grab active:cursor-grabbing"
         >
           {tx.screens.map((screen, i) => (
             <IPhoneFrame
@@ -127,7 +128,7 @@ export function AppGallery() {
               label={screen.label}
               badge={screen.badge}
               delay={i * 0.1}
-              scale={i === 1 || i === 2 ? 1 : 0.9}
+              scale={i === 1 || i === 2 || i === 3 ? 1 : 0.88}
             />
           ))}
         </motion.div>

@@ -4,16 +4,15 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
-// Simplified world map: city dots relative to a 600×340 SVG
 const CITIES = [
   { id: "riyadh", x: 330, y: 195, label: "Riyadh", isOrigin: true },
-  { id: "london", x: 230, y: 118, label: "London", fact: "50M+ Premier League global fans" },
-  { id: "barcelona", x: 222, y: 138, label: "Barcelona" },
-  { id: "paris", x: 238, y: 122, label: "Paris" },
-  { id: "tokyo", x: 500, y: 148, label: "Tokyo", fact: "120M sports streaming users" },
-  { id: "beijing", x: 468, y: 145, label: "Beijing" },
-  { id: "saopaulo", x: 218, y: 268, label: "São Paulo", fact: "200M+ football fans in Brazil" },
-  { id: "newyork", x: 148, y: 155, label: "New York", fact: "MLS growing 30% year-on-year" },
+  { id: "london", x: 230, y: 118, label: "London", fact: "Premier League — Football" },
+  { id: "mumbai", x: 400, y: 200, label: "Mumbai", fact: "IPL & Cricket — 1.4B fans" },
+  { id: "tokyo", x: 500, y: 148, label: "Tokyo", fact: "B.League Basketball" },
+  { id: "jakarta", x: 468, y: 225, label: "Jakarta", fact: "Cricket & Football" },
+  { id: "beijing", x: 468, y: 145, label: "Beijing", fact: "CBA Basketball" },
+  { id: "saopaulo", x: 218, y: 268, label: "São Paulo", fact: "Football — 200M fans" },
+  { id: "newyork", x: 148, y: 155, label: "New York", fact: "NBA & Basketball" },
 ];
 
 function arc(x1: number, y1: number, x2: number, y2: number): string {
@@ -51,6 +50,14 @@ export function GlobalReach() {
               <span style={{ color: "#faff69" }}> 3 LEAGUES.</span>
             </motion.h2>
 
+            <motion.p
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.25 }}
+              className="text-body-text text-sm leading-relaxed mb-6"
+            >
+              Football clubs in Asia. Basketball leagues in East Asia. Cricket boards across South Asia. One platform for all of them.
+            </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.3 }}
@@ -59,7 +66,7 @@ export function GlobalReach() {
               {[
                 { stat: "100+", label: "Countries with our target audience" },
                 { stat: "10+", label: "Clubs in active conversations" },
-                { stat: "3", label: "Leagues across the GCC" },
+                { stat: "3", label: "Sports: Football, Basketball & Cricket" },
               ].map(({ stat, label }) => (
                 <div key={stat} className="border-l-2 pl-4" style={{ borderColor: "rgba(250,255,105,0.4)" }}>
                   <p className="font-bold text-2xl" style={{ color: "#faff69", letterSpacing: "-1px" }}>{stat}</p>

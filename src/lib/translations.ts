@@ -1,10 +1,9 @@
 const en = {
   nav: {
     links: [
-      { key: "platform", label: "Platform" },
-      { key: "revenue", label: "Revenue" },
       { key: "sports", label: "Sports" },
-      { key: "partners", label: "Partners" },
+      { key: "how-it-works", label: "How It Works" },
+      { key: "revenue", label: "Revenue" },
       { key: "contact", label: "Contact" },
     ],
     cta: "Partner With Us →",
@@ -71,6 +70,7 @@ const en = {
     screens: [
       { label: "Today's Events", badge: "HOME" },
       { label: "Player Camera", badge: "LIVE" },
+      { label: "Live Gifting", badge: "GIFT" },
       { label: "Match Predictions", badge: "PREDICT" },
       { label: "Tactical Vote", badge: "VOTE" },
     ],
@@ -113,10 +113,9 @@ const en = {
 const ar: typeof en = {
   nav: {
     links: [
-      { key: "platform", label: "المنصة" },
-      { key: "revenue", label: "الإيرادات" },
       { key: "sports", label: "الرياضات" },
-      { key: "partners", label: "الشركاء" },
+      { key: "how-it-works", label: "كيف يعمل" },
+      { key: "revenue", label: "الإيرادات" },
       { key: "contact", label: "تواصل" },
     ],
     cta: "← انضم إلينا",
@@ -142,7 +141,7 @@ const ar: typeof en = {
   sports: {
     badge: "مصمَّم لكل رياضة",
     heading:
-      "كرة القدم، كرة السلة، التنس، الكريكيت — أينما كان مشجعوك، توجد إيرادات في انتظارك.",
+      "كرة القدم، كرة السلة، التنس، الكريكيت … أينما كان مشجعوك، توجد إيرادات في انتظارك.",
     body: "سبورتك تعمل مع أي رياضة، أي نادٍ، أي دوري. البنية التحتية واحدة. فقط الشعار يتغير.",
     names: {
       Football: "كرة القدم",
@@ -182,6 +181,7 @@ const ar: typeof en = {
     screens: [
       { label: "أحداث اليوم", badge: "الرئيسية" },
       { label: "كاميرا اللاعب", badge: "مباشر" },
+      { label: "الهدايا المباشرة", badge: "هدية" },
       { label: "التنبؤات", badge: "توقع" },
       { label: "التصويت التكتيكي", badge: "صوّت" },
     ],
@@ -200,7 +200,7 @@ const ar: typeof en = {
   },
   revenue: {
     badge: "تدفقات الإيراد",
-    heading: "نصف كل ريال ينفقه مشجعوك — لك مباشرةً.",
+    heading: "نصف كل دولار ينفقه مشجعوك … لك مباشرةً.",
   },
   clubs: {
     badge: "شركاؤنا",
