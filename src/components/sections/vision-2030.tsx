@@ -48,19 +48,11 @@ export function Vision2030() {
 
   return (
     <section ref={sectionRef} className="bg-canvas py-24 relative overflow-hidden">
-      <video
-        autoPlay muted loop playsInline
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style={{ opacity: 0.18 }}
-      >
-        <source src="/cinematic/riyadh-night.mp4" type="video/mp4" />
-      </video>
-
       <GeometricPattern rotation={rotation} />
 
       {/* Saudi colors subtle atmospheric glow */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 80% 50% at 80% 50%, rgba(26,0,8,0.45) 0%, transparent 70%)"
+        background: "radial-gradient(ellipse 80% 50% at 80% 50%, rgba(26,0,8,0.3) 0%, transparent 70%)"
       }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
