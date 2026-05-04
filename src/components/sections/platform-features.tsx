@@ -55,7 +55,10 @@ function FeatureCard({ feature, index }: { feature: (typeof FEATURES)[0]; index:
 
 export function PlatformFeatures() {
   return (
-    <section className="bg-canvas py-24" id="platform-features">
+    <section className="bg-canvas py-24 relative overflow-hidden" id="platform-features">
+      <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(250,255,105,0.25) 30%, rgba(250,255,105,0.5) 50%, rgba(250,255,105,0.25) 70%, transparent)" }}
+      />
       <div className="max-w-7xl mx-auto px-6">
         <motion.span
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}

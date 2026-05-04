@@ -31,7 +31,7 @@ export function HowItWorks() {
   const triggered = useInView(sectionRef, { once: true, margin: REVEAL_MARGIN });
 
   return (
-    <section className="bg-canvas py-28">
+    <section className="bg-canvas py-28" id="how-it-works">
       <div className="max-w-7xl mx-auto px-6">
         <motion.span
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}

@@ -25,12 +25,12 @@ const en = {
       "Tickets",
     ],
     cta1: "Partner With Us →",
-    cta2: "Explore the Platform ↓",
+    cta2: "How Does It Work ↓",
   },
   sports: {
     badge: "Built for every sport",
     heading:
-      "Football, basketball, tennis, cricket — if you have fans, you have revenue waiting.",
+      "Football, basketball, tennis, cricket … if you have fans, you have revenue waiting.",
     body: "Sportech works for any sport, any club, any league. The infrastructure is the same. Only the badge changes.",
     names: {
       Football: "Football",
@@ -137,7 +137,7 @@ const ar: typeof en = {
       "التذاكر",
     ],
     cta1: "← انضم إلينا",
-    cta2: "استكشف المنصة ↓",
+    cta2: "كيف يعمل؟ ↓",
   },
   sports: {
     badge: "مصمَّم لكل رياضة",

@@ -92,7 +92,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-hairline mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-muted text-xs">
-          <span>&copy; 2025 Sportech. All rights reserved.</span>
+          <span>&copy; 2026 Sportech. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-on-dark transition-colors duration-200">
               Privacy Policy

@@ -133,7 +133,7 @@ export function Hero() {
               {tx.cta1}
             </a>
             <a
-              href="#platform"
+              href="#how-it-works"
               className="inline-flex items-center gap-1 border border-hairline text-on-dark text-sm font-semibold rounded-lg px-6 h-12 hover:border-hairline-strong transition-colors duration-200"
             >
               {tx.cta2}

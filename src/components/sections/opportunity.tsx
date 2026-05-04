@@ -96,7 +96,7 @@ export function Opportunity() {
             >
               <div
                 className="font-bold leading-none mb-2"
-                style={{ fontSize: "clamp(56px, 6vw, 96px)", letterSpacing: "-4px", color: "#faff69" }}
+                style={{ fontSize: "clamp(48px, 5vw, 82px)", letterSpacing: "-4px", color: "#faff69" }}
               >
                 <Counter target={target} prefix={prefix} suffix={suffix} />
               </div>

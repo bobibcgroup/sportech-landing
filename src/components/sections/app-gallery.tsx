@@ -80,7 +80,11 @@ export function AppGallery() {
   }
 
   return (
-    <section className="bg-canvas py-24 overflow-hidden" id="platform">
+    <section className="bg-canvas py-24 overflow-hidden relative" id="platform">
+      {/* Section divider */}
+      <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(250,255,105,0.25) 30%, rgba(250,255,105,0.5) 50%, rgba(250,255,105,0.25) 70%, transparent)" }}
+      />
       {/* Edge focus blur */}
       <div className="absolute inset-0 pointer-events-none" style={{
         background: "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.5) 100%)"
