@@ -15,6 +15,7 @@ const TIERS = [
 ];
 
 const ACTIVE_RATIO = 0.25;
+const GROSS_PER_USER = [4, 500, 500, 100, 1000, 1000, 500, 50].reduce((a, b) => a + b, 0);
 
 const STREAMS = [
   { key: "subscriptions", label: "Subscriptions",       gross: 4,    color: "#faff69" },
@@ -171,6 +172,17 @@ export function RevenueSimulator() {
             {streams.map((s, i) => (
               <StreamCard key={s.key} label={s.label} revenue={s.revenue} color={s.color} index={i} />
             ))}
+          </div>
+
+          {/* Per-user spend note */}
+          <div className="px-6 pb-5 pt-1 border-t" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", lineHeight: 1.6 }}>
+              Each active user spends an average of{" "}
+              <span style={{ color: "rgba(255,255,255,0.5)", fontWeight: 600 }}>
+                ${GROSS_PER_USER.toLocaleString()}
+              </span>{" "}
+              per year across all 8 streams.
+            </p>
           </div>
         </motion.div>
 
