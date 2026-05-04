@@ -14,22 +14,26 @@ const TIERS = [
   { label: "2M+", fans: 2_000_000 },
 ];
 
-const STREAMS_CONFIG = [
-  { key: "subscriptions", label: "Subscriptions", arpu: 1.50, color: "#faff69" },
-  { key: "gifting", label: "Live Stream Gifting", arpu: 0.50, color: "#ff78c8" },
-  { key: "predictions", label: "Sports Predictions", arpu: 0.24, color: "#a8ff78" },
-  { key: "voting", label: "Interactive Voting", arpu: 0.10, color: "#78e8ff" },
-  { key: "tickets", label: "Tickets", arpu: 0.24, color: "#78c1ff" },
-  { key: "merchandise", label: "Merchandise", arpu: 0.42, color: "#ffb878" },
-  { key: "giftcards", label: "Digital Gift Cards", arpu: 0.15, color: "#c8a8ff" },
-  { key: "nft", label: "NFT & Collectibles", arpu: 0.15, color: "#ff9878" },
+// 25% of the selected fanbase is counted as active users
+const ACTIVE_RATIO = 0.25;
+
+// Gross platform revenue per active user per year.
+// Club receives 50% of each figure.
+// Subscriptions: 50% free ($0) + 50% paying ($8/yr avg) = $4 gross per user.
+const STREAMS = [
+  { key: "subscriptions", label: "Subscriptions",       gross: 4,    color: "#faff69" },
+  { key: "gifting",       label: "Live Stream Gifting", gross: 500,  color: "#ff78c8" },
+  { key: "predictions",   label: "Sports Predictions",  gross: 500,  color: "#a8ff78" },
+  { key: "voting",        label: "Interactive Voting",  gross: 100,  color: "#78e8ff" },
+  { key: "tickets",       label: "Tickets",             gross: 1000, color: "#78c1ff" },
+  { key: "merchandise",   label: "Merchandise",         gross: 1000, color: "#ffb878" },
+  { key: "giftcards",     label: "Digital Gift Cards",  gross: 500,  color: "#c8a8ff" },
+  { key: "nft",           label: "NFT & Collectibles",  gross: 50,   color: "#ff9878" },
 ];
 
-const TOTAL_ARPU = STREAMS_CONFIG.reduce((sum, s) => sum + s.arpu, 0);
-
-function AnimatedCounter({ value }: { value: number }) {
+function AnimatedCounter({ value, prefix = "$" }: { value: number; prefix?: string }) {
   const mv = useMotionValue(0);
-  const display = useTransform(mv, (v) => `$${Math.round(v).toLocaleString()}`);
+  const display = useTransform(mv, (v) => `${prefix}${Math.round(v).toLocaleString()}`);
   const prevRef = useRef(0);
 
   useEffect(() => {
@@ -45,14 +49,20 @@ function AnimatedCounter({ value }: { value: number }) {
 export function RevenueSimulator() {
   const [selectedTier, setSelectedTier] = useState(2);
 
-  const fans = TIERS[selectedTier].fans;
-  const streams = STREAMS_CONFIG.map(s => ({ ...s, revenue: Math.round(fans * s.arpu) }));
-  const total = Math.round(fans * TOTAL_ARPU);
+  const totalFans  = TIERS[selectedTier].fans;
+  const activeUsers = Math.round(totalFans * ACTIVE_RATIO);
+
+  // Club earns 50% of gross per active user per year
+  const streams = STREAMS.map(s => ({
+    ...s,
+    revenue: Math.round(activeUsers * s.gross * 0.5),
+  }));
+  const total = streams.reduce((sum, s) => sum + s.revenue, 0);
 
   return (
     <section className="bg-canvas py-28 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(250,255,105,0.04) 0%, transparent 70%)"
+        background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(250,255,105,0.04) 0%, transparent 70%)",
       }} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6">
@@ -79,7 +89,7 @@ export function RevenueSimulator() {
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.2 }}
           className="text-body-text text-sm mb-10"
         >
-          Select your active fanbase size to estimate your annual revenue share across all 8 streams.
+          Select your total fanbase size. Only 25% is counted as active users — the rest is upside.
         </motion.p>
 
         {/* Tier selector */}
@@ -115,22 +125,33 @@ export function RevenueSimulator() {
             backdropFilter: "blur(16px)",
           }}
         >
-          {/* Total figure */}
+          {/* Active user callout + total */}
           <div className="mb-8 pb-8 border-b" style={{ borderColor: "rgba(250,255,105,0.08)" }}>
-            <p className="text-[11px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(250,255,105,0.45)" }}>
-              Estimated annual share — your 50%
-            </p>
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: "rgba(250,255,105,0.45)" }}>
+                Estimated annual share — your 50%
+              </span>
+              <span
+                className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
+                style={{ background: "rgba(250,255,105,0.08)", color: "rgba(250,255,105,0.55)", border: "1px solid rgba(250,255,105,0.15)" }}
+              >
+                Based on{" "}
+                <AnimatedCounter value={activeUsers} prefix="" />{" "}
+                active users (25% of {TIERS[selectedTier].label})
+              </span>
+            </div>
+
             <div
               className="font-bold"
               style={{ fontSize: "clamp(48px, 7vw, 80px)", letterSpacing: "-4px", color: "#faff69", lineHeight: 1 }}
             >
               <AnimatedCounter value={total} />
             </div>
-            <p className="text-muted text-xs mt-1.5">per year · based on {TIERS[selectedTier].fans.toLocaleString()} active fans</p>
+            <p className="text-muted text-xs mt-1.5">per year</p>
           </div>
 
           {/* 8-stream breakdown */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
             {streams.map((stream) => {
               const pct = total > 0 ? (stream.revenue / total) * 100 : 0;
               return (
@@ -140,7 +161,7 @@ export function RevenueSimulator() {
                       {stream.label}
                     </span>
                     <span className="text-xs font-bold tabular-nums" style={{ color: stream.color }}>
-                      ${stream.revenue.toLocaleString()}
+                      $<AnimatedCounter value={stream.revenue} prefix="" />
                     </span>
                   </div>
                   <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
@@ -163,7 +184,8 @@ export function RevenueSimulator() {
           className="text-center mt-5"
           style={{ fontSize: 11, color: "rgba(255,255,255,0.22)", lineHeight: 1.7 }}
         >
-          Projections use conservative industry ARPU benchmarks. Actual results vary by engagement, market, and content strategy.
+          Calculations assume 25% active user conversion and club&apos;s 50% revenue share per stream.
+          Actual results vary by engagement, market, and content strategy.
         </motion.p>
       </div>
     </section>
