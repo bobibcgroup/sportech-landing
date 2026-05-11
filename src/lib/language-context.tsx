@@ -15,21 +15,33 @@ const ARABIC_COUNTRIES = new Set([
   "SA", "AE", "QA", "KW", "BH", "OM", "JO", "EG", "MA", "DZ", "TN", "LY", "IQ", "SY", "LB", "YE", "SD",
 ]);
 
+const STORAGE_KEY = "sportech-lang";
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>("en");
   const [isAutoAr, setIsAutoAr] = useState(false);
 
   useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY) as Lang | null;
+    if (saved === "en" || saved === "ar") {
+      setLangState(saved);
+      return;
+    }
     fetch("https://ipapi.co/json/")
       .then((r) => r.json())
       .then((data) => {
         if (ARABIC_COUNTRIES.has(data.country_code)) {
-          setLang("ar");
+          setLangState("ar");
           setIsAutoAr(true);
         }
       })
       .catch(() => {});
   }, []);
+
+  function setLang(l: Lang) {
+    setLangState(l);
+    localStorage.setItem(STORAGE_KEY, l);
+  }
 
   useEffect(() => {
     const html = document.documentElement;

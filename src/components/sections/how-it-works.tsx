@@ -7,7 +7,7 @@ import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 const STEPS = [
   { num: "01", title: "We Build It", body: "We design, build, and operate everything. Your logo, colors, name. Live in weeks." },
   { num: "02", title: "Fans Engage", body: "Fans download your app, subscribe, predict, vote, buy merch, collect cards. All in one place." },
-  { num: "03", title: "Revenue Splits", body: "Every purchase, every subscription, every token spent. We cover costs. You keep 50%.", highlight: true },
+  { num: "03", title: "Revenue Splits", body: "Every purchase, every subscription, every token spent. We cover costs. You earn your agreed share.", highlight: true },
 ];
 
 function ConnectorLine({ triggered }: { triggered: boolean }) {
@@ -31,8 +31,8 @@ export function HowItWorks() {
   const triggered = useInView(sectionRef, { once: true, margin: REVEAL_MARGIN });
 
   return (
-    <section className="bg-canvas py-28" id="how-it-works">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-canvas py-28 relative overflow-hidden" id="how-it-works">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.span
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
@@ -48,7 +48,7 @@ export function HowItWorks() {
           className="text-on-dark font-bold mb-20 max-w-xl"
           style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
         >
-          We build it. Fans use it. You collect half.
+          We build it. Fans use it. You earn.
         </motion.h2>
 
         <div ref={sectionRef} className="relative">
@@ -82,8 +82,8 @@ export function HowItWorks() {
                   <h3 className="text-on-dark font-bold text-lg mb-3 tracking-tight">{title}</h3>
                   <p className="text-body-text text-sm leading-relaxed">{body}</p>
                   {highlight && (
-                    <p className="font-bold mt-4" style={{ fontSize: 48, lineHeight: 1, letterSpacing: "-2px", color: "#faff69" }}>
-                      50%
+                    <p className="font-bold mt-4" style={{ fontSize: 30, lineHeight: 1.15, letterSpacing: "-1px", color: "#faff69" }}>
+                      YOUR SHARE
                     </p>
                   )}
                 </div>

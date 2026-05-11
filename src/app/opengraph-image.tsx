@@ -135,12 +135,12 @@ export default function OgImage() {
           }}
         >
           Patented player camera · Live predictions · Fan voting · AR match view.
-          Zero cost. 50% of every dollar your fans spend.
+          Zero cost. Earn your share of every dollar your fans spend.
         </div>
 
         {/* Pills */}
         <div style={{ display: "flex", gap: 12 }}>
-          {["Zero Platform Cost", "50% Revenue Share", "Launch in Days"].map((pill) => (
+          {["Zero Platform Cost", "Your Revenue Share", "Launch in Days"].map((pill) => (
             <div
               key={pill}
               style={{

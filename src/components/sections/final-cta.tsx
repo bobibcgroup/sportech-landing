@@ -75,7 +75,7 @@ export function FinalCTA() {
           transition={{ duration: dur.normal, delay: 0.7, ease: ease.out }}
           className="text-body-text text-base leading-relaxed max-w-lg mx-auto mb-10"
         >
-          We&apos;re bringing a select number of clubs on first. Free platform, zero risk, full feature set. 50% of eight revenue streams from day one.
+          We&apos;re bringing a select number of clubs on first. Free platform, zero risk, full feature set. Your revenue share across eight streams from day one.
         </motion.p>
 
         <motion.div

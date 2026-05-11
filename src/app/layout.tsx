@@ -12,7 +12,7 @@ const inter = Inter({
 const SITE_URL = "https://sportech.com.sa";
 const TITLE = "Sportech — The Fan Engagement Infrastructure";
 const DESCRIPTION =
-  "Patented player camera technology, live predictions, fan voting, AR match view, and more. Zero cost to your club. 50% of every dollar your fans spend. Launch in days.";
+  "Patented player camera technology, live predictions, fan voting, AR match view, and more. Zero cost to your club. Earn your share of every dollar your fans spend. Launch in days.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
