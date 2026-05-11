@@ -72,6 +72,7 @@ export function AppGallery() {
   const tx = t[lang].gallery;
 
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -82,9 +83,10 @@ export function AppGallery() {
   const prev = useCallback(() => setCurrent((p) => (p - 1 + N) % N), []);
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, paused]);
 
   function handleMouseMove(e: React.MouseEvent) {
     if (!tiltRef.current) return;
@@ -141,7 +143,8 @@ export function AppGallery() {
             ref={tiltRef}
             style={{ rotateY, rotateX, perspective: 1000 }}
             onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => { handleMouseLeave(); setPaused(false); }}
           >
             {/* Overflow clip wrapper */}
             <div style={{ width: SLOT_W * 2 + PHONE_W, overflow: "hidden", position: "relative" }}>

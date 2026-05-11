@@ -19,6 +19,7 @@ const CAM_IMAGES = [
 function CameraSlider() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [paused, setPaused] = useState(false);
 
   const next = useCallback(() => {
     setDirection(1);
@@ -36,9 +37,10 @@ function CameraSlider() {
   }, [current]);
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(next, 3500);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, paused]);
 
   const variants = {
     enter: (dir: number) => ({ x: dir * 40, opacity: 0 }),
@@ -47,7 +49,12 @@ function CameraSlider() {
   };
 
   return (
-    <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3", background: "#0d0d0d" }}>
+    <div
+      className="relative rounded-2xl overflow-hidden"
+      style={{ aspectRatio: "4/3", background: "#0d0d0d" }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <AnimatePresence custom={direction} initial={false} mode="wait">
         <motion.div
           key={current}

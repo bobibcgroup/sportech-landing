@@ -88,7 +88,9 @@ export function FinalCTA() {
           {/* Magnetic primary CTA */}
           <motion.a
             ref={buttonRef}
-            href="mailto:contact@sportech.com.sa"
+            href="https://lzgo.to/demosportech"
+            target="_blank"
+            rel="noopener noreferrer"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: springX, y: springY }}
@@ -96,20 +98,6 @@ export function FinalCTA() {
           >
             Book a Demo →
           </motion.a>
-
-          {/* Secondary outline CTA */}
-          <a
-            href="mailto:contact@sportech.com.sa"
-            className="inline-flex items-center justify-center border text-sm font-semibold rounded-xl px-8 h-14 transition-colors duration-200 whitespace-nowrap"
-            style={{
-              borderColor: "rgba(250,255,105,0.4)",
-              color: "#faff69",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(250,255,105,0.8)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(250,255,105,0.4)")}
-          >
-            Download Deck
-          </a>
         </motion.div>
 
         <motion.p
