@@ -150,7 +150,7 @@ export function RevenueSimulator() {
           <div className="px-8 py-7 border-b" style={{ borderColor: "rgba(250,255,105,0.08)" }}>
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: "rgba(250,255,105,0.45)" }}>
-                Estimated annual revenue share
+                Estimated example annual revenue share
               </span>
               <span
                 className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
