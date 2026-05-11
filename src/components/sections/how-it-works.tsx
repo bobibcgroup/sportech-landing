@@ -83,7 +83,7 @@ export function HowItWorks() {
                   <p className="text-body-text text-sm leading-relaxed">{body}</p>
                   {highlight && (
                     <p className="font-bold mt-4" style={{ fontSize: 30, lineHeight: 1.15, letterSpacing: "-1px", color: "#faff69" }}>
-                      YOUR SHARE
+                      PURE UPSIDE
                     </p>
                   )}
                 </div>
