@@ -46,7 +46,7 @@ export function RevenueStreams() {
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
           style={{ color: "rgba(250,255,105,0.6)" }}
         >
-          8 Revenue Streams. One Split.
+          8 Revenue Streams. One Partnership.
         </motion.span>
 
         <motion.h2
@@ -105,23 +105,23 @@ export function RevenueStreams() {
             <div
               className="font-bold leading-none"
               style={{
-                fontSize: "clamp(72px, 10vw, 120px)",
-                letterSpacing: "-6px",
+                fontSize: "clamp(52px, 7vw, 88px)",
+                letterSpacing: "-4px",
                 color: "#d4a017",
                 textShadow: "0 0 80px rgba(212,160,23,0.35)",
               }}
             >
-              50%
+              YOUR
             </div>
             <div
               className="font-bold leading-none -mt-2 mb-6"
               style={{ fontSize: "clamp(36px, 5vw, 56px)", letterSpacing: "-3px", color: "#d4a017" }}
             >
-              YOURS
+              REVENUE
             </div>
             <div className="h-px w-12 mx-auto mb-6" style={{ background: "rgba(212,160,23,0.3)" }} />
             <p className="text-body-text text-sm leading-relaxed mb-5">
-              The other 50% funds everything we build and operate for you. Zero upfront cost. Zero risk.
+              We build and operate everything at our cost. Your club earns a significant share of every transaction — structured per deal.
             </p>
             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>
               Equivalent to what FC Barcelona&apos;s digital platform generates —{" "}

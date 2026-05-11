@@ -22,10 +22,6 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  function toggleLang() {
-    setLang(lang === "en" ? "ar" : "en");
-  }
-
   return (
     <>
       {/* Scroll progress bar */}
@@ -76,15 +72,15 @@ export function Nav() {
 
           {/* Desktop right */}
           <div className="hidden md:flex items-center gap-4">
-            <button
-              onClick={toggleLang}
-              className="flex items-center gap-1 text-sm font-medium transition-colors duration-200 cursor-pointer select-none"
-              aria-label={lang === "en" ? "Switch to Arabic" : "Switch to English"}
-            >
-              <span className={cn("transition-colors", lang === "en" ? "text-on-dark" : "text-muted hover:text-on-dark")}>EN</span>
-              <span className="text-muted-soft" aria-hidden="true">|</span>
-              <span className={cn("transition-colors", lang === "ar" ? "text-on-dark" : "text-muted hover:text-on-dark")}>عر</span>
-            </button>
+            {lang === "ar" && (
+              <button
+                onClick={() => setLang("en")}
+                className="text-sm font-semibold text-muted hover:text-on-dark transition-colors duration-200 cursor-pointer select-none"
+                aria-label="Switch to English"
+              >
+                EN
+              </button>
+            )}
             <a
               href="#contact"
               className="inline-flex items-center bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-10 hover:bg-primary-active transition-colors duration-200 whitespace-nowrap"
@@ -126,14 +122,14 @@ export function Nav() {
                   {link.label}
                 </a>
               ))}
-              <button
-                onClick={toggleLang}
-                className="flex items-center gap-2 text-body-text text-base font-medium py-1"
-              >
-                <span className={lang === "en" ? "text-primary" : "text-muted"}>EN</span>
-                <span className="text-muted-soft">|</span>
-                <span className={lang === "ar" ? "text-primary" : "text-muted"}>عر</span>
-              </button>
+              {lang === "ar" && (
+                <button
+                  onClick={() => { setLang("en"); setMobileOpen(false); }}
+                  className="text-body-text hover:text-on-dark text-base font-medium py-1 text-start"
+                >
+                  EN
+                </button>
+              )}
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}

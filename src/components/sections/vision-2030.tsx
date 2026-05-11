@@ -6,19 +6,18 @@ import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const PILLARS = [
   {
-    title: "Digital Transformation",
-    body: "Saudi sports clubs at the forefront of fan technology. Not catching up to the West — leading it.",
+    title: "Saudi-Built Technology",
+    body: "The IP, the team, the patent — all Saudi. We didn't import a solution. We invented one, and we're proud of where it comes from.",
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
   },
   {
-    title: "Sports Economy",
-    body: "$480 Billion — the Vision 2030 target for Saudi sports sector contribution to GDP.",
-    stat: "$480B",
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+    title: "Global Sport",
+    body: "Football in Asia. Basketball in the Americas. Cricket across South Asia. Sport is universal — our platform is built to go wherever fans are.",
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
   },
   {
-    title: "Local Innovation",
-    body: "The patent is Saudi. The team is Saudi. The IP stays here — part of what we build for the Kingdom.",
+    title: "Built Here. Scaling Everywhere.",
+    body: "We started in Saudi Arabia. Now we're taking it to every league, every continent, every fanbase. The IP stays Saudi — the impact goes global.",
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff69" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
   },
 ];
@@ -50,7 +49,6 @@ export function Vision2030() {
     <section ref={sectionRef} className="bg-canvas py-24 relative overflow-hidden">
       <GeometricPattern rotation={rotation} />
 
-      {/* Saudi colors subtle atmospheric glow */}
       <div className="absolute inset-0 pointer-events-none" style={{
         background: "radial-gradient(ellipse 80% 50% at 80% 50%, rgba(26,0,8,0.3) 0%, transparent 70%)"
       }} />
@@ -62,7 +60,7 @@ export function Vision2030() {
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
           style={{ color: "rgba(250,255,105,0.6)" }}
         >
-          Supporting Saudi Vision 2030
+          Made in Saudi Arabia
         </motion.span>
 
         <motion.h2
@@ -71,12 +69,12 @@ export function Vision2030() {
           className="text-on-dark font-bold mb-16 max-w-2xl"
           style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
         >
-          BUILT FOR SAUDI ARABIA&apos;S{" "}
-          <span style={{ color: "#faff69" }}>NEXT CHAPTER.</span>
+          SAUDI TECH.{" "}
+          <span style={{ color: "#faff69" }}>BUILT HERE, DEPLOYED GLOBALLY.</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PILLARS.map(({ title, body, stat, icon }, i) => (
+          {PILLARS.map(({ title, body, icon }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 20 }}
@@ -89,9 +87,6 @@ export function Vision2030() {
               <div className="mb-4">{icon}</div>
               <h3 className="text-on-dark font-bold text-base mb-2 tracking-tight">{title}</h3>
               <p className="text-body-text text-sm leading-relaxed">{body}</p>
-              {stat && (
-                <p className="font-bold mt-4" style={{ fontSize: 28, color: "#faff69", letterSpacing: "-1px" }}>{stat}</p>
-              )}
             </motion.div>
           ))}
         </div>

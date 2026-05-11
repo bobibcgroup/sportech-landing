@@ -150,7 +150,7 @@ export function RevenueSimulator() {
           <div className="px-8 py-7 border-b" style={{ borderColor: "rgba(250,255,105,0.08)" }}>
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: "rgba(250,255,105,0.45)" }}>
-                Estimated annual share — your 50%
+                Estimated annual revenue share
               </span>
               <span
                 className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
@@ -193,7 +193,7 @@ export function RevenueSimulator() {
           className="text-center mt-5"
           style={{ fontSize: 11, color: "rgba(255,255,255,0.22)", lineHeight: 1.7 }}
         >
-          Calculations assume 25% active user conversion and club&apos;s 50% revenue share per stream.
+          Calculations assume 25% active user conversion. Revenue share is structured per partnership agreement.
           Actual results vary by engagement, market, and content strategy.
         </motion.p>
       </div>
