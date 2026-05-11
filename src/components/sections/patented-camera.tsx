@@ -179,7 +179,7 @@ export function PatentedCamera() {
           className="text-center mt-12 max-w-2xl mx-auto"
         >
           <p className="text-body-text leading-relaxed">
-            A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch … live, no delay. PSG doesn&apos;t have this. Barcelona doesn&apos;t. It&apos;s ours. It&apos;s patented.
+            A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch … live, no delay. Patented technology. Extraordinarily rare. Built by us.
           </p>
           <p className="text-body-text leading-relaxed mt-3">
             Fans pay to access it. Clubs earn a{" "}
