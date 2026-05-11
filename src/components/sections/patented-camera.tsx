@@ -7,13 +7,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const CAM_IMAGES = [
-  "/camimages/cam-1.jpeg",
-  "/camimages/cam-2.jpeg",
-  "/camimages/cam-3.jpeg",
-  "/camimages/cam-4.jpeg",
-  "/camimages/cam-5.jpeg",
-  "/camimages/cam-6.jpeg",
-  "/camimages/cam-7.jpeg",
+  "/camimages/cam01.jpeg",
+  "/camimages/cam02.jpeg",
+  "/camimages/cam03.jpeg",
 ];
 
 function CameraSlider() {
