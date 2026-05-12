@@ -44,7 +44,7 @@ export function FinalCTA() {
           maxWidth: 1200,
           maxHeight: 1200,
           borderRadius: "50%",
-          background: "radial-gradient(ellipse at center, rgba(var(--color-primary-rgb),0.10) 0%, rgba(212,160,23,0.04) 40%, transparent 70%)",
+          background: "radial-gradient(ellipse at center, rgba(var(--color-primary-rgb),0.10) 0%, rgba(var(--color-primary-rgb),0.04) 40%, transparent 70%)",
           scale: glowScale,
           opacity: glowOpacity,
         }}

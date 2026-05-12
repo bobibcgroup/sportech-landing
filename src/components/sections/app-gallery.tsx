@@ -65,8 +65,8 @@ function IPhoneFrame({ src, label, badge, isActive, primaryColor }: {
             className="absolute inset-0 pointer-events-none z-10"
             style={{
               background: primaryColor,
-              opacity: 0.18,
-              mixBlendMode: "color",
+              opacity: 0.5,
+              mixBlendMode: "overlay",
             }}
           />
         </div>

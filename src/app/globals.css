@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
-@theme inline {
+@theme {
   /* Canvas / surfaces */
   --color-canvas: #0a0a0a;
   --color-surface-soft: #121212;
