@@ -9,11 +9,17 @@ import { useLanguage } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
 const SCREENSHOT_SRCS = [
-  "/appimages/IMG_6873.PNG",
-  "/appimages/IMG_6875.PNG",
-  "/appimages/IMG_6876.PNG",
-  "/appimages/IMG_6877.PNG",
-  "/appimages/IMG_6878.PNG",
+  "/appimages/frames/frame-0.png",
+  "/appimages/frames/frame-2.png",
+  "/appimages/frames/frame-3.png",
+  "/appimages/frames/frame-4.png",
+  "/appimages/frames/frame-5.png",
+  "/appimages/frames/frame-6.png",
+  "/appimages/frames/frame-7.png",
+  "/appimages/frames/frame-8.png",
+  "/appimages/frames/frame-9.png",
+  "/appimages/frames/frame-10.png",
+  "/appimages/frames/frame-11.png",
 ];
 
 const N = SCREENSHOT_SRCS.length;
@@ -51,7 +57,7 @@ function IPhoneFrame({ src, label, badge, isActive }: {
         <div className="absolute" style={{ right: -3, top: 124, width: 3, height: 68, borderRadius: "0 2px 2px 0", background: "#252525" }} />
         {/* Screen */}
         <div className="absolute overflow-hidden bg-black" style={{ inset: 8, borderRadius: 34 }}>
-          <Image src={src} alt={label} fill style={{ objectFit: "cover", objectPosition: "top" }} unoptimized />
+          <Image src={src} alt={label} fill style={{ objectFit: "cover", objectPosition: "top" }} />
         </div>
         {/* Dynamic Island */}
         <div className="absolute z-20"
