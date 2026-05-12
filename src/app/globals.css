@@ -35,6 +35,10 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+:root {
+  --color-primary-rgb: 250, 255, 105;
+}
+
 html {
   background: #0a0a0a;
   color: #ffffff;
