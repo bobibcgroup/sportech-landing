@@ -7,6 +7,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 import { useLanguage } from "@/lib/language-context";
 import { t } from "@/lib/translations";
+import { BrandCustomizer } from "@/components/sections/brand-customizer";
+import { useTheme } from "@/lib/theme-context";
 
 const SCREENSHOT_SRCS = [
   "/appimages/frames/frame-0.png",
@@ -34,8 +36,8 @@ function wrappedDist(i: number, current: number): number {
   return raw;
 }
 
-function IPhoneFrame({ src, label, badge, isActive }: {
-  src: string; label: string; badge: string; isActive: boolean;
+function IPhoneFrame({ src, label, badge, isActive, primaryColor }: {
+  src: string; label: string; badge: string; isActive: boolean; primaryColor: string;
 }) {
   return (
     <div className="flex flex-col items-center gap-3" style={{ width: PHONE_W }}>
@@ -46,7 +48,7 @@ function IPhoneFrame({ src, label, badge, isActive }: {
             background: "linear-gradient(160deg, #2e2e2e 0%, #181818 100%)",
             border: "1px solid rgba(255,255,255,0.07)",
             boxShadow: isActive
-              ? "0 40px 80px rgba(0,0,0,0.85), 0 0 0 0.5px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.04)"
+              ? `0 40px 80px rgba(0,0,0,0.85), 0 0 0 0.5px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.04), 0 0 60px ${primaryColor}4D`
               : "0 16px 32px rgba(0,0,0,0.5)",
           }}
         />
@@ -58,6 +60,15 @@ function IPhoneFrame({ src, label, badge, isActive }: {
         {/* Screen */}
         <div className="absolute overflow-hidden bg-black" style={{ inset: 8, borderRadius: 34 }}>
           <Image src={src} alt={label} fill style={{ objectFit: "cover", objectPosition: "top" }} />
+          {/* Tint overlay (A): colors the screenshot in the active brand color */}
+          <div
+            className="absolute inset-0 pointer-events-none z-10"
+            style={{
+              background: primaryColor,
+              opacity: 0.18,
+              mixBlendMode: "color",
+            }}
+          />
         </div>
         {/* Dynamic Island */}
         <div className="absolute z-20"
@@ -76,6 +87,7 @@ export function AppGallery() {
   const tiltRef = useRef<HTMLDivElement>(null);
   const { lang } = useLanguage();
   const tx = t[lang].gallery;
+  const { primaryColor } = useTheme();
 
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -136,6 +148,9 @@ export function AppGallery() {
           {tx.heading}
         </motion.h2>
 
+        {/* Brand customizer — club search + color picker */}
+        <BrandCustomizer />
+
         {/* Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -191,6 +206,7 @@ export function AppGallery() {
                         label={tx.screens[i % tx.screens.length]?.label ?? `Screen ${i + 1}`}
                         badge={tx.screens[i % tx.screens.length]?.badge ?? ""}
                         isActive={isActive}
+                        primaryColor={primaryColor}
                       />
                     </motion.div>
                   );
