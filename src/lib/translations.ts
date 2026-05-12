@@ -68,11 +68,17 @@ const en = {
     heading:
       "Fans open it every match day. Not because they have to. Because there's always something happening.",
     screens: [
-      { label: "Today's Events", badge: "HOME" },
+      { label: "Match Features", badge: "HOME" },
+      { label: "Team Lineup", badge: "LINEUP" },
+      { label: "Player Camera Select", badge: "LIVE" },
       { label: "Player Camera", badge: "LIVE" },
       { label: "Live Gifting", badge: "GIFT" },
-      { label: "Match Predictions", badge: "PREDICT" },
       { label: "Tactical Vote", badge: "VOTE" },
+      { label: "Match Predictions", badge: "PREDICT" },
+      { label: "Tactical Substitute", badge: "VOTE" },
+      { label: "Vote to Substitute", badge: "VOTE" },
+      { label: "Club Store", badge: "STORE" },
+      { label: "Match Tickets", badge: "TICKETS" },
     ],
   },
   howItWorks: {
@@ -179,11 +185,17 @@ const ar: typeof en = {
     heading:
       "يفتحه المشجعون كل يوم مباراة. ليس لأنهم مضطرون. بل لأن هناك دائماً ما يحدث.",
     screens: [
-      { label: "أحداث اليوم", badge: "الرئيسية" },
+      { label: "ميزات المباراة", badge: "الرئيسية" },
+      { label: "تشكيلة الفريق", badge: "التشكيلة" },
+      { label: "اختيار كاميرا اللاعب", badge: "مباشر" },
       { label: "كاميرا اللاعب", badge: "مباشر" },
       { label: "الهدايا المباشرة", badge: "هدية" },
-      { label: "التنبؤات", badge: "توقع" },
       { label: "التصويت التكتيكي", badge: "صوّت" },
+      { label: "التنبؤات", badge: "توقع" },
+      { label: "تبديل تكتيكي", badge: "صوّت" },
+      { label: "تصويت للتبديل", badge: "صوّت" },
+      { label: "متجر النادي", badge: "المتجر" },
+      { label: "تذاكر المباريات", badge: "التذاكر" },
     ],
   },
   howItWorks: {

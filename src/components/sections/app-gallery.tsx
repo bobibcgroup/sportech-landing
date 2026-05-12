@@ -10,21 +10,21 @@ import { t } from "@/lib/translations";
 import { BrandCustomizer } from "@/components/sections/brand-customizer";
 import { useTheme } from "@/lib/theme-context";
 
-const SCREENSHOT_SRCS = [
-  "/appimages/frames/frame-0.png",
-  "/appimages/frames/frame-2.png",
-  "/appimages/frames/frame-3.png",
-  "/appimages/frames/frame-4.png",
-  "/appimages/frames/frame-5.png",
-  "/appimages/frames/frame-6.png",
-  "/appimages/frames/frame-7.png",
-  "/appimages/frames/frame-8.png",
-  "/appimages/frames/frame-9.png",
-  "/appimages/frames/frame-10.png",
-  "/appimages/frames/frame-11.png",
+const SCREENS = [
+  { src: "/appimages/frames/frame-0.png",  en: { label: "Match Features",        badge: "HOME"     }, ar: { label: "ميزات المباراة",          badge: "الرئيسية"  } },
+  { src: "/appimages/frames/frame-2.png",  en: { label: "Team Lineup",           badge: "LINEUP"   }, ar: { label: "تشكيلة الفريق",           badge: "التشكيلة"  } },
+  { src: "/appimages/frames/frame-3.png",  en: { label: "Player Camera Select",  badge: "LIVE"     }, ar: { label: "اختيار كاميرا اللاعب",    badge: "مباشر"     } },
+  { src: "/appimages/frames/frame-4.png",  en: { label: "Player Camera",         badge: "LIVE"     }, ar: { label: "كاميرا اللاعب",           badge: "مباشر"     } },
+  { src: "/appimages/frames/frame-5.png",  en: { label: "Live Gifting",          badge: "GIFT"     }, ar: { label: "الهدايا المباشرة",         badge: "هدية"      } },
+  { src: "/appimages/frames/frame-6.png",  en: { label: "Tactical Vote",         badge: "VOTE"     }, ar: { label: "التصويت التكتيكي",         badge: "صوّت"      } },
+  { src: "/appimages/frames/frame-7.png",  en: { label: "Match Predictions",     badge: "PREDICT"  }, ar: { label: "التنبؤات",                 badge: "توقع"      } },
+  { src: "/appimages/frames/frame-8.png",  en: { label: "Tactical Substitute",   badge: "VOTE"     }, ar: { label: "تبديل تكتيكي",            badge: "صوّت"      } },
+  { src: "/appimages/frames/frame-9.png",  en: { label: "Vote to Substitute",    badge: "VOTE"     }, ar: { label: "تصويت للتبديل",           badge: "صوّت"      } },
+  { src: "/appimages/frames/frame-10.png", en: { label: "Club Store",            badge: "STORE"    }, ar: { label: "متجر النادي",              badge: "المتجر"    } },
+  { src: "/appimages/frames/frame-11.png", en: { label: "Match Tickets",         badge: "TICKETS"  }, ar: { label: "تذاكر المباريات",          badge: "التذاكر"   } },
 ];
 
-const N = SCREENSHOT_SRCS.length;
+const N = SCREENS.length;
 const PHONE_W = 210;
 const PHONE_H = 450;
 const SLOT_W = 200; // center-to-center distance between adjacent slots
@@ -171,11 +171,12 @@ export function AppGallery() {
             <div style={{ width: SLOT_W * 2 + PHONE_W, overflow: "hidden", position: "relative" }}>
               {/* Inner strip — all phones absolutely positioned */}
               <div style={{ position: "relative", height: PHONE_H + 72 }}>
-                {SCREENSHOT_SRCS.map((src, i) => {
+                {SCREENS.map((screen, i) => {
                   const d = wrappedDist(i, current);
                   const isActive = d === 0;
                   const isSide = Math.abs(d) === 1;
                   const hidden = Math.abs(d) >= 2;
+                  const caption = lang === "ar" ? screen.ar : screen.en;
 
                   return (
                     <motion.div
@@ -202,9 +203,9 @@ export function AppGallery() {
                       onClick={() => isSide && setCurrent(i)}
                     >
                       <IPhoneFrame
-                        src={src}
-                        label={tx.screens[i % tx.screens.length]?.label ?? `Screen ${i + 1}`}
-                        badge={tx.screens[i % tx.screens.length]?.badge ?? ""}
+                        src={screen.src}
+                        label={caption.label}
+                        badge={caption.badge}
                         isActive={isActive}
                         primaryColor={primaryColor}
                       />
@@ -227,7 +228,7 @@ export function AppGallery() {
             </button>
 
             <div className="flex gap-2">
-              {SCREENSHOT_SRCS.map((_, i) => (
+              {SCREENS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
