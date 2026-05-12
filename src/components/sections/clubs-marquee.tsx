@@ -23,7 +23,7 @@ export function ClubsMarquee() {
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           The Brotherhood
         </motion.span>
@@ -35,7 +35,7 @@ export function ClubsMarquee() {
           style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
         >
           IN CONVERSATIONS WITH CLUBS ACROSS{" "}
-          <span style={{ color: "#faff69" }}>3 LEAGUES. 10+ CLUBS.</span>
+          <span style={{ color: "var(--color-primary)" }}>3 LEAGUES. 10+ CLUBS.</span>
         </motion.h2>
       </div>
 
@@ -51,7 +51,7 @@ export function ClubsMarquee() {
         </motion.div>
 
         {/* Yellow center divider */}
-        <div className="w-full h-[1px] my-3" style={{ background: "rgba(250,255,105,0.25)" }} />
+        <div className="w-full h-[1px] my-3" style={{ background: "rgba(var(--color-primary-rgb),0.25)" }} />
 
         <motion.div
           initial={{ x: "-100%" }} whileInView={{ x: 0 }}

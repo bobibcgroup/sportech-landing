@@ -44,7 +44,7 @@ export function RevenueStreams() {
           viewport={{ once: true, margin: REVEAL_MARGIN }}
           transition={{ duration: dur.fast, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           8 Revenue Streams. One Partnership.
         </motion.span>
@@ -71,11 +71,11 @@ export function RevenueStreams() {
                 viewport={{ once: true, margin: REVEAL_MARGIN }}
                 transition={{ duration: dur.normal, delay: i * 0.06, ease: ease.out }}
                 className="flex items-start gap-4 py-4 border-b group cursor-default"
-                style={{ borderColor: "rgba(250,255,105,0.08)" }}
+                style={{ borderColor: "rgba(var(--color-primary-rgb),0.08)" }}
               >
                 <span
                   className="text-[11px] font-bold mt-0.5 shrink-0 tabular-nums"
-                  style={{ color: "rgba(250,255,105,0.35)" }}
+                  style={{ color: "rgba(var(--color-primary-rgb),0.35)" }}
                 >
                   {num}
                 </span>

@@ -51,7 +51,7 @@ function SportTile({ sport, index, name, isSelected, onSelect }: {
           animate={{ width: isSelected ? "48px" : "32px" }}
           transition={{ duration: 0.35, ease: ease.out }}
           className="h-[1.5px] mt-1.5"
-          style={{ background: "#faff69" }}
+          style={{ background: "var(--color-primary)" }}
         />
       </div>
 

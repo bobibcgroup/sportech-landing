@@ -100,7 +100,7 @@ function CameraSlider() {
             style={{
               width: i === current ? 16 : 6,
               height: 6,
-              background: i === current ? "#faff69" : "rgba(255,255,255,0.3)",
+              background: i === current ? "var(--color-primary)" : "rgba(255,255,255,0.3)",
             }}
             aria-label={`Go to image ${i + 1}`}
           />
@@ -129,7 +129,7 @@ export function PatentedCamera() {
           className="flex justify-center mb-8"
         >
           <span className="text-[11px] font-bold tracking-[0.25em] uppercase px-4 py-1.5 rounded-full border"
-            style={{ color: "#faff69", borderColor: "rgba(250,255,105,0.3)", background: "rgba(250,255,105,0.08)" }}>
+            style={{ color: "var(--color-primary)", borderColor: "rgba(var(--color-primary-rgb),0.3)", background: "rgba(var(--color-primary-rgb),0.08)" }}>
             PATENTED
           </span>
         </motion.div>
@@ -140,7 +140,7 @@ export function PatentedCamera() {
           className="text-on-dark font-bold text-center mb-16"
           style={{ fontSize: "clamp(32px, 5.5vw, 64px)", lineHeight: 1.0, letterSpacing: "-3px" }}
         >
-          SEE THE GAME<br /><span style={{ color: "#faff69" }}>FROM INSIDE IT.</span>
+          SEE THE GAME<br /><span style={{ color: "var(--color-primary)" }}>FROM INSIDE IT.</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
@@ -155,7 +155,7 @@ export function PatentedCamera() {
             initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.2, ease: ease.out }}
             className="relative rounded-2xl overflow-hidden group"
-            style={{ aspectRatio: "4/3", background: "#0d0d0d", border: "1px solid rgba(250,255,105,0.12)" }}
+            style={{ aspectRatio: "4/3", background: "#0d0d0d", border: "1px solid rgba(var(--color-primary-rgb),0.12)" }}
           >
             <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
               <source src="/cinematic/player-pov.mp4" type="video/mp4" />
@@ -179,7 +179,7 @@ export function PatentedCamera() {
           </p>
           <p className="text-body-text leading-relaxed mt-3">
             Fans pay to access it. Clubs earn a{" "}
-            <span className="font-bold" style={{ color: "#faff69" }}>significant share</span> of everything they pay.
+            <span className="font-bold" style={{ color: "var(--color-primary)" }}>significant share</span> of everything they pay.
           </p>
         </motion.div>
       </div>

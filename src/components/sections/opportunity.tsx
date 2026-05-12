@@ -62,7 +62,7 @@ export function Opportunity() {
           viewport={{ once: true, margin: REVEAL_MARGIN }}
           transition={{ duration: dur.fast, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           {tx.badge}
         </motion.span>
@@ -90,13 +90,13 @@ export function Opportunity() {
               className="rounded-2xl p-8 border"
               style={{
                 background: "rgba(10,10,10,0.6)",
-                borderColor: "rgba(250,255,105,0.12)",
+                borderColor: "rgba(var(--color-primary-rgb),0.12)",
                 backdropFilter: "blur(8px)",
               }}
             >
               <div
                 className="font-bold leading-none mb-2"
-                style={{ fontSize: "clamp(48px, 5vw, 82px)", letterSpacing: "-4px", color: "#faff69" }}
+                style={{ fontSize: "clamp(48px, 5vw, 82px)", letterSpacing: "-4px", color: "var(--color-primary)" }}
               >
                 <Counter target={target} prefix={prefix} suffix={suffix} />
               </div>

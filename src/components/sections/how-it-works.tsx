@@ -13,10 +13,10 @@ const STEPS = [
 function ConnectorLine({ triggered }: { triggered: boolean }) {
   return (
     <svg className="absolute top-5 left-0 right-0 w-full hidden md:block" height="2" viewBox="0 0 800 2" preserveAspectRatio="none">
-      <line x1="0" y1="1" x2="800" y2="1" stroke="rgba(250,255,105,0.12)" strokeWidth="1" />
+      <line x1="0" y1="1" x2="800" y2="1" stroke="rgba(var(--color-primary-rgb),0.12)" strokeWidth="1" />
       <motion.line
         x1="0" y1="1" x2="800" y2="1"
-        stroke="rgba(250,255,105,0.5)" strokeWidth="1.5"
+        stroke="rgba(var(--color-primary-rgb),0.5)" strokeWidth="1.5"
         strokeDasharray="800"
         initial={{ strokeDashoffset: 800 }}
         animate={{ strokeDashoffset: triggered ? 0 : 800 }}
@@ -37,7 +37,7 @@ export function HowItWorks() {
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           Zero Cost. Zero Risk. 100% Built.
         </motion.span>
@@ -68,21 +68,21 @@ export function HowItWorks() {
                   transition={{ duration: 0.4, delay: 0.6 + i * 0.3, ease: ease.overshoot }}
                   className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold mb-6 border"
                   style={{
-                    background: highlight ? "#faff69" : "rgba(250,255,105,0.1)",
-                    borderColor: highlight ? "#faff69" : "rgba(250,255,105,0.3)",
-                    color: highlight ? "#0a0a0a" : "#faff69",
+                    background: highlight ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.1)",
+                    borderColor: highlight ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.3)",
+                    color: highlight ? "#0a0a0a" : "var(--color-primary)",
                   }}
                 >
                   {num}
                 </motion.div>
                 <div
                   className="rounded-xl p-6 border transition-transform duration-200 group-hover:-translate-y-1"
-                  style={{ background: "rgba(16,16,16,0.6)", borderColor: "rgba(250,255,105,0.08)" }}
+                  style={{ background: "rgba(16,16,16,0.6)", borderColor: "rgba(var(--color-primary-rgb),0.08)" }}
                 >
                   <h3 className="text-on-dark font-bold text-lg mb-3 tracking-tight">{title}</h3>
                   <p className="text-body-text text-sm leading-relaxed">{body}</p>
                   {highlight && (
-                    <p className="font-bold mt-4" style={{ fontSize: 30, lineHeight: 1.15, letterSpacing: "-1px", color: "#faff69" }}>
+                    <p className="font-bold mt-4" style={{ fontSize: 30, lineHeight: 1.15, letterSpacing: "-1px", color: "var(--color-primary)" }}>
                       PURE UPSIDE
                     </p>
                   )}

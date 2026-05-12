@@ -110,7 +110,7 @@ export function AppGallery() {
     <section className="bg-canvas py-24 overflow-hidden relative" id="platform">
       {/* Section divider */}
       <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(250,255,105,0.25) 30%, rgba(250,255,105,0.5) 50%, rgba(250,255,105,0.25) 70%, transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(var(--color-primary-rgb),0.25) 30%, rgba(var(--color-primary-rgb),0.5) 50%, rgba(var(--color-primary-rgb),0.25) 70%, transparent)" }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -120,7 +120,7 @@ export function AppGallery() {
           viewport={{ once: true, margin: REVEAL_MARGIN }}
           transition={{ duration: 0.3, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           {tx.badge}
         </motion.span>
@@ -188,8 +188,8 @@ export function AppGallery() {
                     >
                       <IPhoneFrame
                         src={src}
-                        label={tx.screens[i].label}
-                        badge={tx.screens[i].badge}
+                        label={tx.screens[i % tx.screens.length]?.label ?? `Screen ${i + 1}`}
+                        badge={tx.screens[i % tx.screens.length]?.badge ?? ""}
                         isActive={isActive}
                       />
                     </motion.div>
@@ -204,10 +204,10 @@ export function AppGallery() {
             <button
               onClick={prev}
               className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-              style={{ background: "rgba(250,255,105,0.06)", border: "1px solid rgba(250,255,105,0.14)" }}
+              style={{ background: "rgba(var(--color-primary-rgb),0.06)", border: "1px solid rgba(var(--color-primary-rgb),0.14)" }}
               aria-label="Previous"
             >
-              <ChevronLeft size={16} style={{ color: "rgba(250,255,105,0.7)" }} />
+              <ChevronLeft size={16} style={{ color: "rgba(var(--color-primary-rgb),0.7)" }} />
             </button>
 
             <div className="flex gap-2">
@@ -219,7 +219,7 @@ export function AppGallery() {
                   style={{
                     width: i === current ? 20 : 7,
                     height: 7,
-                    background: i === current ? "#faff69" : "rgba(255,255,255,0.2)",
+                    background: i === current ? "var(--color-primary)" : "rgba(255,255,255,0.2)",
                   }}
                   aria-label={`Go to screen ${i + 1}`}
                 />
@@ -229,10 +229,10 @@ export function AppGallery() {
             <button
               onClick={next}
               className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-              style={{ background: "rgba(250,255,105,0.06)", border: "1px solid rgba(250,255,105,0.14)" }}
+              style={{ background: "rgba(var(--color-primary-rgb),0.06)", border: "1px solid rgba(var(--color-primary-rgb),0.14)" }}
               aria-label="Next"
             >
-              <ChevronRight size={16} style={{ color: "rgba(250,255,105,0.7)" }} />
+              <ChevronRight size={16} style={{ color: "rgba(var(--color-primary-rgb),0.7)" }} />
             </button>
           </div>
         </motion.div>

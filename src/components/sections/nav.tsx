@@ -27,7 +27,7 @@ export function Nav() {
       {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left"
-        style={{ scaleX, background: "#faff69" }}
+        style={{ scaleX, background: "var(--color-primary)" }}
       />
 
       <motion.nav

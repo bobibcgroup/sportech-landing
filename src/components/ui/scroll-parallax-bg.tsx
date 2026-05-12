@@ -15,7 +15,7 @@ export function ScrollParallaxBg() {
       <motion.div
         style={{
           y: y1,
-          background: "rgba(250,255,105,0.04)",
+          background: "rgba(var(--color-primary-rgb),0.04)",
           filter: "blur(120px)",
           borderRadius: "50%",
         }}
@@ -48,7 +48,7 @@ export function ScrollParallaxBg() {
           style={{
             width: "100%",
             height: "100%",
-            background: "rgba(250,255,105,0.03)",
+            background: "rgba(var(--color-primary-rgb),0.03)",
             filter: "blur(100px)",
             borderRadius: "50%",
           }}

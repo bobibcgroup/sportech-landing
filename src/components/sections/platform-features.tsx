@@ -23,14 +23,14 @@ function FeatureCard({ feature, index }: { feature: (typeof FEATURES)[0]; index:
       initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay, ease: ease.out }}
       className="relative rounded-xl p-6 border cursor-default"
-      style={{ background: "rgba(10,10,10,0.5)", borderColor: feature.patented ? "#faff69" : "rgba(250,255,105,0.10)" }}
-      whileHover={{ scale: 1.02, borderColor: feature.patented ? "#faff69" : "rgba(250,255,105,0.35)", transition: { duration: 0.2 } }}
+      style={{ background: "rgba(10,10,10,0.5)", borderColor: feature.patented ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.10)" }}
+      whileHover={{ scale: 1.02, borderColor: feature.patented ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.35)", transition: { duration: 0.2 } }}
       onHoverStart={() => feature.patented && setTip(true)}
       onHoverEnd={() => setTip(false)}
     >
       {feature.patented && (
         <span className="absolute top-3 right-3 text-[9px] font-bold tracking-[0.2em] uppercase px-2 py-0.5 rounded-full"
-          style={{ color: "#faff69", border: "1px solid rgba(250,255,105,0.4)", background: "rgba(250,255,105,0.08)" }}>
+          style={{ color: "var(--color-primary)", border: "1px solid rgba(var(--color-primary-rgb),0.4)", background: "rgba(var(--color-primary-rgb),0.08)" }}>
           PATENTED
         </span>
       )}
@@ -43,7 +43,7 @@ function FeatureCard({ feature, index }: { feature: (typeof FEATURES)[0]; index:
             initial={{ opacity: 0, y: 4, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
             className="absolute -bottom-11 left-0 right-0 z-20 rounded-lg px-3 py-2 text-[11px] text-on-dark"
-            style={{ background: "rgba(26,26,26,0.95)", border: "1px solid rgba(250,255,105,0.2)" }}
+            style={{ background: "rgba(26,26,26,0.95)", border: "1px solid rgba(var(--color-primary-rgb),0.2)" }}
           >
             A patented jersey-mounted player POV camera — extraordinarily rare, and one of very few of its kind in the world.
           </motion.div>
@@ -57,14 +57,14 @@ export function PlatformFeatures() {
   return (
     <section className="bg-canvas py-24 relative overflow-hidden" id="platform-features">
       <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(250,255,105,0.25) 30%, rgba(250,255,105,0.5) 50%, rgba(250,255,105,0.25) 70%, transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(var(--color-primary-rgb),0.25) 30%, rgba(var(--color-primary-rgb),0.5) 50%, rgba(var(--color-primary-rgb),0.25) 70%, transparent)" }}
       />
       <div className="max-w-7xl mx-auto px-6">
         <motion.span
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           The Arsenal
         </motion.span>

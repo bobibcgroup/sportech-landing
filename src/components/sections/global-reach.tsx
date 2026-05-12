@@ -33,7 +33,7 @@ export function GlobalReach() {
           initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
           className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(250,255,105,0.6)" }}
+          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
         >
           Global Reach
         </motion.span>
@@ -47,7 +47,7 @@ export function GlobalReach() {
               style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 1.05, letterSpacing: "-2.5px" }}
             >
               IN CONVERSATIONS ACROSS
-              <span style={{ color: "#faff69" }}> 3 LEAGUES.</span>
+              <span style={{ color: "var(--color-primary)" }}> 3 LEAGUES.</span>
             </motion.h2>
 
             <motion.p
@@ -68,8 +68,8 @@ export function GlobalReach() {
                 { stat: "10+", label: "Clubs in active conversations" },
                 { stat: "3", label: "Sports: Football, Basketball & Cricket" },
               ].map(({ stat, label }) => (
-                <div key={stat} className="border-l-2 pl-4" style={{ borderColor: "rgba(250,255,105,0.4)" }}>
-                  <p className="font-bold text-2xl" style={{ color: "#faff69", letterSpacing: "-1px" }}>{stat}</p>
+                <div key={stat} className="border-l-2 pl-4" style={{ borderColor: "rgba(var(--color-primary-rgb),0.4)" }}>
+                  <p className="font-bold text-2xl" style={{ color: "var(--color-primary)", letterSpacing: "-1px" }}>{stat}</p>
                   <p className="text-body-text text-xs mt-0.5">{label}</p>
                 </div>
               ))}
@@ -87,7 +87,7 @@ export function GlobalReach() {
               {/* Radar rings */}
               {[60, 120, 190, 270].map((r, i) => (
                 <circle key={r} cx={origin.x} cy={origin.y} r={r}
-                  fill="none" stroke="rgba(250,255,105,0.05)" strokeWidth="1"
+                  fill="none" stroke="rgba(var(--color-primary-rgb),0.05)" strokeWidth="1"
                   strokeDasharray={i % 2 === 0 ? "4 6" : "none"} />
               ))}
               {/* Compass lines */}
@@ -97,7 +97,7 @@ export function GlobalReach() {
                   <line key={deg}
                     x1={origin.x - 280 * Math.cos(rad)} y1={origin.y - 280 * Math.sin(rad)}
                     x2={origin.x + 280 * Math.cos(rad)} y2={origin.y + 280 * Math.sin(rad)}
-                    stroke="rgba(250,255,105,0.04)" strokeWidth="1" />
+                    stroke="rgba(var(--color-primary-rgb),0.04)" strokeWidth="1" />
                 );
               })}
 
@@ -107,7 +107,7 @@ export function GlobalReach() {
                   key={city.id}
                   d={arc(origin.x, origin.y, city.x, city.y)}
                   fill="none"
-                  stroke="rgba(250,255,105,0.35)"
+                  stroke="rgba(var(--color-primary-rgb),0.35)"
                   strokeWidth="1"
                   pathLength="1"
                   initial={{ pathLength: 0 }}
@@ -124,12 +124,12 @@ export function GlobalReach() {
                 >
                   {city.isOrigin && (
                     <>
-                      <circle cx={city.x} cy={city.y} r={18} fill="rgba(250,255,105,0.06)" style={{ animation: "pulse-ring 2s ease-out infinite" }} />
-                      <circle cx={city.x} cy={city.y} r={12} fill="rgba(250,255,105,0.1)" />
+                      <circle cx={city.x} cy={city.y} r={18} fill="rgba(var(--color-primary-rgb),0.06)" style={{ animation: "pulse-ring 2s ease-out infinite" }} />
+                      <circle cx={city.x} cy={city.y} r={12} fill="rgba(var(--color-primary-rgb),0.1)" />
                     </>
                   )}
                   <circle cx={city.x} cy={city.y} r={city.isOrigin ? 4 : 3}
-                    fill={city.isOrigin ? "#faff69" : "rgba(250,255,105,0.7)"}
+                    fill={city.isOrigin ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.7)"}
                     style={!city.isOrigin ? { animation: "dot-pulse 2s ease-in-out infinite" } : {}} />
                   <text x={city.x + (city.x > origin.x ? 8 : -8)} y={city.y + 4}
                     fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="Inter, sans-serif"

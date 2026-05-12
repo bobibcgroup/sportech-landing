@@ -69,7 +69,7 @@ export function Hero() {
             top: "38%",
             height: 2,
             background:
-              "linear-gradient(90deg, transparent 0%, rgba(250,255,105,0.10) 35%, rgba(250,255,105,0.18) 50%, rgba(250,255,105,0.10) 65%, transparent 100%)",
+              "linear-gradient(90deg, transparent 0%, rgba(var(--color-primary-rgb),0.10) 35%, rgba(var(--color-primary-rgb),0.18) 50%, rgba(var(--color-primary-rgb),0.10) 65%, transparent 100%)",
             animation: "flare-pulse 6s ease-in-out infinite",
             transformOrigin: "center",
           }}
@@ -85,7 +85,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.8, duration: dur.fast, ease: ease.out }}
             className="text-[12px] font-semibold tracking-widest uppercase mb-8 block"
-            style={{ color: "rgba(250,255,105,0.6)" }}
+            style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
           >
             {tx.badge}
           </motion.span>
@@ -100,7 +100,7 @@ export function Hero() {
                 <motion.span
                   key={i}
                   className="inline-block mr-[0.22em]"
-                  style={{ color: isYellow ? "#faff69" : "#ffffff" }}
+                  style={{ color: isYellow ? "var(--color-primary)" : "#ffffff" }}
                   initial={{ opacity: 0, y: -28 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.2 + i * 0.1, duration: 0.55, ease: ease.out }}
