@@ -1246,5 +1246,1317 @@
     "sport": "soccer",
     "primaryColor": "#888888",
     "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "atlanta-hawks",
+    "name": "Atlanta Hawks",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#E03A3E",
+    "secondaryColor": "#26282A"
+  },
+  {
+    "id": "boston-celtics",
+    "name": "Boston Celtics",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#007A33",
+    "secondaryColor": "#BA9653"
+  },
+  {
+    "id": "brooklyn-nets",
+    "name": "Brooklyn Nets",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "charlotte-hornets",
+    "name": "Charlotte Hornets",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#1D1160",
+    "secondaryColor": "#00788C"
+  },
+  {
+    "id": "chicago-bulls",
+    "name": "Chicago Bulls",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#CE1141",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "cleveland-cavaliers",
+    "name": "Cleveland Cavaliers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#860038",
+    "secondaryColor": "#041E42"
+  },
+  {
+    "id": "dallas-mavericks",
+    "name": "Dallas Mavericks",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#00538C",
+    "secondaryColor": "#002B5E"
+  },
+  {
+    "id": "denver-nuggets",
+    "name": "Denver Nuggets",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#0E2240",
+    "secondaryColor": "#FEC524"
+  },
+  {
+    "id": "detroit-pistons",
+    "name": "Detroit Pistons",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#1D42BA"
+  },
+  {
+    "id": "golden-state-warriors",
+    "name": "Golden State Warriors",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#1D428A",
+    "secondaryColor": "#FFC72C"
+  },
+  {
+    "id": "houston-rockets",
+    "name": "Houston Rockets",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#CE1141",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "indiana-pacers",
+    "name": "Indiana Pacers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#002D62",
+    "secondaryColor": "#FDBB30"
+  },
+  {
+    "id": "la-clippers",
+    "name": "LA Clippers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#1D428A"
+  },
+  {
+    "id": "los-angeles-lakers",
+    "name": "Los Angeles Lakers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#552583",
+    "secondaryColor": "#FDB927"
+  },
+  {
+    "id": "memphis-grizzlies",
+    "name": "Memphis Grizzlies",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#5D76A9",
+    "secondaryColor": "#12173F"
+  },
+  {
+    "id": "miami-heat",
+    "name": "Miami Heat",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#98002E",
+    "secondaryColor": "#F9A01B"
+  },
+  {
+    "id": "milwaukee-bucks",
+    "name": "Milwaukee Bucks",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#00471B",
+    "secondaryColor": "#EEE1C6"
+  },
+  {
+    "id": "minnesota-timberwolves",
+    "name": "Minnesota Timberwolves",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#0C2340",
+    "secondaryColor": "#236192"
+  },
+  {
+    "id": "new-orleans-pelicans",
+    "name": "New Orleans Pelicans",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#0C2340",
+    "secondaryColor": "#85714D"
+  },
+  {
+    "id": "new-york-knicks",
+    "name": "New York Knicks",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#006BB6",
+    "secondaryColor": "#F58426"
+  },
+  {
+    "id": "oklahoma-city-thunder",
+    "name": "Oklahoma City Thunder",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#007AC1",
+    "secondaryColor": "#EF3B24"
+  },
+  {
+    "id": "orlando-magic",
+    "name": "Orlando Magic",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#0077C0",
+    "secondaryColor": "#C4CED4"
+  },
+  {
+    "id": "philadelphia-76ers",
+    "name": "Philadelphia 76ers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#006BB6",
+    "secondaryColor": "#ED174C"
+  },
+  {
+    "id": "phoenix-suns",
+    "name": "Phoenix Suns",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#1D1160",
+    "secondaryColor": "#E56020"
+  },
+  {
+    "id": "portland-trail-blazers",
+    "name": "Portland Trail Blazers",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#E03A3E",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "sacramento-kings",
+    "name": "Sacramento Kings",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#5A2D81",
+    "secondaryColor": "#63727A"
+  },
+  {
+    "id": "san-antonio-spurs",
+    "name": "San Antonio Spurs",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#C4CED4",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "toronto-raptors",
+    "name": "Toronto Raptors",
+    "country": "Canada",
+    "sport": "basketball",
+    "primaryColor": "#CE1141",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "utah-jazz",
+    "name": "Utah Jazz",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#002B5C",
+    "secondaryColor": "#00471B"
+  },
+  {
+    "id": "washington-wizards",
+    "name": "Washington Wizards",
+    "country": "USA",
+    "sport": "basketball",
+    "primaryColor": "#002B5C",
+    "secondaryColor": "#E31837"
+  },
+  {
+    "id": "afghanistan-cricket",
+    "name": "Afghanistan Cricket",
+    "country": "Afghanistan",
+    "sport": "cricket",
+    "primaryColor": "#1D3461",
+    "secondaryColor": "#CE1126"
+  },
+  {
+    "id": "bangladesh-cricket",
+    "name": "Bangladesh Cricket",
+    "country": "Bangladesh",
+    "sport": "cricket",
+    "primaryColor": "#006A4E",
+    "secondaryColor": "#F42A41"
+  },
+  {
+    "id": "ireland-cricket",
+    "name": "Ireland Cricket",
+    "country": "Ireland",
+    "sport": "cricket",
+    "primaryColor": "#169B62",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "zimbabwe-cricket",
+    "name": "Zimbabwe Cricket",
+    "country": "Zimbabwe",
+    "sport": "cricket",
+    "primaryColor": "#008000",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "dc-cricket",
+    "name": "Delhi Capitals",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#17479E",
+    "secondaryColor": "#EF1C25"
+  },
+  {
+    "id": "gt-cricket",
+    "name": "Gujarat Titans",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#1C1C1C",
+    "secondaryColor": "#A57C3A"
+  },
+  {
+    "id": "lsg-cricket",
+    "name": "Lucknow Super Giants",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#A72056",
+    "secondaryColor": "#FFDB01"
+  },
+  {
+    "id": "pbks-cricket",
+    "name": "Punjab Kings",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#ED1B24",
+    "secondaryColor": "#A7A9AC"
+  },
+  {
+    "id": "rr-cricket",
+    "name": "Rajasthan Royals",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#2D4DB5",
+    "secondaryColor": "#E91C8C"
+  },
+  {
+    "id": "srh-cricket",
+    "name": "Sunrisers Hyderabad",
+    "country": "India",
+    "sport": "cricket",
+    "primaryColor": "#F7A721",
+    "secondaryColor": "#FF4B00"
+  },
+  {
+    "id": "bbl-strikers",
+    "name": "Adelaide Strikers",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#0038A8",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "bbl-heat",
+    "name": "Brisbane Heat",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#E4002B",
+    "secondaryColor": "#27251F"
+  },
+  {
+    "id": "bbl-hurricanes",
+    "name": "Hobart Hurricanes",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#7C3592",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "bbl-renegades",
+    "name": "Melbourne Renegades",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#CC2529",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "bbl-stars",
+    "name": "Melbourne Stars",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#00A651",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "bbl-scorchers",
+    "name": "Perth Scorchers",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#F15A29",
+    "secondaryColor": "#003087"
+  },
+  {
+    "id": "bbl-sixers",
+    "name": "Sydney Sixers",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#E11B8C",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "bbl-thunder",
+    "name": "Sydney Thunder",
+    "country": "Australia",
+    "sport": "cricket",
+    "primaryColor": "#6BBD45",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "psl-united",
+    "name": "Islamabad United",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#E8192C",
+    "secondaryColor": "#1C1C1C"
+  },
+  {
+    "id": "psl-kings",
+    "name": "Karachi Kings",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#0066CC",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "psl-qalandars",
+    "name": "Lahore Qalandars",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#006B3F",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "psl-sultans",
+    "name": "Multan Sultans",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#7A4B89",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "psl-zalmi",
+    "name": "Peshawar Zalmi",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#F5A623",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "psl-gladiators",
+    "name": "Quetta Gladiators",
+    "country": "Pakistan",
+    "sport": "cricket",
+    "primaryColor": "#00355E",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cpl-tridents",
+    "name": "Barbados Royals",
+    "country": "Barbados",
+    "sport": "cricket",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "cpl-warriors",
+    "name": "Guyana Amazon Warriors",
+    "country": "Guyana",
+    "sport": "cricket",
+    "primaryColor": "#006233",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "cpl-knight-riders",
+    "name": "Trinbago Knight Riders",
+    "country": "Trinidad",
+    "sport": "cricket",
+    "primaryColor": "#3B225F",
+    "secondaryColor": "#F5C518"
+  },
+  {
+    "id": "cpl-tallahassee",
+    "name": "Saint Lucia Kings",
+    "country": "Saint Lucia",
+    "sport": "cricket",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "cpl-patriots",
+    "name": "St Kitts & Nevis Patriots",
+    "country": "St Kitts",
+    "sport": "cricket",
+    "primaryColor": "#008751",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "cpl-tridents-jam",
+    "name": "Jamaica Tallawahs",
+    "country": "Jamaica",
+    "sport": "cricket",
+    "primaryColor": "#F5C518",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "sa20-capitals",
+    "name": "Paarl Royals",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#003087"
+  },
+  {
+    "id": "sa20-sunrisers",
+    "name": "Sunrisers Eastern Cape",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#F7A721",
+    "secondaryColor": "#FF4B00"
+  },
+  {
+    "id": "sa20-dolphins",
+    "name": "Durban's Super Giants",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "sa20-braves",
+    "name": "MI Cape Town",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#004BA0",
+    "secondaryColor": "#D1AB3E"
+  },
+  {
+    "id": "sa20-warriors",
+    "name": "Joburg Super Kings",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#F5C518",
+    "secondaryColor": "#003087"
+  },
+  {
+    "id": "sa20-bulls",
+    "name": "Pretoria Capitals",
+    "country": "South Africa",
+    "sport": "cricket",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "id": "blackburn-rovers-fc",
+    "name": "Blackburn Rovers FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "norwich-city-fc",
+    "name": "Norwich City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "queens-park-rangers-fc",
+    "name": "Queens Park Rangers FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "stoke-city-fc",
+    "name": "Stoke City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "swansea-city-afc",
+    "name": "Swansea City AFC",
+    "country": "Wales",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "west-bromwich-albion-fc",
+    "name": "West Bromwich Albion FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "hull-city-afc",
+    "name": "Hull City AFC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "portsmouth-fc",
+    "name": "Portsmouth FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "birmingham-city-fc",
+    "name": "Birmingham City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "leicester-city-fc",
+    "name": "Leicester City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#003090",
+    "secondaryColor": "#FDBE11"
+  },
+  {
+    "id": "southampton-fc",
+    "name": "Southampton FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#D71920",
+    "secondaryColor": "#130C0E"
+  },
+  {
+    "id": "derby-county-fc",
+    "name": "Derby County FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "middlesbrough-fc",
+    "name": "Middlesbrough FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "sheffield-wednesday-fc",
+    "name": "Sheffield Wednesday FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "watford-fc",
+    "name": "Watford FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "charlton-athletic-fc",
+    "name": "Charlton Athletic FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ipswich-town-fc",
+    "name": "Ipswich Town FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#0044A9",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "sheffield-united-fc",
+    "name": "Sheffield United FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "millwall-fc",
+    "name": "Millwall FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "bristol-city-fc",
+    "name": "Bristol City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "wrexham-afc",
+    "name": "Wrexham AFC",
+    "country": "Wales",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "coventry-city-fc",
+    "name": "Coventry City FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "preston-north-end-fc",
+    "name": "Preston North End FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "oxford-united-fc",
+    "name": "Oxford United FC",
+    "country": "England",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "rio-ave-fc",
+    "name": "Rio Ave FC",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "fc-porto",
+    "name": "FC Porto",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "gd-estoril-praia",
+    "name": "GD Estoril Praia",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "moreirense-fc",
+    "name": "Moreirense FC",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "fc-arouca",
+    "name": "FC Arouca",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-tondela",
+    "name": "CD Tondela",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-nacional",
+    "name": "CD Nacional",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-santa-clara",
+    "name": "CD Santa Clara",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "fc-famalic-o",
+    "name": "FC Famalicão",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "gil-vicente-fc",
+    "name": "Gil Vicente FC",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "vit-ria-sc",
+    "name": "Vitória SC",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "sporting-clube-de-braga",
+    "name": "Sporting Clube de Braga",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "casa-pia-ac",
+    "name": "Casa Pia AC",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "fc-alverca",
+    "name": "FC Alverca",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cf-estrela-da-amadora",
+    "name": "CF Estrela da Amadora",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "avs",
+    "name": "AVS",
+    "country": "Portugal",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "fluminense-fc",
+    "name": "Fluminense FC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#8B0000",
+    "secondaryColor": "#6DBE45"
+  },
+  {
+    "id": "ca-mineiro",
+    "name": "CA Mineiro",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "gr-mio-fbpa",
+    "name": "Grêmio FBPA",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#1B67B0",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "ca-paranaense",
+    "name": "CA Paranaense",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "se-palmeiras",
+    "name": "SE Palmeiras",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "botafogo-fr",
+    "name": "Botafogo FR",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cruzeiro-ec",
+    "name": "Cruzeiro EC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#003087",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "chapecoense-af",
+    "name": "Chapecoense AF",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "s-o-paulo-fc",
+    "name": "São Paulo FC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#E01F27",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "ec-bahia",
+    "name": "EC Bahia",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "sc-corinthians-paulista",
+    "name": "SC Corinthians Paulista",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cr-vasco-da-gama",
+    "name": "CR Vasco da Gama",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ec-vit-ria",
+    "name": "EC Vitória",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#000000"
+  },
+  {
+    "id": "cr-flamengo",
+    "name": "CR Flamengo",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "coritiba-fbc",
+    "name": "Coritiba FBC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "rb-bragantino",
+    "name": "RB Bragantino",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#DD0741",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "clube-do-remo",
+    "name": "Clube do Remo",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "mirassol-fc",
+    "name": "Mirassol FC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "sc-internacional",
+    "name": "SC Internacional",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "santos-fc",
+    "name": "Santos FC",
+    "country": "Brazil",
+    "sport": "soccer",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "estudiantes-de-la-plata",
+    "name": "Estudiantes de La Plata",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cs-independiente-rivadavia",
+    "name": "CS Independiente Rivadavia",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "aa-argentinos-juniors",
+    "name": "AA Argentinos Juniors",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ca-boca-juniors",
+    "name": "CA Boca Juniors",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ca-lan-s",
+    "name": "CA Lanús",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ca-rosario-central",
+    "name": "CA Rosario Central",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-bol-var",
+    "name": "Club Bolívar",
+    "country": "Bolivia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-nacional-potos",
+    "name": "Club Nacional Potosí",
+    "country": "Bolivia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-the-strongest",
+    "name": "Club The Strongest",
+    "country": "Bolivia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-universitario-de-deportes",
+    "name": "Club Universitario de Deportes",
+    "country": "Peru",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-tolima",
+    "name": "CD Tolima",
+    "country": "Colombia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cdp-junior-fc",
+    "name": "CDP Junior FC",
+    "country": "Colombia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "independiente-santa-fe",
+    "name": "Independiente Santa Fe",
+    "country": "Colombia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-huachipato",
+    "name": "CD Huachipato",
+    "country": "Chile",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "o-higgins-fc",
+    "name": "O'Higgins FC",
+    "country": "Chile",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "barcelona-sc",
+    "name": "Barcelona SC",
+    "country": "Ecuador",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ldu-de-quito",
+    "name": "LDU de Quito",
+    "country": "Ecuador",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "carabobo-fc",
+    "name": "Carabobo FC",
+    "country": "Venezuela",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "deportivo-la-guaira-fc",
+    "name": "Deportivo La Guaira FC",
+    "country": "Venezuela",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "deportivo-t-chira-fc",
+    "name": "Deportivo Táchira FC",
+    "country": "Venezuela",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ca-pe-arol",
+    "name": "CA Peñarol",
+    "country": "Uruguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cs-cristal",
+    "name": "CS Cristal",
+    "country": "Peru",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-alianza-lima",
+    "name": "Club Alianza Lima",
+    "country": "Peru",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cusco-fc",
+    "name": "Cusco FC",
+    "country": "Peru",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "car-independiente-del-valle",
+    "name": "CAR Independiente del Valle",
+    "country": "Ecuador",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-universidad-cat-lica",
+    "name": "CD Universidad Católica",
+    "country": "Chile",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-nacional-de-football",
+    "name": "Club Nacional de Football",
+    "country": "Uruguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-independiente-medell-n",
+    "name": "CD Independiente Medellín",
+    "country": "Colombia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "ca-platense",
+    "name": "CA Platense",
+    "country": "Argentina",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-always-ready",
+    "name": "Club Always Ready",
+    "country": "Bolivia",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-guaran",
+    "name": "Club Guaraní",
+    "country": "Paraguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "cd-coquimbo-unido",
+    "name": "CD Coquimbo Unido",
+    "country": "Chile",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "universidad-central-de-venezuela-fc",
+    "name": "Universidad Central de Venezuela FC",
+    "country": "Venezuela",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-cerro-porte-o",
+    "name": "Club Cerro Porteño",
+    "country": "Paraguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "universidad-catolica",
+    "name": "Universidad Catolica",
+    "country": "Ecuador",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "club-libertad-asuncion",
+    "name": "Club Libertad Asuncion",
+    "country": "Paraguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "2-de-mayo",
+    "name": "2 de Mayo",
+    "country": "Paraguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
+  },
+  {
+    "id": "juventud-de-las-piedras",
+    "name": "Juventud de Las Piedras",
+    "country": "Uruguay",
+    "sport": "soccer",
+    "primaryColor": "#888888",
+    "secondaryColor": "#FFFFFF"
   }
 ]
