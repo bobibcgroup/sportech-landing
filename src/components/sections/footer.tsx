@@ -1,9 +1,9 @@
 const NAV_LINKS = ["Platform", "Revenue", "Sports", "Partners", "Contact"];
 
 const SOCIAL_LINKS = [
-  { label: "X", href: "https://x.com/sportech" },
-  { label: "Instagram", href: "https://instagram.com/sportech" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/sportech" },
+  { label: "X", href: "https://x.com/SportechHQ" },
+  { label: "Instagram", href: "#" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/sportechsa/" },
 ];
 
 export function Footer() {
