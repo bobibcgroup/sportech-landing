@@ -108,6 +108,12 @@ h3 {
   50% { opacity: 1; }
 }
 
+@keyframes static-flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.55; }
+  100% { opacity: 0.85; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
