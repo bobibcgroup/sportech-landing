@@ -6,7 +6,7 @@ const en = {
       { key: "revenue", label: "Revenue" },
       { key: "contact", label: "Contact" },
     ],
-    cta: "Partner With Us →",
+    cta: "Book a Demo →",
     langSwitch: "عر",
   },
   hero: {
@@ -23,7 +23,7 @@ const en = {
       "Merchandise",
       "Tickets",
     ],
-    cta1: "Partner With Us →",
+    cta1: "Book a Demo →",
     cta2: "How Does It Work ↓",
   },
   sports: {
@@ -95,7 +95,7 @@ const en = {
   },
   revenue: {
     badge: "Revenue Streams",
-    heading: "Half of every dollar your fans spend — yours, automatically.",
+    heading: "Your share of every transaction, structured per partnership.",
   },
   clubs: {
     badge: "Our Partners",
@@ -112,7 +112,7 @@ const en = {
   cta: {
     heading: "Ready to turn fans into revenue?",
     body: "Join the clubs already earning more from their digital fans.",
-    button: "Partner With Us →",
+    button: "Book a Demo →",
   },
 };
 
@@ -124,7 +124,7 @@ const ar: typeof en = {
       { key: "revenue", label: "الإيرادات" },
       { key: "contact", label: "تواصل" },
     ],
-    cta: "← انضم إلينا",
+    cta: "← احجز عرضاً",
     langSwitch: "EN",
   },
   hero: {
@@ -141,7 +141,7 @@ const ar: typeof en = {
       "المتجر",
       "التذاكر",
     ],
-    cta1: "← انضم إلينا",
+    cta1: "← احجز عرضاً",
     cta2: "كيف يعمل؟ ↓",
   },
   sports: {
@@ -212,7 +212,7 @@ const ar: typeof en = {
   },
   revenue: {
     badge: "تدفقات الإيراد",
-    heading: "نصف كل دولار ينفقه مشجعوك … لك مباشرةً.",
+    heading: "حصتك من كل عملية، وفق اتفاقية الشراكة.",
   },
   clubs: {
     badge: "شركاؤنا",
@@ -229,7 +229,7 @@ const ar: typeof en = {
   cta: {
     heading: "هل أنت مستعد لتحويل المشجعين إلى إيراد؟",
     body: "انضم إلى الأندية التي تجني أكثر من مشجعيها الرقميين.",
-    button: "← انضم إلينا",
+    button: "← احجز عرضاً",
   },
 };
 

@@ -126,17 +126,6 @@ export function AppGallery() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.span
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }}
-          transition={{ duration: 0.3, ease: ease.out }}
-          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
-        >
-          {tx.badge}
-        </motion.span>
-
         <motion.h2
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}

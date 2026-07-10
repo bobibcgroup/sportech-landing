@@ -7,17 +7,17 @@ import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 const PILLARS = [
   {
     title: "Saudi-Built Technology",
-    body: "The IP, the team, the patent — all Saudi. We didn't import a solution. We invented one, and we're proud of where it comes from.",
+    body: "The IP, the team, the patent: all Saudi. We didn't import a solution. We invented one, and we're proud of where it comes from.",
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
   },
   {
     title: "Global Sport",
-    body: "Football in Asia. Basketball in the Americas. Cricket across South Asia. Sport is universal — our platform is built to go wherever fans are.",
+    body: "Football in Asia. Basketball in the Americas. Cricket across South Asia. Sport is universal. Our platform is built to go wherever fans are.",
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
   },
   {
     title: "Built Here. Scaling Everywhere.",
-    body: "We started in Saudi Arabia. Now we're taking it to every league, every continent, every fanbase. The IP stays Saudi — the impact goes global.",
+    body: "We started in Saudi Arabia. Now we're taking it to every league, every continent, every fanbase. The IP stays Saudi. The impact goes global.",
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
   },
 ];

@@ -2,15 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/language-context";
+import { useContactModal } from "@/lib/contact-modal-context";
 import { t } from "@/lib/translations";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { lang, setLang } = useLanguage();
+  const { open: openContactModal } = useContactModal();
   const tx = t[lang].nav;
 
   const { scrollYProgress } = useScroll();
@@ -42,11 +45,11 @@ export function Nav() {
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.4 }}
+        transition={{ delay: 0.3, duration: 0.4 }}
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Wordmark */}
-          <a
+          <Link
             href="/"
             className="text-on-dark font-bold text-lg tracking-tight leading-none select-none relative group"
           >
@@ -55,7 +58,7 @@ export function Nav() {
               className="absolute -bottom-0.5 left-0 h-[1px] bg-primary origin-left transition-transform duration-400 scale-x-0 group-hover:scale-x-100"
               style={{ width: "100%" }}
             />
-          </a>
+          </Link>
 
           {/* Desktop center nav */}
           <div className="hidden md:flex items-center gap-8">
@@ -81,12 +84,12 @@ export function Nav() {
                 EN
               </button>
             )}
-            <a
-              href="#contact"
-              className="inline-flex items-center bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-10 hover:bg-primary-active transition-colors duration-200 whitespace-nowrap"
+            <button
+              onClick={openContactModal}
+              className="inline-flex items-center bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-10 hover:bg-primary-active transition-colors duration-200 whitespace-nowrap cursor-pointer"
             >
               {tx.cta}
-            </a>
+            </button>
           </div>
 
           {/* Mobile hamburger */}
@@ -130,13 +133,12 @@ export function Nav() {
                   EN
                 </button>
               )}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-10 hover:bg-primary-active transition-colors mt-2 w-full"
+              <button
+                onClick={() => { setMobileOpen(false); openContactModal(); }}
+                className="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-lg px-5 h-10 hover:bg-primary-active transition-colors mt-2 w-full cursor-pointer"
               >
                 {tx.cta}
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

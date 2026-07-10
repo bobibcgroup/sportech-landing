@@ -14,10 +14,10 @@ interface Club {
   secondaryColor: string;
 }
 
-const SPORT_EMOJI: Record<string, string> = {
-  soccer: "⚽",
-  basketball: "🏀",
-  cricket: "🏏",
+const SPORT_LABEL: Record<string, string> = {
+  soccer: "Football",
+  basketball: "Basketball",
+  cricket: "Cricket",
 };
 
 const clubs = clubsData as Club[];
@@ -49,14 +49,15 @@ export function BrandCustomizer() {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const r = searchClubs(query);
+  const handleQueryChange = useCallback((value: string) => {
+    setQuery(value);
+    const r = searchClubs(value);
     setResults(r);
-    setOpen(r.length > 0 && query.trim().length > 0);
-    if (r.length === 0 && query.trim().length > 1) {
+    setOpen(r.length > 0 && value.trim().length > 0);
+    if (r.length === 0 && value.trim().length > 1) {
       setShowPicker(true);
     }
-  }, [query]);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -115,7 +116,7 @@ export function BrandCustomizer() {
           YOUR BRAND. YOUR COLORS.
         </p>
         <p className="text-white/50 text-[13px]">
-          Search your club to preview the app in your team&apos;s colors — applied across the entire page.
+          Search your club to preview the app in your team&apos;s colors, applied across the entire page.
         </p>
       </div>
 
@@ -135,7 +136,7 @@ export function BrandCustomizer() {
             placeholder="Search club name or country..."
             value={query}
             onChange={(e) => {
-              setQuery(e.target.value);
+              handleQueryChange(e.target.value);
               if (selected) {
                 setSelected(null);
                 resetTheme();
@@ -180,7 +181,9 @@ export function BrandCustomizer() {
                 />
                 <span className="text-white/80 text-sm flex-1">{club.name}</span>
                 <span className="text-white/30 text-xs">{club.country}</span>
-                <span className="text-xs ml-1">{SPORT_EMOJI[club.sport]}</span>
+                <span className="text-white/30 text-[10px] font-semibold tracking-wider uppercase ml-1">
+                  {SPORT_LABEL[club.sport]}
+                </span>
               </button>
             ))}
           </div>

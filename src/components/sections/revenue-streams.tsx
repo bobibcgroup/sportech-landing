@@ -5,12 +5,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
 const STREAMS = [
-  { num: "01", title: "Subscriptions", desc: "Recurring tiers … free to premium." },
-  { num: "02", title: "Live Stream Gifting", desc: "Fans send virtual gifts during live match streams … every gift is instant revenue." },
+  { num: "01", title: "Subscriptions", desc: "Recurring tiers, from free to premium." },
+  { num: "02", title: "Live Stream Gifting", desc: "Fans send virtual gifts during live match streams. Every gift is instant revenue." },
   { num: "03", title: "Sports Predictions", desc: "Every match outcome prediction is a revenue event." },
   { num: "04", title: "Interactive Voting", desc: "Higher tiers pay for greater vote influence over club decisions." },
   { num: "05", title: "Tickets", desc: "In-app purchase and peer-to-peer resale with platform commission." },
-  { num: "06", title: "Merchandise", desc: "Official club gear sold through the app … jerseys, editions, accessories." },
+  { num: "06", title: "Merchandise", desc: "Official club gear sold through the app: jerseys, editions, accessories." },
   { num: "07", title: "Digital Gift Cards", desc: "Club-branded cards accepted at 150,000+ stores globally." },
   { num: "08", title: "NFT & Collectibles", desc: "Digital trading cards, rare tokens, seasonal drops." },
 ];
@@ -121,10 +121,10 @@ export function RevenueStreams() {
             </div>
             <div className="h-px w-12 mx-auto mb-6" style={{ background: "rgba(212,160,23,0.3)" }} />
             <p className="text-body-text text-sm leading-relaxed mb-5">
-              We build and operate everything at our cost. Your club earns a significant share of every transaction — structured per deal.
+              We build and operate everything at our cost. Your club earns a significant share of every transaction, structured per deal.
             </p>
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>
-              Equivalent to what FC Barcelona&apos;s digital platform generates —{" "}
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
+              Equivalent to what FC Barcelona&apos;s digital platform generates:{" "}
               <span style={{ color: "#d4a017" }}>over $220M</span> annually.
             </p>
           </motion.div>

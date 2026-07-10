@@ -1,8 +1,13 @@
-const NAV_LINKS = ["Platform", "Revenue", "Sports", "Partners", "Contact"];
+const NAV_LINKS = [
+  { label: "Platform", href: "#platform" },
+  { label: "Revenue", href: "#revenue" },
+  { label: "Sports", href: "#sports" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
+];
 
 const SOCIAL_LINKS = [
   { label: "X", href: "https://x.com/SportechHQ" },
-  { label: "Instagram", href: "#" },
   { label: "LinkedIn", href: "https://linkedin.com/company/sportechsa/" },
 ];
 
@@ -27,13 +32,13 @@ export function Footer() {
               Platform
             </p>
             <ul className="space-y-3">
-              {NAV_LINKS.map((link) => (
-                <li key={link}>
+              {NAV_LINKS.map(({ label, href }) => (
+                <li key={label}>
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={href}
                     className="text-muted text-sm hover:text-on-dark transition-colors duration-200"
                   >
-                    {link}
+                    {label}
                   </a>
                 </li>
               ))}
@@ -94,11 +99,11 @@ export function Footer() {
         <div className="border-t border-hairline mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-muted text-xs">
           <span>&copy; 2026 Sportech. All rights reserved.</span>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-on-dark transition-colors duration-200">
+            <a href="/privacy" className="hover:text-on-dark transition-colors duration-200">
               Privacy Policy
             </a>
             <span className="text-muted-soft" aria-hidden="true">·</span>
-            <a href="#" className="hover:text-on-dark transition-colors duration-200">
+            <a href="/terms" className="hover:text-on-dark transition-colors duration-200">
               Terms of Use
             </a>
           </div>

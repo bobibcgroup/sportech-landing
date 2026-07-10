@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 
@@ -120,7 +120,7 @@ function Lightbox({ index, onClose, onPrev, onNext }: {
 
       {/* ESC hint */}
       <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[11px] tracking-widest uppercase"
-        style={{ color: "rgba(255,255,255,0.25)" }}>
+        style={{ color: "rgba(255,255,255,0.45)" }}>
         ESC to close · ← → to navigate
       </p>
     </motion.div>
@@ -253,6 +253,9 @@ function CameraSlider() {
 }
 
 export function PatentedCamera() {
+  const povRef = useRef<HTMLDivElement>(null);
+  const povInView = useInView(povRef, { once: true, margin: "200px" });
+
   return (
     <section className="bg-canvas py-24 relative overflow-hidden" id="camera">
       <div className="absolute inset-0 pointer-events-none" style={{
@@ -294,9 +297,13 @@ export function PatentedCamera() {
             className="relative rounded-2xl overflow-hidden group"
             style={{ aspectRatio: "4/3", background: "#0d0d0d", border: "1px solid rgba(var(--color-primary-rgb),0.12)" }}
           >
-            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-              <source src="/cinematic/player-pov.mp4" type="video/mp4" />
-            </video>
+            <div ref={povRef} className="absolute inset-0">
+              {povInView && (
+                <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+                  <source src="/cinematic/player-pov.mp4" type="video/mp4" />
+                </video>
+              )}
+            </div>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
               style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 3px)" }} />
             <div className="absolute bottom-4 left-4 flex items-center gap-2">
@@ -312,7 +319,7 @@ export function PatentedCamera() {
           className="text-center mt-12 max-w-2xl mx-auto"
         >
           <p className="text-body-text leading-relaxed">
-            A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch … live, no delay. Patented technology. Extraordinarily rare. Built by us.
+            A tiny camera mounted on the jersey. Fans pick their player and watch the match from inside the pitch, live, with sub-3-second latency benchmarked in real match conditions. Patented, granted preliminary FIFA approval, and built by us.
           </p>
           <p className="text-body-text leading-relaxed mt-3">
             Fans pay to access it. Clubs earn a{" "}

@@ -9,13 +9,13 @@ import { t } from "@/lib/translations";
 
 const SPORTS = [
   { key: "football", src: "/cinematic/sport-football.jpg", fact: "4B+ global fans follow football worldwide", color: "rgba(20,80,30,0.45)" },
-  { key: "basketball", src: "/cinematic/sport-basketball.jpg", fact: "2.5B fans … the second most watched sport on earth", color: "rgba(180,70,10,0.35)" },
+  { key: "basketball", src: "/cinematic/sport-basketball.jpg", fact: "2.5B fans. The second most watched sport on earth", color: "rgba(180,70,10,0.35)" },
   { key: "tennis", src: "/cinematic/sport-tennis.jpg", fact: "1B fans across 200+ countries", color: "rgba(160,180,10,0.3)" },
   { key: "cricket", src: "/cinematic/sport-cricket.jpg", fact: "2.5B fans, dominant in South Asia and the Gulf", color: "rgba(10,50,120,0.35)" },
-  { key: "golf", src: "/cinematic/sport-golf.jpg", fact: "450M fans … the highest average income sport demographic", color: "rgba(20,100,50,0.3)" },
+  { key: "golf", src: "/cinematic/sport-golf.jpg", fact: "450M fans. The highest average income sport demographic", color: "rgba(20,100,50,0.3)" },
   { key: "swimming", src: "/cinematic/sport-swimming.jpg", fact: "2B Olympic viewers every four years", color: "rgba(0,120,160,0.35)" },
   { key: "athletics", src: "/cinematic/sport-athletics.jpg", fact: "Most-watched Olympic discipline across 200 nations", color: "rgba(160,30,20,0.3)" },
-  { key: "mma", src: "/cinematic/sport-mma.jpg", fact: "Fastest growing sport in the Gulf … UFC Arabia launched 2024", color: "rgba(80,20,100,0.35)" },
+  { key: "mma", src: "/cinematic/sport-mma.jpg", fact: "Fastest growing sport in the Gulf. UFC Arabia launched 2024", color: "rgba(80,20,100,0.35)" },
 ];
 
 function SportTile({ sport, index, name, isSelected, onSelect }: {
@@ -114,15 +114,6 @@ export function SportsScope() {
       </AnimatePresence>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.span
-          initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
-          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
-        >
-          {tx.badge}
-        </motion.span>
-
         <motion.h2
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}

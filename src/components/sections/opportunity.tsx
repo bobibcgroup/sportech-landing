@@ -31,7 +31,7 @@ function Counter({ target, prefix = "", suffix = "" }: CounterProps) {
 }
 
 const STATS = [
-  { target: 200, prefix: "$", suffix: "M+", attribution: "FC Barcelona annual digital revenue", delay: 0 },
+  { target: 220, prefix: "$", suffix: "M+", attribution: "FC Barcelona annual digital revenue, publicly reported", delay: 0 },
   { target: 35, prefix: "", suffix: "%", attribution: "Manchester United fan loyalty increase, Year 1", delay: 0.2 },
   { target: 100, prefix: "", suffix: "+", attribution: "Countries with PSG fan token holders", delay: 0.4 },
 ];
@@ -56,17 +56,6 @@ export function Opportunity() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.span
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }}
-          transition={{ duration: dur.fast, ease: ease.out }}
-          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
-        >
-          {tx.badge}
-        </motion.span>
-
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

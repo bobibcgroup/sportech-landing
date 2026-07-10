@@ -33,15 +33,6 @@ export function HowItWorks() {
   return (
     <section className="bg-canvas py-28 relative overflow-hidden" id="how-it-works">
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.span
-          initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
-          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
-        >
-          Zero Cost. Zero Risk. 100% Built.
-        </motion.span>
-
         <motion.h2
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
@@ -82,8 +73,8 @@ export function HowItWorks() {
                   <h3 className="text-on-dark font-bold text-lg mb-3 tracking-tight">{title}</h3>
                   <p className="text-body-text text-sm leading-relaxed">{body}</p>
                   {highlight && (
-                    <p className="font-bold mt-4" style={{ fontSize: 30, lineHeight: 1.15, letterSpacing: "-1px", color: "var(--color-primary)" }}>
-                      PURE UPSIDE
+                    <p className="font-bold mt-4" style={{ fontSize: 15, letterSpacing: "-0.3px", color: "var(--color-primary)" }}>
+                      Zero cost to your club. A minimum guarantee floor on your share.
                     </p>
                   )}
                 </div>

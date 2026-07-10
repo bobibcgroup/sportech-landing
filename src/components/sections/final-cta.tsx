@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
+import { useContactModal } from "@/lib/contact-modal-context";
 
 export function FinalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const { open: openContactModal } = useContactModal();
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "center center"] });
   const glowScale = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
@@ -17,7 +18,7 @@ export function FinalCTA() {
   const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
   const springY = useSpring(mouseY, { stiffness: 150, damping: 15 });
 
-  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+  function handleMouseMove(e: React.MouseEvent<HTMLButtonElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -75,7 +76,7 @@ export function FinalCTA() {
           transition={{ duration: dur.normal, delay: 0.7, ease: ease.out }}
           className="text-body-text text-base leading-relaxed max-w-lg mx-auto mb-10"
         >
-          We&apos;re bringing a select number of clubs on first. Free platform, zero risk, full feature set. Your revenue share across eight streams from day one.
+          We&apos;re bringing a select number of clubs on first. Free platform, full feature set. Core revenue streams live at launch, with the full set of eight phased in across your first year.
         </motion.p>
 
         <motion.div
@@ -86,18 +87,15 @@ export function FinalCTA() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           {/* Magnetic primary CTA */}
-          <motion.a
-            ref={buttonRef}
-            href="https://lzgo.to/demosportech"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            onClick={openContactModal}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: springX, y: springY }}
-            className="inline-flex items-center justify-center bg-primary text-on-primary text-base font-bold rounded-xl px-10 h-14 hover:bg-[#ffff80] transition-colors duration-200 whitespace-nowrap"
+            className="inline-flex items-center justify-center bg-primary text-on-primary text-base font-bold rounded-xl px-10 h-14 hover:bg-primary-active transition-colors duration-200 whitespace-nowrap cursor-pointer"
           >
             Book a Demo →
-          </motion.a>
+          </motion.button>
         </motion.div>
 
         <motion.p
@@ -105,9 +103,13 @@ export function FinalCTA() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }}
           transition={{ duration: dur.fast, delay: 1.2 }}
-          className="text-muted text-xs tracking-wider uppercase mt-8"
+          className="text-xs tracking-wider uppercase mt-8"
+          style={{ color: "rgba(255,255,255,0.5)" }}
         >
-          No cost. No catch. contact@sportech.com.sa
+          No cost to your club.{" "}
+          <a href="mailto:contact@sportech.com.sa" className="hover:text-on-dark transition-colors duration-200 underline underline-offset-2 normal-case">
+            contact@sportech.com.sa
+          </a>
         </motion.p>
       </div>
     </section>

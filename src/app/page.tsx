@@ -1,11 +1,17 @@
 import dynamic from "next/dynamic";
 import { Nav } from "@/components/sections/nav";
 import { Hero } from "@/components/sections/hero";
-import { SportsScope } from "@/components/sections/sports-scope";
+import { ProofStrip } from "@/components/sections/proof-strip";
 import { FilmGrain } from "@/components/ui/film-grain";
 
 const Opportunity = dynamic(() =>
   import("@/components/sections/opportunity").then((m) => ({ default: m.Opportunity }))
+);
+const PatentedCamera = dynamic(() =>
+  import("@/components/sections/patented-camera").then((m) => ({ default: m.PatentedCamera }))
+);
+const AppGallery = dynamic(() =>
+  import("@/components/sections/app-gallery").then((m) => ({ default: m.AppGallery }))
 );
 const HowItWorks = dynamic(() =>
   import("@/components/sections/how-it-works").then((m) => ({ default: m.HowItWorks }))
@@ -13,23 +19,23 @@ const HowItWorks = dynamic(() =>
 const PlatformFeatures = dynamic(() =>
   import("@/components/sections/platform-features").then((m) => ({ default: m.PlatformFeatures }))
 );
-const AppGallery = dynamic(() =>
-  import("@/components/sections/app-gallery").then((m) => ({ default: m.AppGallery }))
-);
-const PatentedCamera = dynamic(() =>
-  import("@/components/sections/patented-camera").then((m) => ({ default: m.PatentedCamera }))
-);
 const RevenueStreams = dynamic(() =>
   import("@/components/sections/revenue-streams").then((m) => ({ default: m.RevenueStreams }))
 );
 const RevenueSimulator = dynamic(() =>
   import("@/components/sections/revenue-simulator").then((m) => ({ default: m.RevenueSimulator }))
 );
+const SportsScope = dynamic(() =>
+  import("@/components/sections/sports-scope").then((m) => ({ default: m.SportsScope }))
+);
 const GlobalReach = dynamic(() =>
   import("@/components/sections/global-reach").then((m) => ({ default: m.GlobalReach }))
 );
 const Vision2030 = dynamic(() =>
   import("@/components/sections/vision-2030").then((m) => ({ default: m.Vision2030 }))
+);
+const FAQ = dynamic(() =>
+  import("@/components/sections/faq").then((m) => ({ default: m.FAQ }))
 );
 const FinalCTA = dynamic(() =>
   import("@/components/sections/final-cta").then((m) => ({ default: m.FinalCTA }))
@@ -45,16 +51,18 @@ export default function Home() {
       <div className="relative" style={{ zIndex: 1 }}>
       <Nav />
       <Hero />
-      <SportsScope />
+      <ProofStrip />
       <Opportunity />
+      <PatentedCamera />
+      <AppGallery />
       <HowItWorks />
       <PlatformFeatures />
-      <AppGallery />
-      <PatentedCamera />
       <RevenueStreams />
       <RevenueSimulator />
+      <SportsScope />
       <GlobalReach />
       <Vision2030 />
+      <FAQ />
       <FinalCTA />
       <Footer />
       </div>

@@ -29,15 +29,6 @@ export function GlobalReach() {
   return (
     <section className="bg-canvas py-24" id="reach">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.span
-          initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: 0.3, ease: ease.out }}
-          className="text-[12px] font-semibold tracking-widest uppercase block mb-4"
-          style={{ color: "rgba(var(--color-primary-rgb),0.6)" }}
-        >
-          Global Reach
-        </motion.span>
-
         <div className="flex flex-col lg:flex-row lg:items-start gap-12">
           <div className="lg:w-80 shrink-0">
             <motion.h2

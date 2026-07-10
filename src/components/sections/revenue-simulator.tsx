@@ -14,20 +14,28 @@ const TIERS = [
   { label: "2M+",  fans: 2_000_000 },
 ];
 
-const ACTIVE_RATIO = 0.25;
-
-const STREAMS = [
-  { key: "subscriptions", label: "Subscriptions",       gross: 4,   color: "var(--color-primary)" },
-  { key: "gifting",       label: "Live Stream Gifting", gross: 196, color: "#ff78c8" },
-  { key: "predictions",   label: "Sports Predictions",  gross: 213, color: "#a8ff78" },
-  { key: "voting",        label: "Interactive Voting",  gross: 43,  color: "#78e8ff" },
-  { key: "tickets",       label: "Tickets",             gross: 386, color: "#78c1ff" },
-  { key: "merchandise",   label: "Merchandise",         gross: 399, color: "#ffb878" },
-  { key: "giftcards",     label: "Digital Gift Cards",  gross: 178, color: "#c8a8ff" },
-  { key: "nft",           label: "NFT & Collectibles",  gross: 27,  color: "#ff9878" },
+// Three-scenario model: conservative default; base case benchmarked
+// against top-tier club app data (12-20% paid engagement).
+const SCENARIOS = [
+  { key: "conservative", label: "Conservative", rate: 0.08 },
+  { key: "base",         label: "Base Case",    rate: 0.15 },
+  { key: "upside",       label: "Upside",       rate: 0.25 },
 ];
 
-const GROSS_PER_USER = STREAMS.reduce((sum, s) => sum + s.gross, 0);
+// Per-user annual spend by stream — sums to the $30 ARPU; top 3 streams
+// (subscriptions, tickets, gifting) hold ~72% per the committed model.
+const STREAMS = [
+  { key: "subscriptions", label: "Subscriptions",       gross: 9.0, color: "var(--color-primary)" },
+  { key: "gifting",       label: "Live Stream Gifting", gross: 6.0, color: "#ff78c8" },
+  { key: "predictions",   label: "Sports Predictions",  gross: 1.8, color: "#a8ff78" },
+  { key: "voting",        label: "Interactive Voting",  gross: 0.9, color: "#78e8ff" },
+  { key: "tickets",       label: "Tickets",             gross: 6.6, color: "#78c1ff" },
+  { key: "merchandise",   label: "Merchandise",         gross: 3.6, color: "#ffb878" },
+  { key: "giftcards",     label: "Digital Gift Cards",  gross: 1.5, color: "#c8a8ff" },
+  { key: "nft",           label: "NFT & Collectibles",  gross: 0.6, color: "#ff9878" },
+];
+
+const ARPU_PER_USER = STREAMS.reduce((sum, s) => sum + s.gross, 0);
 
 function AnimatedNumber({ value }: { value: number }) {
   const mv = useMotionValue(0);
@@ -74,13 +82,16 @@ function StreamCard({ label, revenue, color, index }: {
 
 export function RevenueSimulator() {
   const [selectedTier, setSelectedTier] = useState(2);
+  const [selectedScenario, setSelectedScenario] = useState(0);
 
+  const scenario    = SCENARIOS[selectedScenario];
+  const ratePct     = Math.round(scenario.rate * 100);
   const totalFans   = TIERS[selectedTier].fans;
-  const activeUsers = Math.round(totalFans * ACTIVE_RATIO);
+  const payingUsers = Math.round(totalFans * scenario.rate);
 
   const streams = STREAMS.map(s => ({
     ...s,
-    revenue: Math.round(activeUsers * s.gross * 0.5),
+    revenue: Math.round(payingUsers * s.gross),
   }));
   const total = streams.reduce((sum, s) => sum + s.revenue, 0);
 
@@ -114,8 +125,34 @@ export function RevenueSimulator() {
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.2 }}
           className="text-body-text text-sm mb-10"
         >
-          Select your total fanbase size. Only 25% is counted as active users — the rest is upside.
+          Select your fanbase size and a scenario. The conservative case counts just 8% of fans as paying users. The base case reflects what top-tier club apps already achieve.
         </motion.p>
+
+        {/* Scenario selector */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.25, ease: ease.out }}
+          className="inline-flex rounded-lg border p-1 mb-6"
+          style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)" }}
+          role="group"
+          aria-label="Revenue scenario"
+        >
+          {SCENARIOS.map((s, i) => (
+            <button
+              key={s.key}
+              onClick={() => setSelectedScenario(i)}
+              aria-pressed={selectedScenario === i}
+              className="px-4 h-9 rounded-md text-[13px] font-semibold transition-all duration-200 cursor-pointer"
+              style={{
+                background: selectedScenario === i ? "rgba(var(--color-primary-rgb),0.12)" : "transparent",
+                color: selectedScenario === i ? "var(--color-primary)" : "rgba(255,255,255,0.45)",
+                border: `1px solid ${selectedScenario === i ? "rgba(var(--color-primary-rgb),0.35)" : "transparent"}`,
+              }}
+            >
+              {s.label} · {Math.round(s.rate * 100)}%
+            </button>
+          ))}
+        </motion.div>
 
         {/* Tier selector */}
         <motion.div
@@ -127,7 +164,8 @@ export function RevenueSimulator() {
             <button
               key={tier.label}
               onClick={() => setSelectedTier(i)}
-              className="px-5 h-10 rounded-lg text-sm font-semibold transition-all duration-200"
+              aria-pressed={selectedTier === i}
+              className="px-5 h-10 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer"
               style={{
                 background: selectedTier === i ? "var(--color-primary)" : "rgba(var(--color-primary-rgb),0.06)",
                 color: selectedTier === i ? "#0a0a0a" : "rgba(255,255,255,0.5)",
@@ -150,13 +188,13 @@ export function RevenueSimulator() {
           <div className="px-8 py-7 border-b" style={{ borderColor: "rgba(var(--color-primary-rgb),0.08)" }}>
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: "rgba(var(--color-primary-rgb),0.45)" }}>
-                Estimated example annual revenue share
+                Estimated example annual revenue
               </span>
               <span
                 className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
                 style={{ background: "rgba(var(--color-primary-rgb),0.08)", color: "rgba(var(--color-primary-rgb),0.55)", border: "1px solid rgba(var(--color-primary-rgb),0.15)" }}
               >
-                {activeUsers.toLocaleString()} active users · 25% of {TIERS[selectedTier].label}
+                {payingUsers.toLocaleString()} paying users · {ratePct}% of {TIERS[selectedTier].label}
               </span>
             </div>
             <div
@@ -177,12 +215,12 @@ export function RevenueSimulator() {
 
           {/* Per-user spend note */}
           <div className="px-6 pb-5 pt-1 border-t" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", lineHeight: 1.6 }}>
-              Each active user spends an average of{" "}
-              <span style={{ color: "rgba(255,255,255,0.5)", fontWeight: 600 }}>
-                ${GROSS_PER_USER.toLocaleString()}
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
+              Each paying user generates an average of{" "}
+              <span style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>
+                ${ARPU_PER_USER.toLocaleString()}
               </span>{" "}
-              per year across all 8 streams.
+              per year across the full stream mix as it phases in.
             </p>
           </div>
         </motion.div>
@@ -191,10 +229,11 @@ export function RevenueSimulator() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: REVEAL_MARGIN }} transition={{ duration: dur.normal, delay: 0.6 }}
           className="text-center mt-5"
-          style={{ fontSize: 11, color: "rgba(255,255,255,0.22)", lineHeight: 1.7 }}
+          style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", lineHeight: 1.7 }}
         >
-          Calculations assume 25% active user conversion. Revenue share is structured per partnership agreement.
-          Actual results vary by engagement, market, and content strategy.
+          Calculations assume the selected fan-to-paying-user rate at $30 average revenue per user per year.
+          The base case is benchmarked against top-tier club app engagement of 12 to 20%.
+          Revenue share is structured per partnership agreement. Actual results vary by engagement, market, and content strategy.
         </motion.p>
       </div>
     </section>
