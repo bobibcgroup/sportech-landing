@@ -16,7 +16,7 @@ const ITEMS = {
     },
     {
       title: "Pipeline under NDA",
-      sub: "Clubs across KSA, UAE and international markets",
+      sub: "Clubs across the USA, KSA, Turkey, Pakistan and more",
     },
   ],
   ar: [
@@ -30,7 +30,7 @@ const ITEMS = {
     },
     {
       title: "شراكات قيد التفاوض",
-      sub: "أندية في السعودية والإمارات وأسواق عالمية",
+      sub: "أندية في الولايات المتحدة والسعودية وتركيا وباكستان وغيرها",
     },
   ],
 } as const;
