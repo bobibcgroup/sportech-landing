@@ -106,7 +106,7 @@ export function BrandCustomizer() {
   const isDefaultTheme = primaryColor === "#faff69";
 
   return (
-    <div className="w-full max-w-xl mx-auto mb-12">
+    <div className="w-full">
       {/* Header */}
       <div className="mb-4">
         <p

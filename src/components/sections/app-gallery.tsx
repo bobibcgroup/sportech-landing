@@ -126,19 +126,29 @@ export function AppGallery() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: REVEAL_MARGIN }}
-          transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
-          className="text-on-dark font-bold mb-16 max-w-xl"
-          style={{ fontSize: "clamp(28px, 4vw, 48px)", lineHeight: 1.1, letterSpacing: "-2px" }}
-        >
-          {tx.heading}
-        </motion.h2>
+        {/* Header row: heading + club picker on one aligned grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_420px] gap-10 lg:gap-16 items-end mb-14">
+          <motion.h2
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: REVEAL_MARGIN }}
+            transition={{ duration: dur.slow, delay: 0.1, ease: ease.out }}
+            className="text-on-dark font-bold max-w-xl"
+            style={{ fontSize: "clamp(28px, 4vw, 48px)", lineHeight: 1.1, letterSpacing: "-2px" }}
+          >
+            {tx.heading}
+          </motion.h2>
 
-        {/* Brand customizer — club search + color picker */}
-        <BrandCustomizer />
+          {/* Brand customizer — club search + color picker */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: REVEAL_MARGIN }}
+            transition={{ duration: dur.normal, delay: 0.25, ease: ease.out }}
+          >
+            <BrandCustomizer />
+          </motion.div>
+        </div>
 
         {/* Carousel */}
         <motion.div

@@ -11,7 +11,10 @@ const TIERS = [
   { label: "250K", fans: 250_000 },
   { label: "500K", fans: 500_000 },
   { label: "1M",   fans: 1_000_000 },
-  { label: "2M+",  fans: 2_000_000 },
+  { label: "2M",   fans: 2_000_000 },
+  { label: "20M",  fans: 20_000_000 },
+  { label: "50M",  fans: 50_000_000 },
+  { label: "100M", fans: 100_000_000 },
 ];
 
 // Three-scenario model: conservative default; base case benchmarked
@@ -199,7 +202,7 @@ export function RevenueSimulator() {
             </div>
             <div
               className="font-bold"
-              style={{ fontSize: "clamp(48px, 7vw, 80px)", letterSpacing: "-4px", color: "var(--color-primary)", lineHeight: 1 }}
+              style={{ fontSize: "clamp(38px, 7vw, 80px)", letterSpacing: "-3px", color: "var(--color-primary)", lineHeight: 1 }}
             >
               <AnimatedNumber value={total} />
             </div>

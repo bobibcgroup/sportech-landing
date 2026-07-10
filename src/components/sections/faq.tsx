@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
 import { ease, dur, REVEAL_MARGIN } from "@/lib/animation";
 import { useLanguage } from "@/lib/language-context";
 
@@ -69,6 +71,9 @@ export function FAQ() {
   const { lang } = useLanguage();
   const tx = COPY[lang];
 
+  const [active, setActive] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState<number | null>(0);
+
   return (
     <section className="bg-canvas py-28 relative overflow-hidden" id="faq">
       <div className="max-w-7xl mx-auto px-6">
@@ -83,23 +88,108 @@ export function FAQ() {
           {tx.heading}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
-          {tx.items.map((item, i) => (
-            <motion.div
-              key={item.q}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: REVEAL_MARGIN }}
-              transition={{ duration: dur.normal, delay: (i % 2) * 0.08, ease: ease.out }}
-            >
-              <h3 className="text-on-dark font-semibold text-base tracking-tight mb-2">
-                {item.q}
-              </h3>
-              <p className="text-body-text text-sm leading-relaxed max-w-[52ch]">
-                {item.a}
-              </p>
-            </motion.div>
-          ))}
+        {/* Desktop: question rail + animated answer panel */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: REVEAL_MARGIN }}
+          transition={{ duration: dur.normal, delay: 0.15, ease: ease.out }}
+          className="hidden md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 items-start"
+        >
+          <div role="tablist" aria-label="FAQ questions" className="flex flex-col">
+            {tx.items.map((item, i) => (
+              <button
+                key={item.q}
+                role="tab"
+                aria-selected={active === i}
+                onClick={() => setActive(i)}
+                className="text-start py-4 ps-5 pe-4 border-s-2 transition-all duration-200 cursor-pointer group"
+                style={{
+                  borderColor: active === i ? "var(--color-primary)" : "rgba(255,255,255,0.08)",
+                  background: active === i ? "rgba(var(--color-primary-rgb),0.04)" : "transparent",
+                }}
+              >
+                <span
+                  className="text-[15px] font-semibold tracking-tight transition-colors duration-200 group-hover:text-white"
+                  style={{ color: active === i ? "#ffffff" : "rgba(255,255,255,0.5)" }}
+                >
+                  {item.q}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div
+            className="rounded-2xl border p-10 min-h-[260px]"
+            style={{
+              background: "rgba(10,10,10,0.6)",
+              borderColor: "rgba(var(--color-primary-rgb),0.12)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25, ease: ease.out }}
+              >
+                <h3 className="text-on-dark font-bold text-xl tracking-tight mb-4">
+                  {tx.items[active].q}
+                </h3>
+                <p className="text-body-text text-[15px] leading-relaxed max-w-[58ch]">
+                  {tx.items[active].a}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+
+        {/* Mobile: tap-to-expand rows */}
+        <div className="md:hidden">
+          {tx.items.map((item, i) => {
+            const isOpen = mobileOpen === i;
+            return (
+              <div key={item.q} className="border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+                <button
+                  onClick={() => setMobileOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center justify-between gap-4 py-5 text-start cursor-pointer"
+                >
+                  <span
+                    className="text-[15px] font-semibold tracking-tight transition-colors duration-200"
+                    style={{ color: isOpen ? "#ffffff" : "rgba(255,255,255,0.6)" }}
+                  >
+                    {item.q}
+                  </span>
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2, ease: ease.out }}
+                    className="shrink-0"
+                    style={{ color: isOpen ? "var(--color-primary)" : "rgba(255,255,255,0.35)" }}
+                  >
+                    <Plus size={18} />
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: ease.out }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-body-text text-sm leading-relaxed pb-5">
+                        {item.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
