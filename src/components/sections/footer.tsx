@@ -100,6 +100,10 @@ export function Footer() {
           <span>&copy; 2026 Sportech. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <a href="/privacy" className="hover:text-on-dark transition-colors duration-200">
+              Privacy Policy
+            </a>
+            <span className="text-muted-soft" aria-hidden="true">·</span>
+            <a href="/refund-policy" className="hover:text-on-dark transition-colors duration-200">
               Payment &amp; Refund Policy
             </a>
             <span className="text-muted-soft" aria-hidden="true">·</span>
