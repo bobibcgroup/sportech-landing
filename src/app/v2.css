@@ -230,6 +230,13 @@ html {
 #v2 .sport-cap b { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--display); letter-spacing: 0.04em; text-transform: uppercase; }
 #v2 .sport-cap span { font: 400 12.5px/1.4 var(--mono); letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; text-align: right; }
 
+/* merged configurator (corporate) */
+#v2 .cfg { margin-top: 48px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: clamp(24px, 4vw, 60px); align-items: start; margin-bottom: 26px; }
+#v2 .cfg .sport-tabs, #v2 .cfg .swatches { margin-top: 0; }
+#v2 .sport-view { position: relative; }
+#v2 .sport-view .tint { position: absolute; inset: 0; background: var(--accent); opacity: 0.08; mix-blend-mode: screen; pointer-events: none; transition: background 0.3s; }
+@media (max-width: 920px) { #v2 .cfg { grid-template-columns: 1fr; } }
+
 /* OS wall */
 #v2 .wall-scene { background: var(--bg-2); border-block: 1px solid var(--line); }
 #v2 .wall { margin-top: 56px; display: flex; flex-wrap: wrap; gap: 12px; }

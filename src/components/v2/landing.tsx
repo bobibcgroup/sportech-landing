@@ -483,7 +483,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <img className="wordmark" src="/brand/wordmark-white.png" alt="Sportech" />
             <div className="nav-links">
               {corporate && <a href="#company">Company</a>}
-              <a href="#partners">Partners</a><a href="#cases">Proof</a><a href="#os">Platform</a><a href="#brand">Your Brand</a><a href="#sim">Simulator</a>
+              <a href="#partners">Partners</a><a href="#cases">Proof</a><a href="#os">Platform</a><a href={corporate ? "#rail" : "#brand"}>Your Brand</a><a href="#sim">Simulator</a>
             </div>
             <button className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openContactModal}>Book a Demo</button>
           </div>
@@ -650,6 +650,59 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </div>
       </section>
 
+      {corporate && (
+        <section className="sec" id="rail">
+          <div className="wrap">
+            <h2 className="h2 dh rv">ANY SPORT. <span className="ghost">ANY COLORS.</span> <span className="volt">ALL YOURS.</span></h2>
+            <p className="lede rv">Examples, not limits: if it has fans, it runs on Sportech, under your badge. Pick a sport and a color. The whole page follows.</p>
+            <div className="cfg rv">
+              <div>
+                <div className="ctl-lab">Sport</div>
+                <div className="sport-tabs" role="tablist" aria-label="Sport">
+                  <button className="ctab" role="tab" aria-selected="true" data-sp="0">Football</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="1">Basketball</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="2">Motorsport</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="3">Esports</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="4">Cricket</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="5">Combat</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="6">Tennis</button>
+                  <button className="ctab" role="tab" aria-selected="false" data-sp="7">NFL</button>
+                  <button className="ctab ctab-yours" role="tab" aria-selected="false" data-sp="8">+ Yours</button>
+                </div>
+              </div>
+              <div>
+                <div className="ctl-lab">Club color</div>
+                <div className="swatches" role="group" aria-label="Club color">
+                  <button className="sw" style={{ background: "#e8f840" }} data-c="#e8f840" aria-pressed="true" aria-label="Volt yellow" />
+                  <button className="sw" style={{ background: "#2f6bff" }} data-c="#2f6bff" aria-pressed="false" aria-label="Royal blue" />
+                  <button className="sw" style={{ background: "#e23a3a" }} data-c="#e23a3a" aria-pressed="false" aria-label="Crimson" />
+                  <button className="sw" style={{ background: "#1fbf6b" }} data-c="#1fbf6b" aria-pressed="false" aria-label="Emerald" />
+                  <button className="sw" style={{ background: "#a855f7" }} data-c="#a855f7" aria-pressed="false" aria-label="Violet" />
+                  <label className="sw sw-custom" aria-label="Custom color"><input type="color" id="customc" defaultValue="#e8f840" /></label>
+                </div>
+                <p className="studio-live" id="livetag">THEME: VOLT</p>
+              </div>
+            </div>
+            <div className="sport-stage rv" id="spStage">
+              <div className="sport-view">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img id="spImg" src="/sportscreens/soccer.webp" alt="Sportech football app screens" />
+                <div className="sport-yours" id="spYours" hidden>
+                  <div>
+                    <p className="dh sy-big">YOUR SPORT <span className="volt">HERE.</span></p>
+                    <p className="sy-sub">Leagues, federations, racing teams, esports orgs, creator collectives. If fans show up, revenue does too.</p>
+                  </div>
+                </div>
+                <div className="tint" aria-hidden="true" />
+              </div>
+              <div className="sport-cap"><b id="spName">Football</b><span id="spFeat">Live + Gifting</span></div>
+            </div>
+            <p className="fine rv">Already have an app? We integrate into it. API first.</p>
+          </div>
+        </section>
+      )}
+
+      {!corporate && (
       <section className="sec" id="rail">
         <div className="wrap">
           <h2 className="h2 dh rv">ANY SPORT. <span className="ghost">ANY STAGE.</span> <span className="volt">ANY FANBASE.</span></h2>
@@ -678,6 +731,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           </div>
         </div>
       </section>
+      )}
 
       <section className="sec wall-scene" id="os">
         <div className="wrap">
@@ -742,6 +796,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
 
       {corporate && saudiSection}
 
+      {!corporate && (
       <section className="sec chan-scene" id="brand" style={{ borderTop: 0 }}>
         <div className="wrap">
           <h2 className="h2 dh rv">YOUR BADGE. <span className="volt">YOUR COLORS.</span></h2>
@@ -771,6 +826,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           </div>
         </div>
       </section>
+      )}
 
       {corporate && (
         <section className="sec" style={{ paddingBottom: 0 }}>
