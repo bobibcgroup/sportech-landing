@@ -117,8 +117,9 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     const REGIONS = [
       { t: "AND SAUDI FANS OUT-SPEND THEM ALL", s: [["$308", "per-capita gaming spend in KSA, 3x the MENA average"], ["$125M", "KSA games live-streaming market, 2025"], ["68%", "of Saudi gamers attend live esports events"]] },
       { t: "AMERICA VOTES, PLAYS AND PAYS", s: [["3.4M", "fan votes for a single NBA All-Star in one season"], ["71.8M", "career All-Star votes cast for LeBron James"], ["60K+", "US creators earn real income from live gifts"]] },
-      { t: "EUROPE PAYS FOR A SAY", s: [["11.2M", "Fantasy Premier League managers, every match week"], ["$400M+", "club revenue from fan tokens, led by Europe's elite clubs"], ["$350M+", "spent by fans on those tokens"]] },
-      { t: "ASIA SETS THE SCALE", s: [["2.5B+", "cricket fans, the overwhelming majority in Asia"], ["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["$10M", "gifted per day on TikTok Live worldwide"]] },
+      { t: "EUROPE PAYS TO PLAY A PART", s: [["11.2M", "Fantasy Premier League managers, every match week"], ["12-20%", "of Premier League club-app users pay to engage"], ["$400M+", "club revenue from fan tokens, led by Europe's elite clubs"]] },
+      { t: "KOREA WROTE THE PLAYBOOK", s: [["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["$1,200", "yearly spend of a K-pop superfan, versus about $120 for Spotify"], ["2x+", "owned fan platforms out-earn social channels"]] },
+      { t: "EVERYWHERE, FANS ARE PAYING", s: [["$10M", "gifted per day on TikTok Live"], ["245M", "fantasy sports players in a $31B market"], ["68%", "of TikTok users have tried live gifting"]] },
     ];
     const rgTitle = $("#rgTitle"), rgAnchor = $(".anchor");
     function renderRegion(i: number) {
@@ -665,11 +666,12 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             </div>
           </div>
           <div className="anchor rv">
-            <div className="anchor-tabs" role="tablist" aria-label="Region">
+            <div className="anchor-tabs" role="tablist" aria-label="Market">
               <button className="cbtn" role="tab" aria-pressed="true" data-rg="0">KSA</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="1">North America</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="2">Europe</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="3">Asia</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="1">USA</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="2">UK &amp; Europe</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="3">Korea</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="4">Worldwide</button>
             </div>
             <span className="ttl dh" id="rgTitle">AND SAUDI FANS OUT-SPEND THEM ALL</span>
             <div className="as"><b id="rgB0">$308</b><p id="rgP0">per-capita gaming spend in KSA, 3x the MENA average</p></div>
