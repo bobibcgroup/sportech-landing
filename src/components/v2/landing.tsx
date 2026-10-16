@@ -479,9 +479,13 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <h1 className="dh">
               <span className="rv">YOUR CLUB&apos;S</span>
               <span className="ghost rv">REVENUE.</span>
-              <span className="volt rv">UNLOCKED.</span>
+              <span className="volt rv">{corporate ? "ENGINEERED." : "UNLOCKED."}</span>
             </h1>
-            <p className="hero-sub rv">Your fans already spend on their passion. Just not with you.</p>
+            <p className="hero-sub rv">
+              {corporate
+                ? "Fans spend on their passion every day. Sportech builds the engine that brings it home to your club."
+                : "Your fans already spend on their passion. Just not with you."}
+            </p>
             <div className="hero-cta rv">
               <button className="btn btn-primary" onClick={openContactModal}>Book a Demo</button>
               <a className="btn btn-ghost" href="#sim">Run Your Numbers</a>
