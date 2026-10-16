@@ -441,6 +441,27 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
+  const saudiSection = (
+    <section className="saudi" id="saudi">
+      <div className="wrap">
+        <div className="kicker rv">Saudi Tech</div>
+        <h2 className="h2 dh rv">BUILT IN RIYADH. <span className="volt">PLAYED EVERYWHERE.</span></h2>
+        <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here, built for every fanbase on earth.</p>
+        <div className="st-strip rv">
+          <div className="st-cell">
+            <span className="st-tile st-blur">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="st-logo" src="/brand/sauditech.png" alt="National certification pending" />
+            </span>
+            <span className="t"><b>Ink drying</b><small>A national certification, days away</small></span>
+          </div>
+          <div className="st-cell"><span className="t"><b>KSA Patent</b><small>Granted · PCT filings underway</small></span></div>
+          <div className="st-cell"><span className="t"><b>Vision 2030</b><small>Aligned</small></span></div>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <main id="v2" ref={rootRef}>
       <div className="grain" aria-hidden="true" />
@@ -716,6 +737,8 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </div>
       </section>
 
+      {corporate && saudiSection}
+
       <section className="sec chan-scene" id="brand" style={{ borderTop: 0 }}>
         <div className="wrap">
           <h2 className="h2 dh rv">YOUR BADGE. <span className="volt">YOUR COLORS.</span></h2>
@@ -840,24 +863,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </section>
       )}
 
-      <section className="saudi" id="saudi">
-        <div className="wrap">
-          <div className="kicker rv">Saudi Tech</div>
-          <h2 className="h2 dh rv">BUILT IN RIYADH. <span className="volt">PLAYED EVERYWHERE.</span></h2>
-          <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here, built for every fanbase on earth.</p>
-          <div className="st-strip rv">
-            <div className="st-cell">
-              <span className="st-tile st-blur">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="st-logo" src="/brand/sauditech.png" alt="National certification pending" />
-              </span>
-              <span className="t"><b>Ink drying</b><small>A national certification, days away</small></span>
-            </div>
-            <div className="st-cell"><span className="t"><b>KSA Patent</b><small>Granted · PCT filings underway</small></span></div>
-            <div className="st-cell"><span className="t"><b>Vision 2030</b><small>Aligned</small></span></div>
-          </div>
-        </div>
-      </section>
+      {!corporate && saudiSection}
 
       <section className="cta-scene" id="cta">
         <div className="bgimg" aria-hidden="true">
