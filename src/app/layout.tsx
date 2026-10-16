@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Inter_Tight, Cairo } from "next/font/google";
+import { Inter, Inter_Tight, Cairo, Anton, Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -23,10 +23,31 @@ const cairo = Cairo({
   display: "swap",
 });
 
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+  display: "swap",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex",
+  display: "swap",
+});
+
 const SITE_URL = "https://sportech.com.sa";
-const TITLE = "Sportech — The Fan Engagement Infrastructure";
+const TITLE = "Sportech — The Fan Revenue Engine for Sports Clubs";
 const DESCRIPTION =
-  "Patented player camera technology, live predictions, fan voting, AR match view, and more. Zero cost to your club. Earn your share of every dollar your fans spend. Launch in days.";
+  "One platform, twelve revenue engines: patented Player POV Camera, live gifting, memberships, skill-based predictions and more. Zero upfront cost, white-labeled under your club's brand. Saudi Tech, built in Riyadh. We earn when you earn.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -116,7 +137,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${interTight.variable} ${cairo.variable} h-full antialiased`}
+      className={`${inter.variable} ${interTight.variable} ${cairo.variable} ${anton.variable} ${archivo.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas text-on-dark">
         <script

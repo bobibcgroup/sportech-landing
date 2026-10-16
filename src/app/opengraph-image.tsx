@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Sportech — The Fan Engagement Infrastructure";
+export const alt = "Sportech — The Fan Revenue Engine for Sports Clubs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -103,25 +102,27 @@ export default function OgImage() {
               textTransform: "uppercase",
             }}
           >
-            Fan Engagement Platform
+            The Fan Revenue Engine
           </span>
         </div>
 
         {/* Headline */}
         <div
           style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 16,
             fontSize: 64,
             fontWeight: 800,
             color: "#ffffff",
             lineHeight: 1.1,
             letterSpacing: "-2px",
             marginBottom: 28,
-            maxWidth: 760,
+            maxWidth: 860,
           }}
         >
-          Your club.{" "}
-          <span style={{ color: "#faff69" }}>Your revenue.</span>
-          {" "}Built in days.
+          <span>Your club&apos;s revenue.</span>
+          <span style={{ color: "#faff69" }}>Unlocked.</span>
         </div>
 
         {/* Sub */}
@@ -134,13 +135,13 @@ export default function OgImage() {
             marginBottom: 48,
           }}
         >
-          Patented player camera · Live predictions · Fan voting · AR match view.
-          Zero cost. Earn your share of every dollar your fans spend.
+          One platform, twelve revenue engines. Patented Player POV Camera,
+          live gifting, memberships, predictions and more. We earn when you earn.
         </div>
 
         {/* Pills */}
         <div style={{ display: "flex", gap: 12 }}>
-          {["Zero Platform Cost", "Your Revenue Share", "Launch in Days"].map((pill) => (
+          {["$0 Upfront", "Revenue Share", "Your Brand", "Live in Weeks"].map((pill) => (
             <div
               key={pill}
               style={{
