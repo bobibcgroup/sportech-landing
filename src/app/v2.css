@@ -150,8 +150,13 @@ html {
 #v2 .flap.claim .st { animation: v2pulseQ 2.2s ease-in-out infinite; }
 #v2 .flap.claim { grid-template-columns: max-content 1fr max-content; }
 @media (max-width: 560px) {
+  #v2 .sboard-hd { flex-direction: column; align-items: flex-start; gap: 7px; padding: 14px 18px; }
+  #v2 .flap { grid-template-columns: 1fr max-content; gap: 12px; padding: 14px 18px; }
   #v2 .flap .no { display: none; }
-  #v2 .flap { gap: 14px; padding: 14px 18px; }
+  #v2 .flap .st { font-size: 12px; padding: 8px 12px 7px; }
+  #v2 .flap.claim { grid-template-columns: max-content 1fr; row-gap: 12px; }
+  #v2 .flap.claim .q { width: 38px; height: 44px; }
+  #v2 .flap.claim .st { grid-column: 1 / -1; justify-self: stretch; text-align: center; font-size: 15px; letter-spacing: 0.12em; padding: 13px 14px 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   #v2 .flap { opacity: 1; transform: none; }
