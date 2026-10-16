@@ -52,7 +52,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How is the revenue share structured?",
-    a: "Per partnership, with a minimum guarantee floor for the club. Full commercial terms are set out in the agreement.",
+    a: "Per partnership. Full commercial terms are set out in the agreement.",
   },
 ];
 
@@ -100,6 +100,7 @@ export function V2Landing() {
       const c = CH[i];
       if (!chBig || !chCap || !chSrc || !chModel || !chProof || !panel) return;
       chBig.textContent = c.big; chCap.textContent = c.cap; chSrc.textContent = c.src; chModel.textContent = c.model;
+      chBig.style.fontSize = c.big.length >= 7 ? "clamp(52px,6.6vw,112px)" : c.big.length >= 6 ? "clamp(58px,7.8vw,136px)" : "";
       chProof.innerHTML = c.proof.map((p) => '<div class="cpr"><b class="dh">' + p[0] + "</b><p>" + p[1] + "</p></div>").join("");
       if (!reduce) gsap.fromTo(panel, { opacity: 0.35, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" });
     }
@@ -122,19 +123,25 @@ export function V2Landing() {
       { n: "Combat", f: "Smart Ticketing", img: "/sportscreens/martialarts.webp" },
       { n: "Tennis", f: "Loyalty & Rewards", img: "/sportscreens/tennis.webp" },
       { n: "NFL", f: "Club Store", img: "/sportscreens/nfl.webp" },
+      { n: "Your Sport", f: "Any fanbase on earth", img: "" },
     ];
-    SPORTS.forEach((s) => { const im = new Image(); im.src = s.img; });
-    const spImg = $<HTMLImageElement>("#spImg"), spName = $("#spName"), spFeat = $("#spFeat"), spStage = $("#spStage");
+    SPORTS.forEach((s) => { if (s.img) { const im = new Image(); im.src = s.img; } });
+    const spImg = $<HTMLImageElement>("#spImg"), spName = $("#spName"), spFeat = $("#spFeat"), spStage = $("#spStage"), spYours = $("#spYours");
     let spIdx = 0, spLock = false;
     function showSport(i: number) {
       spIdx = i;
       $$("#rail .ctab").forEach((x, j) => x.setAttribute("aria-selected", j === i ? "true" : "false"));
-      if (!spImg || !spName || !spFeat) return;
-      spImg.src = SPORTS[i].img;
-      spImg.alt = "Sportech " + SPORTS[i].n + " app screens";
+      if (!spImg || !spName || !spFeat || !spYours) return;
+      const isYours = !SPORTS[i].img;
+      spImg.hidden = isYours;
+      spYours.hidden = !isYours;
+      if (!isYours) {
+        spImg.src = SPORTS[i].img;
+        spImg.alt = "Sportech " + SPORTS[i].n + " app screens";
+      }
       spName.textContent = SPORTS[i].n;
       spFeat.textContent = SPORTS[i].f;
-      if (!reduce) gsap.fromTo(spImg, { opacity: 0.3 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+      if (!reduce) gsap.fromTo(isYours ? spYours : spImg, { opacity: 0.3 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
     }
     $$("#rail .ctab").forEach((t) => {
       t.addEventListener("click", () => { spLock = true; showSport(parseInt((t as HTMLElement).dataset.sp || "0", 10)); });
@@ -261,7 +268,9 @@ export function V2Landing() {
         if (v) v.textContent = "$" + fmt(active * SPLIT[i].v);
       });
       if (!elTotal) return;
-      if (!animate || reduce) { elTotal.textContent = "$" + fmt(total); shownTotal = total; return; }
+      const totalStr = "$" + fmt(total);
+      elTotal.style.fontSize = totalStr.length >= 12 ? "clamp(36px,4.4vw,68px)" : totalStr.length >= 11 ? "clamp(42px,5.2vw,84px)" : "clamp(48px,7vw,108px)";
+      if (!animate || reduce) { elTotal.textContent = totalStr; shownTotal = total; return; }
       const o = { v: shownTotal };
       gsap.to(o, { v: total, duration: 0.9, ease: "power3.out", onUpdate: () => { elTotal.textContent = "$" + fmt(o.v); }, onComplete: () => { shownTotal = total; } });
     }
@@ -459,7 +468,7 @@ export function V2Landing() {
             </div>
           </div>
           <div className="feed-card rv">
-            <div className="feed-head"><i />Live on Sportech — Matchday</div>
+            <div className="feed-head"><i />Live on your club app — Matchday</div>
             <div className="feed-rows" id="feedRows" />
             <div className="feed-total"><span>This match so far</span><b id="feedTotal">$12,418</b></div>
             <div className="feed-note">Illustrative simulation</div>
@@ -522,8 +531,8 @@ export function V2Landing() {
 
       <section className="sec" id="rail">
         <div className="wrap">
-          <h2 className="h2 dh rv"><span className="ghost">THE CLUB,</span> IN THEIR <span className="volt">POCKET.</span></h2>
-          <p className="lede rv">One engine under your badge, tuned for every sport. Pick one.</p>
+          <h2 className="h2 dh rv">ANY SPORT. <span className="ghost">ANY STAGE.</span> <span className="volt">ANY FANBASE.</span></h2>
+          <p className="lede rv">One engine under your badge. These are examples, not limits: if it has fans, it runs on Sportech.</p>
           <div className="sport-tabs rv" role="tablist" aria-label="Sport">
             <button className="ctab" role="tab" aria-selected="true" data-sp="0">Football</button>
             <button className="ctab" role="tab" aria-selected="false" data-sp="1">Basketball</button>
@@ -533,10 +542,17 @@ export function V2Landing() {
             <button className="ctab" role="tab" aria-selected="false" data-sp="5">Combat</button>
             <button className="ctab" role="tab" aria-selected="false" data-sp="6">Tennis</button>
             <button className="ctab" role="tab" aria-selected="false" data-sp="7">NFL</button>
+            <button className="ctab ctab-yours" role="tab" aria-selected="false" data-sp="8">+ Yours</button>
           </div>
           <div className="sport-stage rv" id="spStage">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img id="spImg" src="/sportscreens/soccer.webp" alt="Sportech football app screens" />
+            <div className="sport-yours" id="spYours" hidden>
+              <div>
+                <p className="dh sy-big">YOUR SPORT <span className="volt">HERE.</span></p>
+                <p className="sy-sub">Leagues, federations, racing teams, esports orgs, creator collectives. If fans show up, revenue does too.</p>
+              </div>
+            </div>
             <div className="sport-cap"><b id="spName">Football</b><span id="spFeat">Live + Gifting</span></div>
           </div>
         </div>
@@ -693,8 +709,10 @@ export function V2Landing() {
           <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here, built for every fanbase on earth.</p>
           <div className="st-strip rv">
             <div className="st-cell">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="st-logo" src="/brand/sauditech.png" alt="Saudi Tech" />
+              <span className="st-tile">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="st-logo" src="/brand/sauditech.png" alt="Saudi Tech" />
+              </span>
               <span className="t"><small>National technology mark</small></span>
             </div>
             <div className="st-cell"><span className="t"><b>KSA Patent</b><small>Granted · PCT filings underway</small></span></div>
