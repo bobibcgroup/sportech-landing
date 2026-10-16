@@ -119,6 +119,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       { t: "AMERICA VOTES, PLAYS AND PAYS", s: [["3.4M", "fan votes for a single NBA All-Star in one season"], ["71.8M", "career All-Star votes cast for LeBron James"], ["60K+", "US creators earn real income from live gifts"]] },
       { t: "EUROPE PAYS TO PLAY A PART", s: [["11.2M", "Fantasy Premier League managers, every match week"], ["12-20%", "of Premier League club-app users pay to engage"], ["$400M+", "club revenue from fan tokens, led by Europe's elite clubs"]] },
       { t: "KOREA WROTE THE PLAYBOOK", s: [["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["$1,200", "yearly spend of a K-pop superfan, versus about $120 for Spotify"], ["2x+", "owned fan platforms out-earn social channels"]] },
+      { t: "CRICKET IS ITS OWN ECONOMY", s: [["2.5B+", "cricket fans worldwide, the overwhelming majority in South Asia"], ["1B+", "viewers reached by a single IPL season, TV and digital"], ["200M+", "registered players on India's biggest fantasy cricket platform"]] },
       { t: "EVERYWHERE, FANS ARE PAYING", s: [["$10M", "gifted per day on TikTok Live"], ["245M", "fantasy sports players in a $31B market"], ["68%", "of TikTok users have tried live gifting"]] },
     ];
     const rgTitle = $("#rgTitle"), rgAnchor = $(".anchor");
@@ -671,7 +672,8 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
               <button className="cbtn" role="tab" aria-pressed="false" data-rg="1">USA</button>
               <button className="cbtn" role="tab" aria-pressed="false" data-rg="2">UK &amp; Europe</button>
               <button className="cbtn" role="tab" aria-pressed="false" data-rg="3">Korea</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="4">Worldwide</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="4">India &amp; Pakistan</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="5">Worldwide</button>
             </div>
             <span className="ttl dh" id="rgTitle">AND SAUDI FANS OUT-SPEND THEM ALL</span>
             <div className="as"><b id="rgB0">$308</b><p id="rgP0">per-capita gaming spend in KSA, 3x the MENA average</p></div>
