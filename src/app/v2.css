@@ -129,7 +129,8 @@ html {
 #v2 .psec.on .flap:nth-child(5) { animation-delay: 1.9s; }
 #v2 .psec.on .flap:nth-child(6) { animation-delay: 2.25s; }
 #v2 .psec.on .flap:nth-child(7) { animation-delay: 2.6s; }
-#v2 .psec.on .flap:nth-child(8) { animation-delay: 3.1s; }
+#v2 .psec.on .flap:nth-child(8) { animation-delay: 2.95s; }
+#v2 .psec.on .flap:nth-child(9) { animation-delay: 3.4s; }
 @keyframes v2flapIn { to { opacity: 1; transform: rotateX(0); } }
 @keyframes v2shimmer { to { transform: translateX(100%); } }
 @keyframes v2pulseQ { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 10%, transparent); } }
@@ -139,10 +140,11 @@ html {
 #v2 .flap .st { font: 400 13px/1 var(--display); letter-spacing: 0.1em; padding: 8px 14px 7px; border-radius: 7px; background: var(--accent); color: var(--accent-ink); transition: background 0.3s, color 0.3s; white-space: nowrap; }
 #v2 .flap.nda { position: relative; overflow: hidden; }
 #v2 .flap.nda .st { background: rgba(255, 255, 255, 0.06); color: var(--ink-faint); border: 1px solid var(--line); }
-#v2 .flap.nda .blk { display: inline-block; height: 15px; width: min(170px, 38vw); border-radius: 4px; background: repeating-linear-gradient(90deg, rgba(238, 241, 246, 0.16) 0 26px, rgba(238, 241, 246, 0.05) 26px 34px); filter: blur(1.5px); }
+#v2 .flap .blk { display: inline-block; height: 15px; width: min(170px, 38vw); border-radius: 4px; background: repeating-linear-gradient(90deg, rgba(238, 241, 246, 0.16) 0 26px, rgba(238, 241, 246, 0.05) 26px 34px); filter: blur(1.5px); margin-bottom: 4px; }
 #v2 .flap.nda::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(238, 241, 246, 0.05) 50%, transparent 65%); transform: translateX(-100%); animation: v2shimmer 3s ease-in-out infinite; }
 #v2 .flap.nda:nth-child(6)::after { animation-delay: 0.7s; }
 #v2 .flap.nda:nth-child(7)::after { animation-delay: 1.4s; }
+#v2 .flap.nda:nth-child(8)::after { animation-delay: 2.1s; }
 #v2 .flap.claim { border-bottom: 0; cursor: pointer; background: color-mix(in srgb, var(--accent) 5%, transparent); transition: background 0.25s; }
 #v2 .flap.claim:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 #v2 .flap.claim .q { width: 42px; height: 48px; border: 1.5px dashed color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 10px; display: grid; place-items: center; font: 400 19px var(--display); color: var(--accent); animation: v2pulseQ 2.2s ease-in-out infinite; transition: color 0.3s, border-color 0.3s; }
@@ -344,8 +346,12 @@ html {
 #v2 .st-strip { margin-top: 48px; display: inline-flex; flex-wrap: wrap; align-items: stretch; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07); overflow: hidden; }
 #v2 .st-cell { display: flex; align-items: center; gap: 16px; padding: 20px 28px; border-left: 1px solid var(--line); }
 #v2 .st-cell:first-child { border-left: 0; }
-#v2 .st-tile { flex: none; background: #fff; border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; justify-content: center; }
+#v2 .st-tile { flex: none; background: #fff; border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 #v2 .st-logo { height: 96px; width: auto; display: block; }
+#v2 .st-blur { position: relative; }
+#v2 .st-blur img { filter: blur(7px); opacity: 0.85; }
+#v2 .st-blur::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%); transform: translateX(-100%); animation: v2shimmer 2.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { #v2 .st-blur::after { animation: none; } }
 #v2 .st-cell .t b { display: block; font: 400 16px/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; }
 #v2 .st-cell .t small { display: block; margin-top: 5px; font: 400 11px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
 @media (max-width: 700px) {

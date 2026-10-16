@@ -517,17 +517,17 @@ export function V2Landing() {
             </div>
             <div className="flap">
               <span className="no">01</span>
-              <span><b>Al-Nassr</b><small>Tier 1 Football · Activation Q4</small></span>
+              <span><span className="blk" style={{ width: "min(150px, 34vw)" }} /><small>Tier 1 Football Club · Activation Q4</small></span>
               <span className="st">SIGNED</span>
             </div>
             <div className="flap">
               <span className="no">02</span>
-              <span><b>Al-Balad</b><small>Football Club</small></span>
+              <span><span className="blk" style={{ width: "min(118px, 28vw)" }} /><small>Football Club</small></span>
               <span className="st">SIGNED</span>
             </div>
             <div className="flap">
               <span className="no">03</span>
-              <span><b>POWR</b><small>Esports Organization</small></span>
+              <span><span className="blk" style={{ width: "min(96px, 24vw)" }} /><small>Esports Organization</small></span>
               <span className="st">SIGNED</span>
             </div>
             <div className="flap nda">
@@ -544,6 +544,11 @@ export function V2Landing() {
               <span className="no">06</span>
               <span><span className="blk" style={{ width: "min(190px, 42vw)" }} /><small>Combat Sports · Under NDA</small></span>
               <span className="st">INKING</span>
+            </div>
+            <div className="flap nda">
+              <span className="no">07</span>
+              <span><span className="blk" style={{ width: "min(140px, 32vw)" }} /><small>Camel Racing · In talks</small></span>
+              <span className="st">IN TALKS</span>
             </div>
             <button type="button" className="flap claim" id="claimRow">
               <span className="q">?</span>
@@ -778,11 +783,11 @@ export function V2Landing() {
           <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here, built for every fanbase on earth.</p>
           <div className="st-strip rv">
             <div className="st-cell">
-              <span className="st-tile">
+              <span className="st-tile st-blur">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="st-logo" src="/brand/sauditech.png" alt="Saudi Tech" />
+                <img className="st-logo" src="/brand/sauditech.png" alt="National certification pending" />
               </span>
-              <span className="t"><small>National technology mark</small></span>
+              <span className="t"><b>Ink drying</b><small>A national certification, days away</small></span>
             </div>
             <div className="st-cell"><span className="t"><b>KSA Patent</b><small>Granted · PCT filings underway</small></span></div>
             <div className="st-cell"><span className="t"><b>Vision 2030</b><small>Aligned</small></span></div>
