@@ -446,7 +446,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       <div className="wrap">
         <div className="kicker rv">Saudi Tech</div>
         <h2 className="h2 dh rv">BUILT IN RIYADH. <span className="volt">PLAYED EVERYWHERE.</span></h2>
-        <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here, built for every fanbase on earth.</p>
+        <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here.</p>
         <div className="st-strip rv">
           <div className="st-cell">
             <span className="st-tile st-blur">
@@ -482,6 +482,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="wordmark" src="/brand/wordmark-white.png" alt="Sportech" />
             <div className="nav-links">
+              {corporate && <a href="#company">Company</a>}
               <a href="#partners">Partners</a><a href="#cases">Proof</a><a href="#os">Platform</a><a href="#brand">Your Brand</a><a href="#sim">Simulator</a>
             </div>
             <button className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openContactModal}>Book a Demo</button>
@@ -531,7 +532,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <h2 className="h2 dh rv">WE BUILD THE REVENUE <span className="volt">ENGINE OF SPORT.</span></h2>
             <p className="lede rv">Sportech is a Saudi technology company, now a closed joint-stock company, that designs, builds, operates and funds fan revenue infrastructure for clubs and leagues. One platform, twelve income streams, under your brand.</p>
             <div className="cfacts">
-              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Built in Riyadh from day one.</p></div>
+              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Saudi from day one.</p></div>
               <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
               <div className="fact rv"><div className="big dh">JSC</div><b>Closed joint-stock company</b><p>Incorporated for scale and governance.</p></div>
               <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
@@ -541,14 +542,16 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </section>
       )}
 
-      <div className="proof">
-        <div className="wrap">
-          <div className="proof-item rv"><b>Tier 1 club signed</b><span>Activation live Q4 2026</span></div>
-          <div className="proof-item rv"><b>FIFA preliminary approval</b><span>Player Camera, match use</span></div>
-          <div className="proof-item rv"><b>Patented hardware</b><span>Granted KSA, PCT filings underway</span></div>
-          <div className="proof-item rv"><b>Pipeline under NDA</b><span>Clubs and leagues, four markets</span></div>
+      {!corporate && (
+        <div className="proof">
+          <div className="wrap">
+            <div className="proof-item rv"><b>Tier 1 club signed</b><span>Activation live Q4 2026</span></div>
+            <div className="proof-item rv"><b>FIFA preliminary approval</b><span>Player Camera, match use</span></div>
+            <div className="proof-item rv"><b>Patented hardware</b><span>Granted KSA, PCT filings underway</span></div>
+            <div className="proof-item rv"><b>Pipeline under NDA</b><span>Clubs and leagues, four markets</span></div>
+          </div>
         </div>
-      </div>
+      )}
 
       <section className="sec psec" id="partners">
         <div className="wrap">
@@ -717,7 +720,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <div className="cam-specs">
               <div className="spec rv"><div className="v dh">&lt;3S</div><small>Latency in live match conditions</small></div>
               <div className="spec rv"><div className="v dh">9MM</div><small>Total height, built to disappear</small></div>
-              <div className="spec rv"><div className="v dh">KSA</div><small>Patent granted, PCT filings underway</small></div>
+              <div className="spec rv"><div className="v dh">50MM</div><small>Diameter, jersey mounted</small></div>
             </div>
           </div>
           <div className="cam-stage rv">
