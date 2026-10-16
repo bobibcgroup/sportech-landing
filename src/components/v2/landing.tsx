@@ -508,7 +508,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           <div className="wrap">
             <div className="kicker rv">The company</div>
             <h2 className="h2 dh rv">WE BUILD THE REVENUE <span className="volt">ENGINE OF SPORT.</span></h2>
-            <p className="lede rv">Sportech is a Saudi technology company, now a closed joint-stock company, that designs, builds, operates and funds fan revenue platforms for clubs and leagues. One platform, twelve income streams, under your brand.</p>
+            <p className="lede rv">Sportech is a Saudi technology company, now a closed joint-stock company, that designs, builds, operates and funds fan revenue infrastructure for clubs and leagues. One platform, twelve income streams, under your brand.</p>
             <div className="cfacts">
               <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Built in Riyadh from day one.</p></div>
               <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
@@ -674,6 +674,16 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <span className="tag rv">Sponsor Activations</span>
           </div>
           <p className="wall-note rv">Predictions and competitions are entertainment only, with no betting. Shariah compliant. Club coins are closed-loop loyalty, never convertible to cash.</p>
+          {corporate && (
+            <div className="infra rv">
+              <div className="inf"><b>White-label by design</b><p>Your badge, your colors, your store listing.</p></div>
+              <div className="inf"><b>Automated operations</b><p>Content, payments and campaigns run themselves.</p></div>
+              <div className="inf"><b>AI built in</b><p>Moderation, highlights, recommendations and insights.</p></div>
+              <div className="inf"><b>Engage and monetize</b><p>Talk to your fans directly, and earn on every interaction.</p></div>
+              <div className="inf"><b>Admin control apps</b><p>Your team sees, manages and approves everything.</p></div>
+              <div className="inf"><b>Secure by default</b><p>Enterprise-grade auth, in-region data, full audit trail.</p></div>
+            </div>
+          )}
         </div>
       </section>
 

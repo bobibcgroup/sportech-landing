@@ -325,6 +325,17 @@ html {
 }
 
 /* company facts + announcements (corporate variant) */
+#v2 .infra { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: rgba(255, 255, 255, 0.02); }
+#v2 .inf { padding: 26px 26px 24px; border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+#v2 .inf:nth-child(-n + 3) { border-top: 0; }
+#v2 .inf:nth-child(3n + 1) { border-left: 0; }
+#v2 .inf b { display: block; font: 700 16.5px/1.3 var(--body); }
+#v2 .inf p { margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--ink-faint); }
+@media (max-width: 860px) {
+  #v2 .infra { grid-template-columns: 1fr; }
+  #v2 .inf { border-left: 0; border-top: 1px solid var(--line); }
+  #v2 .inf:first-child { border-top: 0; }
+}
 #v2 .cfacts { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); }
 #v2 .cfacts .fact .big { font-size: clamp(44px, 5vw, 84px); }
 #v2 .anns { margin-top: 52px; border-top: 1px solid var(--line); max-width: 1000px; }
