@@ -499,6 +499,23 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </div>
       </header>
 
+      {corporate && (
+        <section className="sec" id="company">
+          <div className="wrap">
+            <div className="kicker rv">The company</div>
+            <h2 className="h2 dh rv">WE BUILD THE REVENUE <span className="volt">ENGINE OF SPORT.</span></h2>
+            <p className="lede rv">Sportech is a Saudi technology company, now a closed joint-stock company, that designs, builds, operates and funds fan revenue platforms for clubs and leagues. One platform, twelve income streams, under your brand.</p>
+            <div className="cfacts">
+              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Built in Riyadh from day one.</p></div>
+              <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
+              <div className="fact rv"><div className="big dh">JSC</div><b>Closed joint-stock company</b><p>Incorporated for scale and governance.</p></div>
+              <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
+            </div>
+            <p className="fine rv">[FOUNDERS — names and titles to confirm, or remove this line]</p>
+          </div>
+        </section>
+      )}
+
       <div className="proof">
         <div className="wrap">
           <div className="proof-item rv"><b>Tier 1 club signed</b><span>Activation live Q4 2026</span></div>
@@ -715,6 +732,20 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </div>
       </section>
 
+      {corporate && (
+        <section className="sec" style={{ paddingBottom: 0 }}>
+          <div className="wrap">
+            <div className="kicker rv">Commercial model</div>
+            <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
+            <div className="model-grid">
+              <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
+              <div className="fact rv"><div className="big dh">0</div><b>Operations on your side</b><p>Fully managed. Your team stays on sport.</p></div>
+              <div className="fact rv"><div className="big dh">100%</div><b>Your brand</b><p>Your badge, your colors, your fans. We stay invisible.</p></div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="sec sim-scene" id="sim">
         <div className="wrap">
           <h2 className="h2 dh rv">RUN YOUR <span className="volt">NUMBERS.</span></h2>
@@ -748,17 +779,19 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <div className="kicker rv">{corporate ? "Commercial model" : "The model"}</div>
-          <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
-          <div className="model-grid">
-            <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
-            <div className="fact rv"><div className="big dh">0</div><b>Operations on your side</b><p>Fully managed. Your team stays on sport.</p></div>
-            <div className="fact rv"><div className="big dh">100%</div><b>Your brand</b><p>Your badge, your colors, your fans. We stay invisible.</p></div>
+      {!corporate && (
+        <section className="sec" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="kicker rv">The model</div>
+            <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
+            <div className="model-grid">
+              <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
+              <div className="fact rv"><div className="big dh">0</div><b>Operations on your side</b><p>Fully managed. Your team stays on sport.</p></div>
+              <div className="fact rv"><div className="big dh">100%</div><b>Your brand</b><p>Your badge, your colors, your fans. We stay invisible.</p></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="sec" id="faq" style={{ paddingTop: 0 }}>
         <div className="wrap">
@@ -777,22 +810,6 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           </div>
         </div>
       </section>
-
-      {corporate && (
-        <section className="sec" id="company" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <div className="kicker rv">The company</div>
-            <h2 className="h2 dh rv">THE COMPANY BEHIND <span className="volt">THE ENGINE.</span></h2>
-            <div className="cfacts">
-              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Built in Riyadh from day one.</p></div>
-              <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
-              <div className="fact rv"><div className="big dh">JSC</div><b>Closed joint-stock company</b><p>Incorporated for scale and governance.</p></div>
-              <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
-            </div>
-            <p className="fine rv">[FOUNDERS — names and titles to confirm, or remove this line]</p>
-          </div>
-        </section>
-      )}
 
       {corporate && (
         <section className="sec" id="news" style={{ paddingTop: 0 }}>
