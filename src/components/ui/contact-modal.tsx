@@ -311,6 +311,7 @@ export function ContactModal() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -18 }}
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      onAnimationComplete={() => inputRef.current?.focus()}
                       className="flex flex-col gap-1.5"
                     >
                       <label htmlFor="lead-field" className="text-xs font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>
@@ -320,6 +321,7 @@ export function ContactModal() {
                         ref={inputRef}
                         id="lead-field"
                         name={fieldKey}
+                        autoFocus
                         type={step === 2 ? "email" : "text"}
                         inputMode={step === 2 ? "email" : "text"}
                         value={values[fieldKey]}
