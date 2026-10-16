@@ -8,13 +8,11 @@ import { useContactModal } from "@/lib/contact-modal-context";
 const TICKER_FACTS = (
   <>
     <span>TIER 1 CLUB <b>SIGNED</b> — ACTIVATION Q4 2026</span>
-    <span>FIFA PRELIMINARY APPROVAL — <b>PLAYER CAMERA</b></span>
     <span>PATENT GRANTED IN KSA — <b>PCT FILINGS UNDERWAY</b></span>
     <span>12 REVENUE ENGINES — <b>ONE PLATFORM</b></span>
     <span>$0 UPFRONT — <b>WE EARN WHEN YOU EARN</b></span>
     <span>PLAYER POV LATENCY <b>UNDER 3 SECONDS</b></span>
     <span>SAUDI TECH — <b>BUILT IN RIYADH</b></span>
-    <span>FIRST SAUDI COMPANY GOVERNED BY <b>ENGLISH LAW</b></span>
     <span>FAN ENGAGEMENT MARKET <b>$19.8B BY 2033</b></span>
     <span>FOOTBALL FANS WORLDWIDE <b>5 BILLION+</b></span>
     <span>LIVE AND <b>PRODUCTION-READY</b></span>
@@ -545,7 +543,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         <div className="proof">
           <div className="wrap">
             <div className="proof-item rv"><b>Tier 1 club signed</b><span>Activation live Q4 2026</span></div>
-            <div className="proof-item rv"><b>FIFA preliminary approval</b><span>Player Camera, match use</span></div>
+            <div className="proof-item rv"><b>Production-ready platform</b><span>Live today, not a prototype</span></div>
             <div className="proof-item rv"><b>Patented hardware</b><span>Granted KSA, PCT filings underway</span></div>
             <div className="proof-item rv"><b>Pipeline under NDA</b><span>Clubs and leagues, four markets</span></div>
           </div>
@@ -915,7 +913,6 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
               <div className="ann"><span className="ad">OCT 2026</span><span className="at">Partnership signed with a Tier 1 Saudi football club; activation Q4 2026</span><span className="ac">Partnership</span></div>
               <div className="ann"><span className="ad">AUG 2026</span><span className="at">Sportech completes conversion to a closed joint-stock company</span><span className="ac">Corporate</span></div>
               <div className="ann"><span className="ad">MAR 2026</span><span className="at">Player POV Camera patent granted in Saudi Arabia; PCT filings underway</span><span className="ac">Technology</span></div>
-              <div className="ann"><span className="ad">2026</span><span className="at">FIFA grants preliminary approval for match use of the Player Camera</span><span className="ac">Technology</span></div>
             </div>
           </div>
         </section>
