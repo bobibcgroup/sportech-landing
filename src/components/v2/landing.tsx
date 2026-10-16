@@ -113,6 +113,33 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     });
     renderCh(0);
 
+    /* ---------- region pills on the anchor ---------- */
+    const REGIONS = [
+      { t: "AND SAUDI FANS OUT-SPEND THEM ALL", s: [["$308", "per-capita gaming spend in KSA, 3x the MENA average"], ["$125M", "KSA games live-streaming market, 2025"], ["68%", "of Saudi gamers attend live esports events"]] },
+      { t: "AMERICA VOTES, PLAYS AND PAYS", s: [["3.4M", "fan votes for a single NBA All-Star in one season"], ["71.8M", "career All-Star votes cast for LeBron James"], ["60K+", "US creators earn real income from live gifts"]] },
+      { t: "EUROPE PAYS FOR A SAY", s: [["11.2M", "Fantasy Premier League managers, every match week"], ["$400M+", "club revenue from fan tokens, led by Europe's elite clubs"], ["$350M+", "spent by fans on those tokens"]] },
+      { t: "ASIA SETS THE SCALE", s: [["2.5B+", "cricket fans, the overwhelming majority in Asia"], ["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["$10M", "gifted per day on TikTok Live worldwide"]] },
+    ];
+    const rgTitle = $("#rgTitle"), rgAnchor = $(".anchor");
+    function renderRegion(i: number) {
+      const rg = REGIONS[i];
+      if (!rgTitle) return;
+      rgTitle.textContent = rg.t;
+      rg.s.forEach((pair, j) => {
+        const b = $("#rgB" + j), p = $("#rgP" + j);
+        if (b) b.textContent = pair[0];
+        if (p) p.textContent = pair[1];
+      });
+      if (!reduce && rgAnchor) gsap.fromTo(rgAnchor, { opacity: 0.45, y: 6 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+    }
+    $$(".anchor-tabs .cbtn").forEach((t) => {
+      t.addEventListener("click", () => {
+        $$(".anchor-tabs .cbtn").forEach((x) => x.setAttribute("aria-pressed", "false"));
+        t.setAttribute("aria-pressed", "true");
+        renderRegion(parseInt((t as HTMLElement).dataset.rg || "0", 10));
+      });
+    });
+
     /* ---------- sport switcher ---------- */
     const SPORTS = [
       { n: "Football", f: "Live + Gifting", img: "/sportscreens/soccer.webp" },
@@ -638,10 +665,16 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             </div>
           </div>
           <div className="anchor rv">
-            <span className="ttl dh">AND SAUDI FANS OUT-SPEND THEM ALL</span>
-            <div className="as"><b>$308</b><p>per-capita gaming spend in KSA, 3x the MENA average</p></div>
-            <div className="as"><b>$125M</b><p>KSA games live-streaming market, 2025</p></div>
-            <div className="as"><b>68%</b><p>of Saudi gamers attend live esports events</p></div>
+            <div className="anchor-tabs" role="tablist" aria-label="Region">
+              <button className="cbtn" role="tab" aria-pressed="true" data-rg="0">KSA</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="1">North America</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="2">Europe</button>
+              <button className="cbtn" role="tab" aria-pressed="false" data-rg="3">Asia</button>
+            </div>
+            <span className="ttl dh" id="rgTitle">AND SAUDI FANS OUT-SPEND THEM ALL</span>
+            <div className="as"><b id="rgB0">$308</b><p id="rgP0">per-capita gaming spend in KSA, 3x the MENA average</p></div>
+            <div className="as"><b id="rgB1">$125M</b><p id="rgP1">KSA games live-streaming market, 2025</p></div>
+            <div className="as"><b id="rgB2">68%</b><p id="rgP2">of Saudi gamers attend live esports events</p></div>
           </div>
           <p className="fine rv">Third-party figures describe observed fan behavior on other platforms, cited per stat. They are market evidence, not Sportech projections.</p>
         </div>
