@@ -532,12 +532,11 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <h2 className="h2 dh rv">WE BUILD THE REVENUE <span className="volt">ENGINE OF SPORT.</span></h2>
             <p className="lede rv">Sportech is a Saudi technology company, now a closed joint-stock company, that designs, builds, operates and funds fan revenue infrastructure for clubs and leagues. One platform, twelve income streams, under your brand.</p>
             <div className="cfacts">
-              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Saudi from day one.</p></div>
+              <div className="fact rv"><div className="big dh">2025</div><b>Founded</b><p>Saudi from day one.</p></div>
               <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
               <div className="fact rv"><div className="big dh">JSC</div><b>Closed joint-stock company</b><p>Incorporated for scale and governance.</p></div>
               <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
             </div>
-            <p className="fine rv">[FOUNDERS — names and titles to confirm, or remove this line]</p>
           </div>
         </section>
       )}
@@ -560,7 +559,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           <div className="sboard rv">
             <div className="sboard-hd">
               <span className="l"><i />Signing board — live</span>
-              <span className="r"><span data-count="3">3</span> SIGNED · 7 BY NOVEMBER</span>
+              <span className="r"><span data-count="3">3</span> SIGNED · 7 BY NOV 2026</span>
             </div>
             <div className="flap">
               <span className="no">01</span>
@@ -913,10 +912,10 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <div className="kicker rv">Announcements</div>
             <h2 className="h2 dh rv">ON THE <span className="volt">RECORD.</span></h2>
             <div className="anns rv">
-              <div className="ann"><span className="ad">OCT 2026</span><span className="at">Sportech completes conversion to a closed joint-stock company</span><span className="ac">Corporate</span></div>
               <div className="ann"><span className="ad">OCT 2026</span><span className="at">Partnership signed with a Tier 1 Saudi football club; activation Q4 2026</span><span className="ac">Partnership</span></div>
-              <div className="ann"><span className="ad">[YEAR]</span><span className="at">Player POV Camera patent granted in Saudi Arabia; PCT filings underway</span><span className="ac">Technology</span></div>
-              <div className="ann"><span className="ad">[YEAR]</span><span className="at">FIFA grants preliminary approval for match use of the Player Camera</span><span className="ac">Technology</span></div>
+              <div className="ann"><span className="ad">AUG 2026</span><span className="at">Sportech completes conversion to a closed joint-stock company</span><span className="ac">Corporate</span></div>
+              <div className="ann"><span className="ad">MAR 2026</span><span className="at">Player POV Camera patent granted in Saudi Arabia; PCT filings underway</span><span className="ac">Technology</span></div>
+              <div className="ann"><span className="ad">2026</span><span className="at">FIFA grants preliminary approval for match use of the Player Camera</span><span className="ac">Technology</span></div>
             </div>
           </div>
         </section>
@@ -944,7 +943,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
               <img src="/brand/wordmark-white.png" alt="Sportech" style={{ height: 16, width: "auto" }} />
               <p>The fan revenue engine for sports clubs. Saudi Tech, built in Riyadh, designed for the world.</p>
               {corporate && (
-                <p style={{ marginTop: 10 }}>Sportech is a closed joint-stock company registered in Riyadh, Kingdom of Saudi Arabia. CR [CR NUMBER].</p>
+                <p style={{ marginTop: 10 }}>Sportech is a closed joint-stock company registered in Riyadh, Kingdom of Saudi Arabia. CR 1009177946.</p>
               )}
             </div>
             <div className="ft-col">
@@ -977,7 +976,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             </div>
           </div>
           <div className="ft-bar">
-            <span>&copy; 2026 {corporate ? "Sportech JSC" : "Sportech"}. All rights reserved.</span>
+            <span>&copy; 2026 Sportech. All rights reserved.</span>
             <div className="ft-legal">
               <a href="/privacy">Privacy Policy</a>
               <a href="/refund-policy">Payment &amp; Refund Policy</a>
