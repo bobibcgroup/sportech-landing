@@ -324,6 +324,18 @@ html {
   #v2 .model-grid { grid-template-columns: 1fr; gap: 48px; }
 }
 
+/* company facts + announcements (corporate variant) */
+#v2 .cfacts { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); }
+#v2 .cfacts .fact .big { font-size: clamp(44px, 5vw, 84px); }
+#v2 .anns { margin-top: 52px; border-top: 1px solid var(--line); max-width: 1000px; }
+#v2 .ann { display: grid; grid-template-columns: 110px 1fr max-content; gap: 20px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+#v2 .ann .ad { font: 500 12.5px/1.4 var(--mono); letter-spacing: 0.08em; color: var(--ink-faint); text-transform: uppercase; }
+#v2 .ann .at { font: 600 16.5px/1.45 var(--body); color: var(--ink); }
+#v2 .ann .ac { font: 500 10.5px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); border: 1px solid var(--line); border-radius: 7px; padding: 7px 11px; }
+@media (max-width: 860px) { #v2 .cfacts { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { #v2 .ann { grid-template-columns: 1fr max-content; } #v2 .ann .ad { grid-column: 1 / -1; } }
+@media (max-width: 480px) { #v2 .cfacts { grid-template-columns: 1fr; } }
+
 /* FAQ */
 #v2 .faq { margin-top: 52px; max-width: 900px; border-top: 1px solid var(--line); }
 #v2 .fq { border-bottom: 1px solid var(--line); }

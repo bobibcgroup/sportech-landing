@@ -56,7 +56,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-export function V2Landing() {
+export function V2Landing({ corporate = false }: { corporate?: boolean }) {
   const { open: openContactModal } = useContactModal();
   const rootRef = useRef<HTMLElement>(null);
   const openRef = useRef(openContactModal);
@@ -449,7 +449,9 @@ export function V2Landing() {
         <span className="ticker-tag"><i />SPORTECH</span>
         <div className="ticker-track">
           {TICKER_FACTS}
+          {corporate && <span>NOW A CLOSED <b>JOINT-STOCK COMPANY</b></span>}
           {TICKER_FACTS}
+          {corporate && <span>NOW A CLOSED <b>JOINT-STOCK COMPANY</b></span>}
         </div>
       </div>
 
@@ -748,7 +750,7 @@ export function V2Landing() {
 
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="kicker rv">The model</div>
+          <div className="kicker rv">{corporate ? "Commercial model" : "The model"}</div>
           <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
           <div className="model-grid">
             <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
@@ -775,6 +777,37 @@ export function V2Landing() {
           </div>
         </div>
       </section>
+
+      {corporate && (
+        <section className="sec" id="company" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="kicker rv">The company</div>
+            <h2 className="h2 dh rv">THE COMPANY BEHIND <span className="volt">THE ENGINE.</span></h2>
+            <div className="cfacts">
+              <div className="fact rv"><div className="big dh">[YEAR]</div><b>Founded</b><p>Built in Riyadh from day one.</p></div>
+              <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
+              <div className="fact rv"><div className="big dh">JSC</div><b>Closed joint-stock company</b><p>Incorporated for scale and governance.</p></div>
+              <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
+            </div>
+            <p className="fine rv">[FOUNDERS — names and titles to confirm, or remove this line]</p>
+          </div>
+        </section>
+      )}
+
+      {corporate && (
+        <section className="sec" id="news" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="kicker rv">Announcements</div>
+            <h2 className="h2 dh rv">ON THE <span className="volt">RECORD.</span></h2>
+            <div className="anns rv">
+              <div className="ann"><span className="ad">OCT 2026</span><span className="at">Sportech completes conversion to a closed joint-stock company</span><span className="ac">Corporate</span></div>
+              <div className="ann"><span className="ad">OCT 2026</span><span className="at">Partnership signed with a Tier 1 Saudi football club; activation Q4 2026</span><span className="ac">Partnership</span></div>
+              <div className="ann"><span className="ad">[YEAR]</span><span className="at">Player POV Camera patent granted in Saudi Arabia; PCT filings underway</span><span className="ac">Technology</span></div>
+              <div className="ann"><span className="ad">[YEAR]</span><span className="at">FIFA grants preliminary approval for match use of the Player Camera</span><span className="ac">Technology</span></div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="saudi" id="saudi">
         <div className="wrap">
@@ -803,7 +836,7 @@ export function V2Landing() {
         <div className="wrap cta-inner">
           <h2 className="dh rv">TURN FANS INTO <span className="volt">REVENUE.</span></h2>
           <button className="btn btn-primary rv" style={{ padding: "18px 38px", fontSize: 16 }} onClick={openContactModal}>Book a Demo</button>
-          <p className="rv">A private walkthrough with your club&apos;s numbers. No deck, a live product.</p>
+          <p className="rv">{corporate ? "A private walkthrough with your club's numbers, with our partnerships team." : "A private walkthrough with your club's numbers. No deck, a live product."}</p>
         </div>
       </section>
 
@@ -814,6 +847,9 @@ export function V2Landing() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/wordmark-white.png" alt="Sportech" style={{ height: 16, width: "auto" }} />
               <p>The fan revenue engine for sports clubs. Saudi Tech, built in Riyadh, designed for the world.</p>
+              {corporate && (
+                <p style={{ marginTop: 10 }}>Sportech is a closed joint-stock company registered in Riyadh, Kingdom of Saudi Arabia. CR [CR NUMBER].</p>
+              )}
             </div>
             <div className="ft-col">
               <div className="ft-h">Platform</div>
@@ -845,7 +881,7 @@ export function V2Landing() {
             </div>
           </div>
           <div className="ft-bar">
-            <span>&copy; 2026 Sportech. All rights reserved.</span>
+            <span>&copy; 2026 {corporate ? "Sportech JSC" : "Sportech"}. All rights reserved.</span>
             <div className="ft-legal">
               <a href="/privacy">Privacy Policy</a>
               <a href="/refund-policy">Payment &amp; Refund Policy</a>
