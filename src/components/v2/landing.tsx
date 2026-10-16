@@ -59,6 +59,8 @@ const FAQ_ITEMS = [
 export function V2Landing() {
   const { open: openContactModal } = useContactModal();
   const rootRef = useRef<HTMLElement>(null);
+  const openRef = useRef(openContactModal);
+  openRef.current = openContactModal;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -196,6 +198,25 @@ export function V2Landing() {
         const me = ev as MouseEvent;
         moneyBurst(me.clientX || r.left + r.width / 2, me.clientY || r.top + r.height / 2);
       });
+    });
+
+    /* ---------- signing board: replayable flap reveal + claim row ---------- */
+    const psec = $(".psec");
+    if (psec) {
+      const pio = new IntersectionObserver(
+        (es) => es.forEach((e) => { if (e.isIntersecting) psec.classList.add("on"); else psec.classList.remove("on"); }),
+        { threshold: 0.25 }
+      );
+      pio.observe(psec);
+      cleanups.push(() => pio.disconnect());
+    }
+    const claim = $("#claimRow");
+    claim?.addEventListener("click", (ev) => {
+      const r = claim.getBoundingClientRect();
+      const me = ev as MouseEvent;
+      moneyBurst(me.clientX || r.left + r.width / 2, me.clientY || r.top + r.height / 2);
+      const t = setTimeout(() => openRef.current(), 650);
+      cleanups.push(() => clearTimeout(t));
     });
 
     /* ---------- FAQ accordion ---------- */
@@ -438,7 +459,7 @@ export function V2Landing() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="wordmark" src="/brand/wordmark-white.png" alt="Sportech" />
             <div className="nav-links">
-              <a href="#cases">Proof</a><a href="#os">Platform</a><a href="#brand">Your Brand</a><a href="#sim">Simulator</a>
+              <a href="#partners">Partners</a><a href="#cases">Proof</a><a href="#os">Platform</a><a href="#brand">Your Brand</a><a href="#sim">Simulator</a>
             </div>
             <button className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openContactModal}>Book a Demo</button>
           </div>
@@ -485,7 +506,55 @@ export function V2Landing() {
         </div>
       </div>
 
-      <section className="sec">
+      <section className="sec psec" id="partners">
+        <div className="wrap">
+          <div className="kicker rv">Traction</div>
+          <h2 className="h2 dh rv">SIGNINGS, <span className="ghost">AS THEY</span> <span className="volt">HAPPEN.</span></h2>
+          <div className="sboard rv">
+            <div className="sboard-hd">
+              <span className="l"><i />Signing board — live</span>
+              <span className="r"><span data-count="3">3</span> SIGNED · 7 BY NOVEMBER</span>
+            </div>
+            <div className="flap">
+              <span className="no">01</span>
+              <span><b>Al-Nassr</b><small>Tier 1 Football · Activation Q4</small></span>
+              <span className="st">SIGNED</span>
+            </div>
+            <div className="flap">
+              <span className="no">02</span>
+              <span><b>Al-Balad</b><small>Football Club</small></span>
+              <span className="st">SIGNED</span>
+            </div>
+            <div className="flap">
+              <span className="no">03</span>
+              <span><b>POWR</b><small>Esports Organization</small></span>
+              <span className="st">SIGNED</span>
+            </div>
+            <div className="flap nda">
+              <span className="no">04</span>
+              <span><span className="blk" /><small>Football League · Under NDA</small></span>
+              <span className="st">INKING</span>
+            </div>
+            <div className="flap nda">
+              <span className="no">05</span>
+              <span><span className="blk" style={{ width: "min(128px, 30vw)" }} /><small>Media Platform · Under NDA</small></span>
+              <span className="st">INKING</span>
+            </div>
+            <div className="flap nda">
+              <span className="no">06</span>
+              <span><span className="blk" style={{ width: "min(190px, 42vw)" }} /><small>Combat Sports · Under NDA</small></span>
+              <span className="st">INKING</span>
+            </div>
+            <button type="button" className="flap claim" id="claimRow">
+              <span className="q">?</span>
+              <span><b>YOUR CLUB</b><small>The next seat on this board is open</small></span>
+              <span className="st">CLAIM YOUR SLOT</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="kicker rv">The gap</div>
           <h2 className="h2 dh rv">THE WHISTLE ENDS THE MATCH. <span className="volt">NOT THE SPENDING.</span></h2>
