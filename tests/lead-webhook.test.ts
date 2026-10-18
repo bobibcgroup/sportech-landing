@@ -13,12 +13,12 @@ function listen(server: Server): Promise<number> {
 }
 
 test("forwards name, organization, email to the webhook", async () => {
-  let received: Record<string, unknown> | null = null;
+  const calls: Array<Record<string, unknown>> = [];
   const server = createServer((req, res) => {
     let raw = "";
     req.on("data", (c) => (raw += c));
     req.on("end", () => {
-      received = JSON.parse(raw);
+      calls.push(JSON.parse(raw) as Record<string, unknown>);
       res.writeHead(200).end("{}");
     });
   });
@@ -44,7 +44,8 @@ test("forwards name, organization, email to the webhook", async () => {
 
     assert.equal(res.status, 200);
     assert.deepEqual((await res.json()).forwarded, true);
-    assert.ok(received, "webhook was never called");
+    assert.equal(calls.length, 1, "webhook was never called");
+    const received = calls[0];
     assert.equal(received.name, "Webhook Test");
     assert.equal(received.organization, "Test FC");
     assert.equal(received.email, "hook@example.com");
