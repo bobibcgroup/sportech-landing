@@ -4,20 +4,23 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useContactModal } from "@/lib/contact-modal-context";
+import { useLanguage } from "@/lib/language-context";
+import { V2_COPY } from "./copy";
 
-const TICKER_FACTS = (
-  <>
-    <span>TIER 1 CLUB <b>SIGNED</b> — ACTIVATION Q4 2026</span>
-    <span>PATENT GRANTED IN KSA — <b>PCT FILINGS UNDERWAY</b></span>
-    <span>12 REVENUE ENGINES — <b>ONE PLATFORM</b></span>
-    <span>$0 UPFRONT — <b>WE EARN WHEN YOU EARN</b></span>
-    <span>PLAYER POV LATENCY <b>UNDER 3 SECONDS</b></span>
-    <span>SAUDI TECH — <b>BUILT IN RIYADH</b></span>
-    <span>FAN ENGAGEMENT MARKET <b>$19.8B BY 2033</b></span>
-    <span>FOOTBALL FANS WORLDWIDE <b>5 BILLION+</b></span>
-    <span>LIVE AND <b>PRODUCTION-READY</b></span>
-  </>
-);
+const SPORT_IMGS = [
+  "/sportscreens/soccer.webp",
+  "/sportscreens/basketball.webp",
+  "/sportscreens/formula1.webp",
+  "/sportscreens/esports.webp",
+  "/sportscreens/cricket.webp",
+  "/sportscreens/martialarts.webp",
+  "/sportscreens/tennis.webp",
+  "/sportscreens/nfl.webp",
+  "", // "+ Yours" card has no screenshot
+];
+
+/* revenue split weights; labels come from the copy dictionary */
+const SPLIT_W = [9.0, 6.6, 6.0, 3.6, 1.8, 1.5, 0.9, 0.6];
 
 function PlusIcon() {
   return (
@@ -27,42 +30,20 @@ function PlusIcon() {
   );
 }
 
-const FAQ_ITEMS = [
-  {
-    q: "What does the platform cost the club?",
-    a: "Nothing. We design, build, operate and fund the entire platform. Your club earns an agreed share of every transaction from day one of launch.",
-  },
-  {
-    q: "How fast can we launch?",
-    a: "A white-label app in your club's identity is typically live within weeks. Core revenue streams activate at launch, and the full set of twelve modules lands across your first year.",
-  },
-  {
-    q: "Are match predictions a form of betting?",
-    a: "No. Predictions are skill-based entertainment using platform points. No real money is staked, and the fan wallet is closed-loop, working like a loyalty program.",
-  },
-  {
-    q: "Who operates payments, ticketing and support?",
-    a: "Sportech runs the full stack end to end through a modular API architecture, integrated with regional payment and ticketing providers.",
-  },
-  {
-    q: "Where is fan data stored?",
-    a: "In-region, per market, and governed by the partnership agreement, with tiered identity verification built in.",
-  },
-  {
-    q: "How is the revenue share structured?",
-    a: "Per partnership. Full commercial terms are set out in the agreement.",
-  },
-];
-
 export function V2Landing({ corporate = false }: { corporate?: boolean }) {
   const { open: openContactModal } = useContactModal();
+  const { lang, setLang } = useLanguage();
+  const t = V2_COPY[lang];
   const rootRef = useRef<HTMLElement>(null);
   const openRef = useRef(openContactModal);
-  openRef.current = openContactModal;
+  useEffect(() => {
+    openRef.current = openContactModal;
+  }, [openContactModal]);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const tt = V2_COPY[lang];
 
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     gsap.registerPlugin(ScrollTrigger);
@@ -72,28 +53,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     const $$ = <T extends Element = HTMLElement>(sel: string) => Array.from(root.querySelectorAll<T>(sel));
 
     /* ---------- use-case channels ---------- */
-    const CH = [
-      {
-        big: "$10M", cap: "gifted every day on TikTok Live.", src: "Ipsos x TikTok, 2025",
-        proof: [["68%", "of TikTok users have tried live gifting"], ["1M+", "concurrent viewers on one football-fandom stream"], ["60K+", "US creators earn real income from gifts"]],
-        model: "Fans gift during warm-ups, goals and trophy moments, inside the club app. The club keeps the majority share.",
-      },
-      {
-        big: "727,700", cap: "paid subscriptions to one creator, in one month.", src: "Twitch / Resourcera, 2025",
-        proof: [["$1.9B", "Twitch revenue in 2025, mostly subscriptions"], ["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["2x+", "owned platforms out-earn social channels"]],
-        model: "Club membership tiers with real perks. Recurring revenue that compounds season after season.",
-      },
-      {
-        big: "$400M+", cap: "paid by fans for a say in club decisions.", src: "ScienceDirect, 2025",
-        proof: [["$350M+", "spent by fans on fan tokens alone"], ["3.4M", "votes for a single NBA All-Star in one season"], ["71.8M", "career All-Star votes cast for LeBron James"]],
-        model: "Fan votes on man of the match, kits and club moments. No crypto, no cash-out, pure belonging.",
-      },
-      {
-        big: "68%", cap: "of live viewers join points-staked predictions.", src: "BetterStreams, 2023",
-        proof: [["2x", "chat activity while a prediction window is open"], ["11.2M", "Fantasy Premier League managers, every match week"], ["245M", "fantasy sports users in a $31B market"]],
-        model: "Match predictions staked with closed-loop club points. A loyalty mechanic; points never convert to cash.",
-      },
-    ];
+    const CH = tt.cases.channels;
     const chBig = $("#chBig"), chCap = $("#chCap"), chSrc = $("#chSrc"),
       chProof = $("#chProof"), chModel = $("#chModel"), panel = $("#chanpanel");
     function renderCh(i: number) {
@@ -104,24 +64,17 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       chProof.innerHTML = c.proof.map((p) => '<div class="cpr"><b class="dh">' + p[0] + "</b><p>" + p[1] + "</p></div>").join("");
       if (!reduce) gsap.fromTo(panel, { opacity: 0.35, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" });
     }
-    $$("#cases .ctab").forEach((t) => {
-      t.addEventListener("click", () => {
+    $$("#cases .ctab").forEach((tab) => {
+      tab.addEventListener("click", () => {
         $$("#cases .ctab").forEach((x) => x.setAttribute("aria-selected", "false"));
-        t.setAttribute("aria-selected", "true");
-        renderCh(parseInt((t as HTMLElement).dataset.ch || "0", 10));
+        tab.setAttribute("aria-selected", "true");
+        renderCh(parseInt((tab as HTMLElement).dataset.ch || "0", 10));
       });
     });
     renderCh(0);
 
     /* ---------- region pills on the anchor ---------- */
-    const REGIONS = [
-      { t: "AND SAUDI FANS OUT-SPEND THEM ALL", s: [["$308", "per-capita gaming spend in KSA, 3x the MENA average"], ["$125M", "KSA games live-streaming market, 2025"], ["68%", "of Saudi gamers attend live esports events"]] },
-      { t: "AMERICA VOTES, PLAYS AND PAYS", s: [["3.4M", "fan votes for a single NBA All-Star in one season"], ["71.8M", "career All-Star votes cast for LeBron James"], ["60K+", "US creators earn real income from live gifts"]] },
-      { t: "EUROPE PAYS TO PLAY A PART", s: [["11.2M", "Fantasy Premier League managers, every match week"], ["12-20%", "of Premier League club-app users pay to engage"], ["$400M+", "club revenue from fan tokens, led by Europe's elite clubs"]] },
-      { t: "KOREA WROTE THE PLAYBOOK", s: [["$593M", "Weverse direct fan-to-artist revenue, 2024"], ["$1,200", "yearly spend of a K-pop superfan, versus about $120 for Spotify"], ["2x+", "owned fan platforms out-earn social channels"]] },
-      { t: "CRICKET IS ITS OWN ECONOMY", s: [["2.5B+", "cricket fans worldwide, the overwhelming majority in South Asia"], ["1B+", "viewers reached by a single IPL season, TV and digital"], ["200M+", "registered players on India's biggest fantasy cricket platform"]] },
-      { t: "EVERYWHERE, FANS ARE PAYING", s: [["$10M", "gifted per day on TikTok Live"], ["245M", "fantasy sports players in a $31B market"], ["68%", "of TikTok users have tried live gifting"]] },
-    ];
+    const REGIONS = tt.cases.regions;
     const rgTitle = $("#rgTitle"), rgAnchor = $(".anchor");
     function renderRegion(i: number) {
       const rg = REGIONS[i];
@@ -134,26 +87,16 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       });
       if (!reduce && rgAnchor) gsap.fromTo(rgAnchor, { opacity: 0.45, y: 6 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
     }
-    $$(".anchor-tabs .cbtn").forEach((t) => {
-      t.addEventListener("click", () => {
+    $$(".anchor-tabs .cbtn").forEach((tab) => {
+      tab.addEventListener("click", () => {
         $$(".anchor-tabs .cbtn").forEach((x) => x.setAttribute("aria-pressed", "false"));
-        t.setAttribute("aria-pressed", "true");
-        renderRegion(parseInt((t as HTMLElement).dataset.rg || "0", 10));
+        tab.setAttribute("aria-pressed", "true");
+        renderRegion(parseInt((tab as HTMLElement).dataset.rg || "0", 10));
       });
     });
 
     /* ---------- sport switcher ---------- */
-    const SPORTS = [
-      { n: "Football", f: "Live + Gifting", img: "/sportscreens/soccer.webp" },
-      { n: "Basketball", f: "Predictions", img: "/sportscreens/basketball.webp" },
-      { n: "Motorsport", f: "Player Cam POV", img: "/sportscreens/formula1.webp" },
-      { n: "Esports", f: "Voice Rooms", img: "/sportscreens/esports.webp" },
-      { n: "Cricket", f: "Memberships", img: "/sportscreens/cricket.webp" },
-      { n: "Combat", f: "Smart Ticketing", img: "/sportscreens/martialarts.webp" },
-      { n: "Tennis", f: "Loyalty & Rewards", img: "/sportscreens/tennis.webp" },
-      { n: "NFL", f: "Club Store", img: "/sportscreens/nfl.webp" },
-      { n: "Your Sport", f: "Any fanbase on earth", img: "" },
-    ];
+    const SPORTS = tt.rail.sports.map((s, i) => ({ n: s.n, f: s.f, img: SPORT_IMGS[i] || "" }));
     SPORTS.forEach((s) => { if (s.img) { const im = new Image(); im.src = s.img; } });
     const spImg = $<HTMLImageElement>("#spImg"), spName = $("#spName"), spFeat = $("#spFeat"), spStage = $("#spStage"), spYours = $("#spYours");
     let spIdx = 0, spLock = false;
@@ -166,14 +109,14 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       spYours.hidden = !isYours;
       if (!isYours) {
         spImg.src = SPORTS[i].img;
-        spImg.alt = "Sportech " + SPORTS[i].n + " app screens";
+        spImg.alt = "Sportech — " + SPORTS[i].n;
       }
       spName.textContent = SPORTS[i].n;
       spFeat.textContent = SPORTS[i].f;
       if (!reduce) gsap.fromTo(isYours ? spYours : spImg, { opacity: 0.3 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
     }
-    $$("#rail .ctab").forEach((t) => {
-      t.addEventListener("click", () => { spLock = true; showSport(parseInt((t as HTMLElement).dataset.sp || "0", 10)); });
+    $$("#rail .ctab").forEach((tab) => {
+      tab.addEventListener("click", () => { spLock = true; showSport(parseInt((tab as HTMLElement).dataset.sp || "0", 10)); });
     });
     if (!reduce) {
       const spTimer = setInterval(() => {
@@ -242,8 +185,8 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       const r = claim.getBoundingClientRect();
       const me = ev as MouseEvent;
       moneyBurst(me.clientX || r.left + r.width / 2, me.clientY || r.top + r.height / 2);
-      const t = setTimeout(() => openRef.current(), 650);
-      cleanups.push(() => clearTimeout(t));
+      const timer = setTimeout(() => openRef.current(), 650);
+      cleanups.push(() => clearTimeout(timer));
     });
 
     /* ---------- FAQ accordion ---------- */
@@ -275,7 +218,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     const retheme = (c: string) => {
       root.style.setProperty("--accent", c);
       root.style.setProperty("--accent-ink", ink(c));
-      if (live) live.textContent = "THEME: " + (names[c.toLowerCase()] || c.toUpperCase());
+      if (live) live.textContent = tt.rail.themePrefix + (names[c.toLowerCase()] || c.toUpperCase());
     };
     $$(".sw[data-c]").forEach((sw) => {
       sw.addEventListener("click", () => {
@@ -291,16 +234,18 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     });
 
     /* ---------- revenue simulator ---------- */
-    const SPLIT = [
-      { k: "Subscriptions", v: 9.0 }, { k: "Tickets", v: 6.6 }, { k: "Live Gifting", v: 6.0 },
-      { k: "Merchandise", v: 3.6 }, { k: "Predictions", v: 1.8 }, { k: "Gift Cards", v: 1.5 },
-      { k: "Voting", v: 0.9 }, { k: "Collectibles", v: 0.6 },
-    ];
+    const SPLIT = tt.sim.streams.map((k, i) => ({ k, v: SPLIT_W[i] }));
     const ARPU = 30; // annual, sums the split
-    let fans = 1000000, rate = 0.08, shownTotal = 2400000;
+    const LADDER = [100000, 150000, 200000, 250000, 300000, 400000, 500000, 650000, 800000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000, 5000000, 6500000, 8000000, 10000000, 15000000, 20000000, 25000000, 30000000, 40000000, 50000000, 65000000, 80000000, 100000000];
+    const fanSlider = $<HTMLInputElement>("#fanslider"), fanRead = $("#fanRead");
+    /* keep whatever the user had selected across language switches */
+    let fans = LADDER[parseInt(fanSlider?.value || "9", 10)] || 1000000;
+    const pressedRate = $<HTMLElement>('#scnset .cbtn[aria-pressed="true"]');
+    let rate = parseFloat(pressedRate?.dataset.rate || "0.08"), shownTotal = 0;
     const elTotal = $("#simTotal"), elBadge = $("#simBadge"), streamsEl = $("#streams");
     const fmt = (n: number) => Math.round(n).toLocaleString("en-US");
-    if (streamsEl && streamsEl.children.length === 0) {
+    if (streamsEl) {
+      streamsEl.innerHTML = "";
       SPLIT.forEach((s) => {
         const row = document.createElement("div");
         row.className = "strm";
@@ -310,7 +255,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     }
     function render(animate: boolean) {
       const active = fans * rate, total = active * ARPU;
-      if (elBadge) elBadge.textContent = fmt(active) + " active fans at $2.50 per month";
+      if (elBadge) elBadge.textContent = tt.sim.badge(fmt(active));
       streamsEl?.querySelectorAll(".strm").forEach((row, i) => {
         const v = row.querySelector(".v");
         if (v) v.textContent = "$" + fmt(active * SPLIT[i].v);
@@ -322,12 +267,11 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       const o = { v: shownTotal };
       gsap.to(o, { v: total, duration: 0.9, ease: "power3.out", onUpdate: () => { elTotal.textContent = "$" + fmt(o.v); }, onComplete: () => { shownTotal = total; } });
     }
-    const LADDER = [100000, 150000, 200000, 250000, 300000, 400000, 500000, 650000, 800000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000, 5000000, 6500000, 8000000, 10000000, 15000000, 20000000, 25000000, 30000000, 40000000, 50000000, 65000000, 80000000, 100000000];
-    const fanSlider = $<HTMLInputElement>("#fanslider"), fanRead = $("#fanRead");
     const fmtFans = (n: number) => {
       if (n >= 1000000) { const m = n / 1000000; return (m % 1 ? m.toFixed(1) : m) + "M"; }
       return n / 1000 + "K";
     };
+    if (fanRead) fanRead.textContent = fmtFans(fans);
     fanSlider?.addEventListener("input", () => {
       fans = LADDER[parseInt(fanSlider.value, 10)];
       if (fanRead) fanRead.textContent = fmtFans(fans);
@@ -344,17 +288,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     render(false);
 
     /* ---------- hero live revenue feed ---------- */
-    const FEED: Array<[string, string, number, number]> = [
-      ["Live Gifting", "Gift: goal celebration", 5, 250],
-      ["Live Gifting", "Gift: warm-up stream", 5, 90],
-      ["Memberships", "Gold tier renewal", 10, 30],
-      ["Memberships", "New silver member", 5, 15],
-      ["Predictions", "Match prediction entry", 2, 10],
-      ["Player Cam", "POV match pass", 8, 15],
-      ["Smart Ticketing", "Resale, Sec 104", 40, 420],
-      ["Club Store", "Third kit drop", 60, 180],
-      ["Voting", "Kit vote unlock", 2, 6],
-    ];
+    const FEED = tt.feed;
     const feedRows = $("#feedRows"), feedTotal = $("#feedTotal");
     let runTotal = 12418, lastFeedIdx = -1, feedAlive = true;
     function feedEvent() {
@@ -378,7 +312,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     if (feedTotal) feedTotal.textContent = "$" + fmt(runTotal);
     if (!reduce) {
       const feedLoop = () => {
-        const t = setTimeout(() => {
+        const timer = setTimeout(() => {
           if (!feedAlive || !feedRows || !feedTotal) return;
           const r = feedRows.getBoundingClientRect();
           if (!document.hidden && r.bottom > 0 && r.top < innerHeight) {
@@ -391,7 +325,7 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           }
           feedLoop();
         }, 900 + Math.random() * 1400);
-        cleanups.push(() => clearTimeout(t));
+        cleanups.push(() => clearTimeout(timer));
       };
       feedLoop();
       cleanups.push(() => { feedAlive = false; });
@@ -400,19 +334,19 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
     /* ---------- camera feed switcher ---------- */
     const CAMM: Record<string, { type: string; src: string; alt: string }> = {
       pov: { type: "video", src: "/cinematic/player-pov.mp4", alt: "" },
-      c1: { type: "img", src: "/camimages/cam01.jpeg", alt: "Sportech Player Camera hardware, view 1" },
-      c2: { type: "img", src: "/camimages/cam02.jpeg", alt: "Sportech Player Camera hardware, view 2" },
-      c3: { type: "img", src: "/camimages/cam03.jpeg", alt: "Sportech Player Camera hardware, view 3" },
+      c1: { type: "img", src: "/camimages/cam01.jpeg", alt: tt.camera.altHw + "1" },
+      c2: { type: "img", src: "/camimages/cam02.jpeg", alt: tt.camera.altHw + "2" },
+      c3: { type: "img", src: "/camimages/cam03.jpeg", alt: tt.camera.altHw + "3" },
     };
     const camView = $("#camView");
-    $$(".cam-tab").forEach((t) => {
-      t.addEventListener("click", () => {
+    $$(".cam-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
         $$(".cam-tab").forEach((x) => x.setAttribute("aria-pressed", "false"));
-        t.setAttribute("aria-pressed", "true");
-        const m = CAMM[(t as HTMLElement).dataset.cam || "pov"];
+        tab.setAttribute("aria-pressed", "true");
+        const m = CAMM[(tab as HTMLElement).dataset.cam || "pov"];
         if (!camView) return;
         if (m.type === "video") {
-          camView.innerHTML = '<video autoplay muted loop playsinline><source src="' + m.src + '" type="video/mp4"></video><span class="cam-live"><i></i>LIVE — SUB-3S</span>';
+          camView.innerHTML = '<video autoplay muted loop playsinline><source src="' + m.src + '" type="video/mp4"></video><span class="cam-live"><i></i>' + tt.camera.live + "</span>";
         } else {
           camView.innerHTML = '<img src="' + m.src + '" alt="' + m.alt + '" loading="lazy">';
         }
@@ -464,26 +398,35 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       });
     }
 
-    cleanups.push(() => triggers.forEach((t) => t.kill()));
+    cleanups.push(() => triggers.forEach((trig) => trig.kill()));
     return () => cleanups.forEach((fn) => fn());
-  }, []);
+  }, [lang]);
+
+  const tickerFacts = (
+    <>
+      {t.ticker.map((f, i) => (
+        <span key={i}>{f[0]}<b>{f[1]}</b>{f[2]}</span>
+      ))}
+      {corporate && <span>{t.tickerJsc[0]}<b>{t.tickerJsc[1]}</b>{t.tickerJsc[2]}</span>}
+    </>
+  );
 
   const saudiSection = (
     <section className="saudi" id="saudi">
       <div className="wrap">
-        <div className="kicker rv">Saudi Tech</div>
-        <h2 className="h2 dh rv">BUILT IN RIYADH. <span className="volt">PLAYED EVERYWHERE.</span></h2>
-        <p className="lede rv">Sportech is Saudi technology: engineered, patented and proven here.</p>
+        <div className="kicker rv">{t.saudi.kicker}</div>
+        <h2 className="h2 dh rv">{t.saudi.h2a}<span className="volt">{t.saudi.h2v}</span></h2>
+        <p className="lede rv">{t.saudi.lede}</p>
         <div className="st-strip rv">
           <div className="st-cell">
             <span className="st-tile st-blur">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="st-logo" src="/brand/sauditech.png" alt="National certification pending" />
+              <img className="st-logo" src="/brand/sauditech.png" alt={t.saudi.logoAlt} />
             </span>
-            <span className="t"><b>Ink drying</b><small>A national certification, days away</small></span>
+            <span className="t"><b>{t.saudi.cells[0].b}</b><small>{t.saudi.cells[0].s}</small></span>
           </div>
-          <div className="st-cell"><span className="t"><b>KSA Patent</b><small>Granted · PCT filings underway</small></span></div>
-          <div className="st-cell"><span className="t"><b>Vision 2030</b><small>Aligned</small></span></div>
+          <div className="st-cell"><span className="t"><b>{t.saudi.cells[1].b}</b><small>{t.saudi.cells[1].s}</small></span></div>
+          <div className="st-cell"><span className="t"><b>{t.saudi.cells[2].b}</b><small>{t.saudi.cells[2].s}</small></span></div>
         </div>
       </div>
     </section>
@@ -496,10 +439,8 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       <div className="ticker" aria-hidden="true">
         <span className="ticker-tag"><i />SPORTECH</span>
         <div className="ticker-track">
-          {TICKER_FACTS}
-          {corporate && <span>NOW A SIMPLIFIED <b>JOINT-STOCK COMPANY</b></span>}
-          {TICKER_FACTS}
-          {corporate && <span>NOW A SIMPLIFIED <b>JOINT-STOCK COMPANY</b></span>}
+          {tickerFacts}
+          {tickerFacts}
         </div>
       </div>
 
@@ -509,10 +450,18 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="wordmark" src="/brand/wordmark-white.png" alt="Sportech" />
             <div className="nav-links">
-              {corporate && <a href="#company">Company</a>}
-              <a href="#partners">Partners</a><a href="#cases">Proof</a><a href="#os">Platform</a><a href={corporate ? "#rail" : "#brand"}>Your Brand</a><a href="#sim">Simulator</a>
+              {corporate && <a href="#company">{t.nav.company}</a>}
+              <a href="#partners">{t.nav.partners}</a><a href="#cases">{t.nav.proof}</a><a href="#os">{t.nav.platform}</a><a href={corporate ? "#rail" : "#brand"}>{t.nav.yourBrand}</a><a href="#sim">{t.nav.simulator}</a>
             </div>
-            <button className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openContactModal}>Book a Demo</button>
+            <button
+              className="lang-btn"
+              style={{ marginInlineStart: "auto" }}
+              onClick={() => setLang(lang === "en" ? "ar" : "en")}
+              aria-label={lang === "en" ? "التبديل إلى العربية" : "Switch to English"}
+            >
+              {t.nav.langToggle}
+            </button>
+            <button className="btn btn-primary" onClick={openContactModal}>{t.nav.bookDemo}</button>
           </div>
         </div>
       </nav>
@@ -526,28 +475,24 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
         <div className="wrap">
           <div>
             <h1 className="dh">
-              <span className="rv">YOUR CLUB&apos;S</span>
-              <span className="ghost rv">REVENUE.</span>
-              <span className="volt rv">{corporate ? "ENGINEERED." : "UNLOCKED."}</span>
+              <span className="rv">{t.hero.h1a}</span>
+              <span className="ghost rv">{t.hero.h1b}</span>
+              <span className="volt rv">{corporate ? t.hero.h1c : t.hero.h1cAlt}</span>
             </h1>
-            <p className="hero-sub rv">
-              {corporate
-                ? "Fans spend on their passion every day. Sportech builds the engine that brings it home to your club."
-                : "Your fans already spend on their passion. Just not with you."}
-            </p>
+            <p className="hero-sub rv">{corporate ? t.hero.sub : t.hero.subAlt}</p>
             <div className="hero-cta rv">
-              <button className="btn btn-primary" onClick={openContactModal}>Book a Demo</button>
-              <a className="btn btn-ghost" href="#sim">Run Your Numbers</a>
+              <button className="btn btn-primary" onClick={openContactModal}>{t.nav.bookDemo}</button>
+              <a className="btn btn-ghost" href="#sim">{t.hero.runNumbers}</a>
             </div>
             <div className="hero-model rv">
-              <span><i />$0 upfront</span><span><i />Revenue share</span><span><i />Your brand</span><span><i />Live in weeks</span>
+              {t.hero.model.map((m) => <span key={m}><i />{m}</span>)}
             </div>
           </div>
           <div className="feed-card rv">
-            <div className="feed-head"><i />Live on your club app — Matchday</div>
+            <div className="feed-head"><i />{t.hero.feedHead}</div>
             <div className="feed-rows" id="feedRows" />
-            <div className="feed-total"><span>This match so far</span><b id="feedTotal">$12,418</b></div>
-            <div className="feed-note">Illustrative simulation</div>
+            <div className="feed-total"><span>{t.hero.feedTotalLabel}</span><b id="feedTotal">$12,418</b></div>
+            <div className="feed-note">{t.hero.feedNote}</div>
           </div>
         </div>
       </header>
@@ -555,14 +500,13 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {corporate && (
         <section className="sec" id="company">
           <div className="wrap">
-            <div className="kicker rv">The company</div>
-            <h2 className="h2 dh rv">WE BUILD THE REVENUE <span className="volt">ENGINE OF SPORT.</span></h2>
-            <p className="lede rv">Sportech is a Saudi technology company, now a simplified joint-stock company, that designs, builds, operates and funds fan revenue infrastructure for clubs and leagues. One platform, twelve income streams, under your brand.</p>
+            <div className="kicker rv">{t.company.kicker}</div>
+            <h2 className="h2 dh rv">{t.company.h2a}<span className="volt">{t.company.h2v}</span></h2>
+            <p className="lede rv">{t.company.lede}</p>
             <div className="cfacts">
-              <div className="fact rv"><div className="big dh">2025</div><b>Founded</b><p>Saudi from day one.</p></div>
-              <div className="fact rv"><div className="big dh">HQ</div><b>Riyadh, Saudi Arabia</b><p>Engineering, operations and leadership.</p></div>
-              <div className="fact rv"><div className="big dh">JSC</div><b>Simplified joint-stock company</b><p>Incorporated for scale and governance.</p></div>
-              <div className="fact rv"><div className="big dh">1+12</div><b>Patent granted · 12 modules</b><p>KSA patent granted, PCT filings underway.</p></div>
+              {t.company.facts.map((f) => (
+                <div className="fact rv" key={f.b}><div className="big dh">{f.big}</div><b>{f.b}</b><p>{f.p}</p></div>
+              ))}
             </div>
           </div>
         </section>
@@ -571,62 +515,36 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {!corporate && (
         <div className="proof">
           <div className="wrap">
-            <div className="proof-item rv"><b>Tier 1 club signed</b><span>Activation live Q4 2026</span></div>
-            <div className="proof-item rv"><b>Production-ready platform</b><span>Live today, not a prototype</span></div>
-            <div className="proof-item rv"><b>Patented hardware</b><span>Granted KSA, PCT filings underway</span></div>
-            <div className="proof-item rv"><b>Pipeline under NDA</b><span>Clubs and leagues, four markets</span></div>
+            {t.proofStrip.map((p) => (
+              <div className="proof-item rv" key={p.b}><b>{p.b}</b><span>{p.s}</span></div>
+            ))}
           </div>
         </div>
       )}
 
       <section className="sec psec" id="partners">
         <div className="wrap">
-          <div className="kicker rv">Traction</div>
-          <h2 className="h2 dh rv">SIGNINGS, <span className="ghost">AS THEY</span> <span className="volt">HAPPEN.</span></h2>
+          <div className="kicker rv">{t.partners.kicker}</div>
+          <h2 className="h2 dh rv">{t.partners.h2a}<span className="ghost">{t.partners.h2g}</span> <span className="volt">{t.partners.h2v}</span></h2>
           <div className="sboard rv">
             <div className="sboard-hd">
-              <span className="l"><i />Signing board — live</span>
-              <span className="r"><span data-count="3">3</span> SIGNED · 7 BY NOV 2026</span>
+              <span className="l"><i />{t.partners.boardLive}</span>
+              <span className="r"><span data-count="3">3</span>{t.partners.signedSuffix}</span>
             </div>
-            <div className="flap">
-              <span className="no">01</span>
-              <span><span className="blk" style={{ width: "min(150px, 34vw)" }} /><small>Tier 1 Football Club · Activation Q4</small></span>
-              <span className="st">SIGNED</span>
-            </div>
-            <div className="flap">
-              <span className="no">02</span>
-              <span><span className="blk" style={{ width: "min(118px, 28vw)" }} /><small>Football Club</small></span>
-              <span className="st">SIGNED</span>
-            </div>
-            <div className="flap">
-              <span className="no">03</span>
-              <span><span className="blk" style={{ width: "min(96px, 24vw)" }} /><small>Esports Organization</small></span>
-              <span className="st">SIGNED</span>
-            </div>
-            <div className="flap nda">
-              <span className="no">04</span>
-              <span><span className="blk" /><small>Football League · Under NDA</small></span>
-              <span className="st">INKING</span>
-            </div>
-            <div className="flap nda">
-              <span className="no">05</span>
-              <span><span className="blk" style={{ width: "min(128px, 30vw)" }} /><small>Media Platform · Under NDA</small></span>
-              <span className="st">INKING</span>
-            </div>
-            <div className="flap nda">
-              <span className="no">06</span>
-              <span><span className="blk" style={{ width: "min(190px, 42vw)" }} /><small>Combat Sports · Under NDA</small></span>
-              <span className="st">INKING</span>
-            </div>
-            <div className="flap nda">
-              <span className="no">07</span>
-              <span><span className="blk" style={{ width: "min(140px, 32vw)" }} /><small>Camel Racing · In talks</small></span>
-              <span className="st">IN TALKS</span>
-            </div>
+            {t.partners.rows.map((row, i) => {
+              const widths = ["min(150px, 34vw)", "min(118px, 28vw)", "min(96px, 24vw)", "", "min(128px, 30vw)", "min(190px, 42vw)", "min(140px, 32vw)"];
+              return (
+                <div className={i >= 3 ? "flap nda" : "flap"} key={row.cat}>
+                  <span className="no">{String(i + 1).padStart(2, "0")}</span>
+                  <span><span className="blk" style={widths[i] ? { width: widths[i] } : undefined} /><small>{row.cat}</small></span>
+                  <span className="st">{row.st}</span>
+                </div>
+              );
+            })}
             <button type="button" className="flap claim" id="claimRow">
               <span className="q">?</span>
-              <span><b>YOUR CLUB</b><small>The next seat on this board is open</small></span>
-              <span className="st">CLAIM YOUR SLOT</span>
+              <span><b>{t.partners.claimB}</b><small>{t.partners.claimS}</small></span>
+              <span className="st">{t.partners.claimSt}</span>
             </button>
           </div>
         </div>
@@ -634,78 +552,68 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
 
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="kicker rv">The gap</div>
-          <h2 className="h2 dh rv">THE WHISTLE ENDS THE MATCH. <span className="volt">NOT THE SPENDING.</span></h2>
+          <div className="kicker rv">{t.gap.kicker}</div>
+          <h2 className="h2 dh rv">{t.gap.h2a}<span className="volt">{t.gap.h2v}</span></h2>
           <div className="gapstats">
-            <div className="gs rv"><span className="n dh"><em data-count="19.8" data-prefix="$" data-suffix="B">$19.8B</em></span><p>Fan engagement market by 2033. Up from $6.2B today.</p></div>
-            <div className="gs rv"><span className="n dh" data-count="5" data-suffix="B+">5B+</span><p>Football fans worldwide. Cricket adds 2.5B more.</p></div>
-            <div className="gs rv"><span className="n dh ghost">365D</span><p>Fans spend all year. Clubs earn on matchday.</p></div>
+            <div className="gs rv"><span className="n dh"><em data-count="19.8" data-prefix="$" data-suffix={t.gap.s1suffix}>$19.8{t.gap.s1suffix}</em></span><p>{t.gap.s1p}</p></div>
+            <div className="gs rv"><span className="n dh" data-count="5" data-suffix={t.gap.s2suffix}>5{t.gap.s2suffix}</span><p>{t.gap.s2p}</p></div>
+            <div className="gs rv"><span className="n dh ghost">{t.gap.s3big}</span><p>{t.gap.s3p}</p></div>
           </div>
-          <p className="src rv">Market size: Growth Market Reports, 2025.</p>
+          <p className="src rv">{t.gap.src}</p>
         </div>
       </section>
 
       <section className="sec chan-scene" id="cases">
         <div className="wrap">
-          <h2 className="h2 dh rv">FANS ALREADY PAY. <span className="ghost">SPORT JUST</span> <span className="volt">DOESN&apos;T COLLECT.</span></h2>
-          <p className="lede rv">Four proven behaviors. None owned by clubs today. Switch channels.</p>
+          <h2 className="h2 dh rv">{t.cases.h2a}<span className="ghost">{t.cases.h2g}</span> <span className="volt">{t.cases.h2v}</span></h2>
+          <p className="lede rv">{t.cases.lede}</p>
           <div className="chan-tabs rv" role="tablist" aria-label="Fan behavior">
-            <button className="ctab" role="tab" aria-selected="true" data-ch="0">Gifting</button>
-            <button className="ctab" role="tab" aria-selected="false" data-ch="1">Memberships</button>
-            <button className="ctab" role="tab" aria-selected="false" data-ch="2">Voting</button>
-            <button className="ctab" role="tab" aria-selected="false" data-ch="3">Predictions</button>
+            {t.cases.tabs.map((tab, i) => (
+              <button className="ctab" role="tab" aria-selected={i === 0} data-ch={i} key={tab}>{tab}</button>
+            ))}
           </div>
           <div className="chan-panel rv" id="chanpanel">
             <div className="chan-stat">
-              <div className="big dh" id="chBig">$10M</div>
-              <p className="cap" id="chCap">gifted every day on TikTok Live.</p>
-              <p className="srcline" id="chSrc">Ipsos x TikTok, 2025</p>
+              <div className="big dh" id="chBig">{t.cases.channels[0].big}</div>
+              <p className="cap" id="chCap">{t.cases.channels[0].cap}</p>
+              <p className="srcline" id="chSrc">{t.cases.channels[0].src}</p>
             </div>
             <div>
               <div className="chan-proof" id="chProof" />
-              <div className="chan-model"><b>On Sportech</b><span id="chModel" /></div>
+              <div className="chan-model"><b>{t.cases.onSportech}</b><span id="chModel" /></div>
             </div>
           </div>
           <div className="anchor rv">
             <div className="anchor-tabs" role="tablist" aria-label="Market">
-              <button className="cbtn" role="tab" aria-pressed="true" data-rg="0">KSA</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="1">USA</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="2">UK &amp; Europe</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="3">Korea</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="4">India &amp; Pakistan</button>
-              <button className="cbtn" role="tab" aria-pressed="false" data-rg="5">Worldwide</button>
+              {t.cases.regionTabs.map((tab, i) => (
+                <button className="cbtn" role="tab" aria-pressed={i === 0} data-rg={i} key={tab}>{tab}</button>
+              ))}
             </div>
-            <span className="ttl dh" id="rgTitle">AND SAUDI FANS OUT-SPEND THEM ALL</span>
-            <div className="as"><b id="rgB0">$308</b><p id="rgP0">per-capita gaming spend in KSA, 3x the MENA average</p></div>
-            <div className="as"><b id="rgB1">$125M</b><p id="rgP1">KSA games live-streaming market, 2025</p></div>
-            <div className="as"><b id="rgB2">68%</b><p id="rgP2">of Saudi gamers attend live esports events</p></div>
+            <span className="ttl dh" id="rgTitle">{t.cases.regions[0].t}</span>
+            {t.cases.regions[0].s.map((pair, j) => (
+              <div className="as" key={j}><b id={"rgB" + j}>{pair[0]}</b><p id={"rgP" + j}>{pair[1]}</p></div>
+            ))}
           </div>
-          <p className="fine rv">Third-party figures describe observed fan behavior on other platforms, cited per stat. They are market evidence, not Sportech projections.</p>
+          <p className="fine rv">{t.cases.fine}</p>
         </div>
       </section>
 
       {corporate && (
         <section className="sec" id="rail">
           <div className="wrap">
-            <h2 className="h2 dh rv">ANY SPORT. <span className="ghost">ANY COLORS.</span> <span className="volt">ALL YOURS.</span></h2>
-            <p className="lede rv">Examples, not limits: if it has fans, it runs on Sportech, under your badge. Pick a sport and a color. The whole page follows.</p>
+            <h2 className="h2 dh rv">{t.rail.h2a}<span className="ghost">{t.rail.h2g}</span> <span className="volt">{t.rail.h2v}</span></h2>
+            <p className="lede rv">{t.rail.lede}</p>
             <div className="cfg rv">
               <div>
-                <div className="ctl-lab">Sport</div>
+                <div className="ctl-lab">{t.rail.sportLabel}</div>
                 <div className="sport-tabs" role="tablist" aria-label="Sport">
-                  <button className="ctab" role="tab" aria-selected="true" data-sp="0">Football</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="1">Basketball</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="2">Motorsport</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="3">Esports</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="4">Cricket</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="5">Combat</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="6">Tennis</button>
-                  <button className="ctab" role="tab" aria-selected="false" data-sp="7">NFL</button>
-                  <button className="ctab ctab-yours" role="tab" aria-selected="false" data-sp="8">+ Yours</button>
+                  {t.rail.sports.map((s, i) => (
+                    <button className={i === 8 ? "ctab ctab-yours" : "ctab"} role="tab" aria-selected={i === 0} data-sp={i} key={s.n}>{s.n}</button>
+                  ))}
                 </div>
               </div>
               <div>
-                <div className="ctl-lab">Club color</div>
+                <div className="ctl-lab">{t.rail.colorLabel}</div>
                 <div className="swatches" role="group" aria-label="Club color">
                   <button className="sw" style={{ background: "#e8f840" }} data-c="#e8f840" aria-pressed="true" aria-label="Volt yellow" />
                   <button className="sw" style={{ background: "#2f6bff" }} data-c="#2f6bff" aria-pressed="false" aria-label="Royal blue" />
@@ -714,24 +622,24 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
                   <button className="sw" style={{ background: "#a855f7" }} data-c="#a855f7" aria-pressed="false" aria-label="Violet" />
                   <label className="sw sw-custom" aria-label="Custom color"><input type="color" id="customc" defaultValue="#e8f840" /></label>
                 </div>
-                <p className="studio-live" id="livetag">THEME: VOLT</p>
+                <p className="studio-live" id="livetag">{t.rail.themePrefix}VOLT</p>
               </div>
             </div>
             <div className="sport-stage rv" id="spStage">
               <div className="sport-view">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img id="spImg" src="/sportscreens/soccer.webp" alt="Sportech football app screens" />
+                <img id="spImg" src="/sportscreens/soccer.webp" alt={"Sportech — " + t.rail.sports[0].n} />
                 <div className="sport-yours" id="spYours" hidden>
                   <div>
-                    <p className="dh sy-big">YOUR SPORT <span className="volt">HERE.</span></p>
-                    <p className="sy-sub">Leagues, federations, racing teams, esports orgs, creator collectives. If fans show up, revenue does too.</p>
+                    <p className="dh sy-big">{t.rail.yoursBig}<span className="volt">{t.rail.yoursVolt}</span></p>
+                    <p className="sy-sub">{t.rail.yoursSub}</p>
                   </div>
                 </div>
                 <div className="tint" aria-hidden="true" />
               </div>
-              <div className="sport-cap"><b id="spName">Football</b><span id="spFeat">Live + Gifting</span></div>
+              <div className="sport-cap"><b id="spName">{t.rail.sports[0].n}</b><span id="spFeat">{t.rail.sports[0].f}</span></div>
             </div>
-            <p className="fine rv">Already have an app? We integrate into it. API first.</p>
+            <p className="fine rv">{t.rail.fine}</p>
           </div>
         </section>
       )}
@@ -739,29 +647,23 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {!corporate && (
       <section className="sec" id="rail">
         <div className="wrap">
-          <h2 className="h2 dh rv">ANY SPORT. <span className="ghost">ANY STAGE.</span> <span className="volt">ANY FANBASE.</span></h2>
-          <p className="lede rv">One engine under your badge. These are examples, not limits: if it has fans, it runs on Sportech.</p>
+          <h2 className="h2 dh rv">{t.rail.h2a}<span className="ghost">{t.rail.h2gAlt}</span> <span className="volt">{t.rail.h2vAlt}</span></h2>
+          <p className="lede rv">{t.rail.ledeAlt}</p>
           <div className="sport-tabs rv" role="tablist" aria-label="Sport">
-            <button className="ctab" role="tab" aria-selected="true" data-sp="0">Football</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="1">Basketball</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="2">Motorsport</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="3">Esports</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="4">Cricket</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="5">Combat</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="6">Tennis</button>
-            <button className="ctab" role="tab" aria-selected="false" data-sp="7">NFL</button>
-            <button className="ctab ctab-yours" role="tab" aria-selected="false" data-sp="8">+ Yours</button>
+            {t.rail.sports.map((s, i) => (
+              <button className={i === 8 ? "ctab ctab-yours" : "ctab"} role="tab" aria-selected={i === 0} data-sp={i} key={s.n}>{s.n}</button>
+            ))}
           </div>
           <div className="sport-stage rv" id="spStage">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img id="spImg" src="/sportscreens/soccer.webp" alt="Sportech football app screens" />
+            <img id="spImg" src="/sportscreens/soccer.webp" alt={"Sportech — " + t.rail.sports[0].n} />
             <div className="sport-yours" id="spYours" hidden>
               <div>
-                <p className="dh sy-big">YOUR SPORT <span className="volt">HERE.</span></p>
-                <p className="sy-sub">Leagues, federations, racing teams, esports orgs, creator collectives. If fans show up, revenue does too.</p>
+                <p className="dh sy-big">{t.rail.yoursBig}<span className="volt">{t.rail.yoursVolt}</span></p>
+                <p className="sy-sub">{t.rail.yoursSub}</p>
               </div>
             </div>
-            <div className="sport-cap"><b id="spName">Football</b><span id="spFeat">Live + Gifting</span></div>
+            <div className="sport-cap"><b id="spName">{t.rail.sports[0].n}</b><span id="spFeat">{t.rail.sports[0].f}</span></div>
           </div>
         </div>
       </section>
@@ -769,31 +671,19 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
 
       <section className="sec wall-scene" id="os">
         <div className="wrap">
-          <div className="kicker rv">The Sportech OS</div>
-          <h2 className="h2 dh rv">ONE PLATFORM. <span className="volt">TWELVE ENGINES.</span></h2>
+          <div className="kicker rv">{t.os.kicker}</div>
+          <h2 className="h2 dh rv">{t.os.h2a}<span className="volt">{t.os.h2v}</span></h2>
           <div className="wall">
-            <span className="tag rv">Player POV Camera <small>PATENTED</small></span>
-            <span className="tag rv">Live Gifting</span>
-            <span className="tag rv">Memberships</span>
-            <span className="tag rv">Predictions <small>SKILL-BASED</small></span>
-            <span className="tag rv">Voice Rooms</span>
-            <span className="tag rv">Augmented Reality</span>
-            <span className="tag rv">Voting</span>
-            <span className="tag rv">Smart Ticketing</span>
-            <span className="tag rv">Loyalty Coins <small>CLOSED-LOOP</small></span>
-            <span className="tag rv">Club Store</span>
-            <span className="tag rv">Player Stores</span>
-            <span className="tag rv">Sponsor Activations</span>
+            {t.os.tags.map((tag) => (
+              <span className="tag rv" key={tag.t}>{tag.t}{tag.s && <small>{tag.s}</small>}</span>
+            ))}
           </div>
-          <p className="wall-note rv">Predictions and competitions are entertainment only, with no betting. Shariah compliant. Club coins are closed-loop loyalty, never convertible to cash.</p>
+          <p className="wall-note rv">{t.os.note}</p>
           {corporate && (
             <div className="infra rv">
-              <div className="inf"><b>White-label by design</b><p>Your badge, your colors, your store listing.</p></div>
-              <div className="inf"><b>Automated operations</b><p>Content, payments and campaigns run themselves.</p></div>
-              <div className="inf"><b>AI built in</b><p>Moderation, highlights, recommendations and insights.</p></div>
-              <div className="inf"><b>Engage and monetize</b><p>Talk to your fans directly, and earn on every interaction.</p></div>
-              <div className="inf"><b>Admin control apps</b><p>Your team sees, manages and approves everything.</p></div>
-              <div className="inf"><b>Secure by default</b><p>Enterprise-grade auth, in-region data, full audit trail.</p></div>
+              {t.os.infra.map((inf) => (
+                <div className="inf" key={inf.b}><b>{inf.b}</b><p>{inf.p}</p></div>
+              ))}
             </div>
           )}
         </div>
@@ -802,13 +692,13 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       <section className="sec">
         <div className="wrap cam-grid">
           <div>
-            <div className="kicker rv">Patented technology</div>
-            <h2 className="h2 dh rv">THE MATCH, FROM <span className="volt">THE JERSEY.</span></h2>
-            <p className="lede rv">Fans pick their player and ride the game live, from a patented jersey camera the size of a coin. Switch the feed yourself.</p>
+            <div className="kicker rv">{t.camera.kicker}</div>
+            <h2 className="h2 dh rv">{t.camera.h2a}<span className="volt">{t.camera.h2v}</span></h2>
+            <p className="lede rv">{t.camera.lede}</p>
             <div className="cam-specs">
-              <div className="spec rv"><div className="v dh">&lt;3S</div><small>Latency in live match conditions</small></div>
-              <div className="spec rv"><div className="v dh">9MM</div><small>Total height, built to disappear</small></div>
-              <div className="spec rv"><div className="v dh">50MM</div><small>Diameter, jersey mounted</small></div>
+              {t.camera.specs.map((sp) => (
+                <div className="spec rv" key={sp.v}><div className="v dh">{sp.v}</div><small>{sp.s}</small></div>
+              ))}
             </div>
           </div>
           <div className="cam-stage rv">
@@ -816,13 +706,12 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
               <video autoPlay muted loop playsInline>
                 <source src="/cinematic/player-pov.mp4" type="video/mp4" />
               </video>
-              <span className="cam-live" id="camLive"><i />LIVE — SUB-3S</span>
+              <span className="cam-live" id="camLive"><i />{t.camera.live}</span>
             </div>
             <div className="cam-tabs" role="group" aria-label="Camera feed">
-              <button className="cam-tab" data-cam="pov" aria-pressed="true">Player POV</button>
-              <button className="cam-tab" data-cam="c1" aria-pressed="false">Hardware 01</button>
-              <button className="cam-tab" data-cam="c2" aria-pressed="false">Hardware 02</button>
-              <button className="cam-tab" data-cam="c3" aria-pressed="false">Hardware 03</button>
+              {t.camera.tabs.map((tab, i) => (
+                <button className="cam-tab" data-cam={i === 0 ? "pov" : "c" + i} aria-pressed={i === 0} key={tab}>{tab}</button>
+              ))}
             </div>
           </div>
         </div>
@@ -833,11 +722,11 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {!corporate && (
       <section className="sec chan-scene" id="brand" style={{ borderTop: 0 }}>
         <div className="wrap">
-          <h2 className="h2 dh rv">YOUR BADGE. <span className="volt">YOUR COLORS.</span></h2>
-          <p className="lede rv">White label means the whole experience answers to your brand. Pick a color. The entire page follows.</p>
+          <h2 className="h2 dh rv">{t.brand.h2a}<span className="volt">{t.brand.h2v}</span></h2>
+          <p className="lede rv">{t.brand.lede}</p>
           <div className="studio-grid">
             <div>
-              <div className="ctl-lab rv">Club color</div>
+              <div className="ctl-lab rv">{t.rail.colorLabel}</div>
               <div className="swatches rv" role="group" aria-label="Club color">
                 <button className="sw" style={{ background: "#e8f840" }} data-c="#e8f840" aria-pressed="true" aria-label="Volt yellow" />
                 <button className="sw" style={{ background: "#2f6bff" }} data-c="#2f6bff" aria-pressed="false" aria-label="Royal blue" />
@@ -846,16 +735,16 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
                 <button className="sw" style={{ background: "#a855f7" }} data-c="#a855f7" aria-pressed="false" aria-label="Violet" />
                 <label className="sw sw-custom" aria-label="Custom color"><input type="color" id="customc" defaultValue="#e8f840" /></label>
               </div>
-              <p className="studio-note rv">Already have an app? We integrate into it. API first.</p>
-              <p className="studio-live rv" id="livetag">THEME: VOLT</p>
+              <p className="studio-note rv">{t.rail.fine}</p>
+              <p className="studio-live rv" id="livetag">{t.rail.themePrefix}VOLT</p>
             </div>
             <div className="brand-panel rv" id="brandpanel">
-              <div className="bar"><span className="crest" /><span className="nm">YOUR CLUB<small>Official fan app</small></span></div>
+              <div className="bar"><span className="crest" /><span className="nm">{t.brand.panelName}<small>{t.brand.panelSub}</small></span></div>
               <div className="scr">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/sportscreens/soccer.webp" alt="Sportech app screens in club branding" loading="lazy" />
               </div>
-              <div className="row"><span className="pill">Join Membership</span><span className="pill q">Match Center</span></div>
+              <div className="row"><span className="pill">{t.brand.pill1}</span><span className="pill q">{t.brand.pill2}</span></div>
             </div>
           </div>
         </div>
@@ -865,12 +754,12 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {corporate && (
         <section className="sec" style={{ paddingBottom: 0 }}>
           <div className="wrap">
-            <div className="kicker rv">Commercial model</div>
-            <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
+            <div className="kicker rv">{t.model.kicker}</div>
+            <h2 className="h2 dh rv">{t.model.h2a}<span className="volt">{t.model.h2v}</span></h2>
             <div className="model-grid">
-              <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
-              <div className="fact rv"><div className="big dh">0</div><b>Operations on your side</b><p>Fully managed. Your team stays on sport.</p></div>
-              <div className="fact rv"><div className="big dh">100%</div><b>Your brand</b><p>Your badge, your colors, your fans. We stay invisible.</p></div>
+              {t.model.facts.map((f) => (
+                <div className="fact rv" key={f.b}><div className="big dh">{f.big}</div><b>{f.b}</b><p>{f.p}</p></div>
+              ))}
             </div>
           </div>
         </section>
@@ -878,33 +767,33 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
 
       <section className="sec sim-scene" id="sim">
         <div className="wrap">
-          <h2 className="h2 dh rv">RUN YOUR <span className="volt">NUMBERS.</span></h2>
-          <p className="lede rv">Pick a fanbase and a scenario. The model is conservative on purpose.</p>
+          <h2 className="h2 dh rv">{t.sim.h2a}<span className="volt">{t.sim.h2v}</span></h2>
+          <p className="lede rv">{t.sim.lede}</p>
           <div className="console rv">
             <div>
               <div className="ctl-block">
-                <div className="ctl-lab">Total fanbase</div>
-                <div className="fan-read"><b id="fanRead">1M</b><span>fans</span></div>
-                <input className="slider" type="range" id="fanslider" min="0" max="27" step="1" defaultValue="9" aria-label="Total fanbase" />
+                <div className="ctl-lab">{t.sim.fanbaseLabel}</div>
+                <div className="fan-read"><b id="fanRead">1M</b><span>{t.sim.fansWord}</span></div>
+                <input className="slider" type="range" id="fanslider" min="0" max="27" step="1" defaultValue="9" aria-label={t.sim.fanbaseLabel} />
                 <div className="fan-scale" aria-hidden="true"><span>100K</span><span>1M</span><span>10M</span><span>100M</span></div>
               </div>
               <div className="ctl-block">
-                <div className="ctl-lab">Scenario</div>
+                <div className="ctl-lab">{t.sim.scenarioLabel}</div>
                 <div className="chipset" id="scnset">
-                  <button className="cbtn" data-rate="0.08" aria-pressed="true">Conservative 8%</button>
-                  <button className="cbtn" data-rate="0.15" aria-pressed="false">Base 15%</button>
-                  <button className="cbtn" data-rate="0.25" aria-pressed="false">Upside 25%</button>
+                  <button className="cbtn" data-rate="0.08" aria-pressed="true">{t.sim.scenarios[0]}</button>
+                  <button className="cbtn" data-rate="0.15" aria-pressed="false">{t.sim.scenarios[1]}</button>
+                  <button className="cbtn" data-rate="0.25" aria-pressed="false">{t.sim.scenarios[2]}</button>
                 </div>
               </div>
               <div className="streams" id="streams" />
             </div>
             <div className="sim-total">
-              <div className="lab">Estimated annual revenue</div>
+              <div className="lab">{t.sim.totalLabel}</div>
               <div className="big" id="simTotal">$2,400,000</div>
-              <div className="per">per year, shared club and Sportech</div>
-              <div className="sim-badge" id="simBadge">80,000 active fans at $2.50 per month</div>
+              <div className="per">{t.sim.perLine}</div>
+              <div className="sim-badge" id="simBadge">{t.sim.badge("80,000")}</div>
             </div>
-            <p className="sim-note">Illustrative, on stated assumptions. Base case benchmarked against Premier League club app engagement of 12 to 20%. Not a forecast.</p>
+            <p className="sim-note">{t.sim.note}</p>
           </div>
         </div>
       </section>
@@ -912,12 +801,12 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {!corporate && (
         <section className="sec" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <div className="kicker rv">The model</div>
-            <h2 className="h2 dh rv">WE EARN <span className="volt">WHEN YOU EARN.</span></h2>
+            <div className="kicker rv">{t.model.kickerAlt}</div>
+            <h2 className="h2 dh rv">{t.model.h2a}<span className="volt">{t.model.h2v}</span></h2>
             <div className="model-grid">
-              <div className="fact rv"><div className="big dh">$0</div><b>Upfront cost</b><p>No licence fee, no build cost, no integration bill.</p></div>
-              <div className="fact rv"><div className="big dh">0</div><b>Operations on your side</b><p>Fully managed. Your team stays on sport.</p></div>
-              <div className="fact rv"><div className="big dh">100%</div><b>Your brand</b><p>Your badge, your colors, your fans. We stay invisible.</p></div>
+              {t.model.facts.map((f) => (
+                <div className="fact rv" key={f.b}><div className="big dh">{f.big}</div><b>{f.b}</b><p>{f.p}</p></div>
+              ))}
             </div>
           </div>
         </section>
@@ -925,10 +814,10 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
 
       <section className="sec" id="faq" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="kicker rv">FAQ</div>
-          <h2 className="h2 dh rv">EVERY CLUB <span className="volt">ASKS.</span></h2>
+          <div className="kicker rv">{t.faq.kicker}</div>
+          <h2 className="h2 dh rv">{t.faq.h2a}<span className="volt">{t.faq.h2v}</span></h2>
           <div className="faq">
-            {FAQ_ITEMS.map((item) => (
+            {t.faq.items.map((item) => (
               <div className="fq rv" key={item.q}>
                 <button className="fq-q" aria-expanded="false">
                   {item.q}
@@ -944,12 +833,12 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
       {corporate && (
         <section className="sec" id="news" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <div className="kicker rv">Announcements</div>
-            <h2 className="h2 dh rv">ON THE <span className="volt">RECORD.</span></h2>
+            <div className="kicker rv">{t.news.kicker}</div>
+            <h2 className="h2 dh rv">{t.news.h2a}<span className="volt">{t.news.h2v}</span></h2>
             <div className="anns rv">
-              <div className="ann"><span className="ad">OCT 2026</span><span className="at">Partnership signed with a Tier 1 Saudi football club; activation Q4 2026</span><span className="ac">Partnership</span></div>
-              <div className="ann"><span className="ad">AUG 2026</span><span className="at">Sportech completes conversion to a simplified joint-stock company</span><span className="ac">Corporate</span></div>
-              <div className="ann"><span className="ad">MAR 2026</span><span className="at">Player POV Camera patent granted in Saudi Arabia; PCT filings underway</span><span className="ac">Technology</span></div>
+              {t.news.items.map((n) => (
+                <div className="ann" key={n.t}><span className="ad">{n.d}</span><span className="at">{n.t}</span><span className="ac">{n.c}</span></div>
+              ))}
             </div>
           </div>
         </section>
@@ -963,9 +852,9 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
           <img src="/cinematic/crowd-silhouette.jpg" alt="" loading="lazy" />
         </div>
         <div className="wrap cta-inner">
-          <h2 className="dh rv">TURN FANS INTO <span className="volt">REVENUE.</span></h2>
-          <button className="btn btn-primary rv" style={{ padding: "18px 38px", fontSize: 16 }} onClick={openContactModal}>Book a Demo</button>
-          <p className="rv">{corporate ? "A private walkthrough with your club's numbers, with our partnerships team." : "A private walkthrough with your club's numbers. No deck, a live product."}</p>
+          <h2 className="dh rv">{t.cta.h2a}<span className="volt">{t.cta.h2v}</span></h2>
+          <button className="btn btn-primary rv" style={{ padding: "18px 38px", fontSize: 16 }} onClick={openContactModal}>{t.nav.bookDemo}</button>
+          <p className="rv">{corporate ? t.cta.sub : t.cta.subAlt}</p>
         </div>
       </section>
 
@@ -975,30 +864,30 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             <div className="ft-brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/wordmark-white.png" alt="Sportech" style={{ height: 16, width: "auto" }} />
-              <p>The fan revenue engine for sports clubs. Saudi Tech, built in Riyadh, designed for the world.</p>
+              <p>{t.footer.brandP}</p>
               {corporate && (
-                <p style={{ marginTop: 10 }}>Sportech is a simplified joint-stock company registered in Riyadh, Kingdom of Saudi Arabia. CR 1009177946.</p>
+                <p style={{ marginTop: 10 }}>{t.footer.legalLine}</p>
               )}
             </div>
             <div className="ft-col">
-              <div className="ft-h">Platform</div>
+              <div className="ft-h">{t.footer.platformH}</div>
               <ul>
-                <li><a href="#cases">Proof</a></li>
-                <li><a href="#os">The 12 engines</a></li>
-                <li><a href="#sim">Revenue simulator</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#cases">{t.footer.links[0]}</a></li>
+                <li><a href="#os">{t.footer.links[1]}</a></li>
+                <li><a href="#sim">{t.footer.links[2]}</a></li>
+                <li><a href="#faq">{t.footer.links[3]}</a></li>
               </ul>
             </div>
             <div className="ft-col">
-              <div className="ft-h">Contact</div>
+              <div className="ft-h">{t.footer.contactH}</div>
               <ul>
                 <li><a href="mailto:contact@sportech.com.sa">contact@sportech.com.sa</a></li>
                 <li><a href="tel:+966114222225">+966 11 422 2225</a></li>
-                <li><span>Riyadh, Saudi Arabia</span></li>
+                <li><span>{t.footer.riyadh}</span></li>
               </ul>
             </div>
             <div className="ft-col">
-              <div className="ft-h">Follow</div>
+              <div className="ft-h">{t.footer.followH}</div>
               <div className="ft-social">
                 <a className="sbtn" href="https://x.com/SportechHQ" target="_blank" rel="noopener noreferrer" aria-label="Sportech on X">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.2h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.2h7.59l5.24 6.93L18.9 1.2Zm-1.29 19.44h2.04L6.49 3.29H4.3l13.31 17.35Z" /></svg>
@@ -1010,11 +899,11 @@ export function V2Landing({ corporate = false }: { corporate?: boolean }) {
             </div>
           </div>
           <div className="ft-bar">
-            <span>&copy; 2026 Sportech. All rights reserved.</span>
+            <span>{t.footer.copyright}</span>
             <div className="ft-legal">
-              <a href="/privacy">Privacy Policy</a>
-              <a href="/refund-policy">Payment &amp; Refund Policy</a>
-              <a href="/terms">Terms of Use</a>
+              <a href="/privacy">{t.footer.privacy}</a>
+              <a href="/refund-policy">{t.footer.refund}</a>
+              <a href="/terms">{t.footer.terms}</a>
             </div>
           </div>
         </div>
