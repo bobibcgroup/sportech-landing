@@ -72,26 +72,24 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ...lead,
+        name: lead.name,
+        organization: lead.club,
+        email: lead.email,
         source: "sportech.com.sa",
         submittedAt: new Date().toISOString(),
       }),
     });
 
     if (!res.ok) {
-      console.error("[lead] Webhook responded with status", res.status);
-      return Response.json(
-        { ok: false, error: "We could not submit your request. Please try again." },
-        { status: 502 }
-      );
+      // Never fail a prospect because of internal plumbing: log the lead so
+      // it isn't lost (e.g. n8n workflow deactivated) and accept the submit.
+      console.error("[lead] Webhook responded with status", res.status, "— lead:", lead);
+      return Response.json({ ok: true, forwarded: false });
     }
 
     return Response.json({ ok: true, forwarded: true });
   } catch (error: unknown) {
-    console.error("[lead] Webhook delivery failed:", error);
-    return Response.json(
-      { ok: false, error: "We could not submit your request. Please try again." },
-      { status: 502 }
-    );
+    console.error("[lead] Webhook delivery failed:", error, "— lead:", lead);
+    return Response.json({ ok: true, forwarded: false });
   }
 }
