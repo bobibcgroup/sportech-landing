@@ -1,5 +1,11 @@
+import { createRateLimiter, clientIpFrom } from "@/lib/rate-limit";
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MAX_FIELD_LENGTH = 200;
+
+// A real visitor submits the demo form once; 5/min per IP stops floods
+// into the webhook pipeline without ever touching a legitimate user.
+const limiter = createRateLimiter({ limit: 5, windowMs: 60_000 });
 
 interface LeadPayload {
   name: string;
@@ -24,6 +30,14 @@ function validate(body: Record<string, unknown>): LeadPayload | null {
 }
 
 export async function POST(request: Request) {
+  const rate = limiter.check(clientIpFrom(request.headers));
+  if (!rate.allowed) {
+    return Response.json(
+      { ok: false, error: "Too many requests. Please try again in a minute." },
+      { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } }
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await request.json();
